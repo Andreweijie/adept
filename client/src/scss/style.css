@@ -501,12 +501,25 @@ tr:nth-child(even) {
   background-color: #1fed97;
   height: 20vh;
   width: 45%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border-radius: 0.5em;
   -webkit-clip-path: circle(0% at 83% 72%);
           clip-path: circle(0% at 83% 72%);
   -webkit-transition: all 1s;
   transition: all 1s;
   z-index: 2;
+}
+
+.test5 h1 {
+  color: white;
 }
 
 .test6-enter {
