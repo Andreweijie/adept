@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const authRoutes = require("./routes/auth");
+const custRoutes = require("./routes/cust");
+const adminRoutes = require("./routes/admin");
 const port = 5000;
 
 app.use(cors());
@@ -15,6 +17,8 @@ app.use(
 );
 
 app.use("/api", authRoutes);
+app.use("/cust", custRoutes);
+app.use("/admin", adminRoutes);
 
 mongoose
   .connect(

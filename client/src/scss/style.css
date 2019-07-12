@@ -1,0 +1,528 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,900&display=swap");
+.App {
+  background-color: #f9f9f9;
+  font-family: "Segoe UI";
+  font-weight: 200;
+  height: 100vh;
+  width: 100vw;
+  /* Admin Page CSS */
+  /* Login Page CSS */
+}
+
+.App #admin {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.App #admin #admin-side {
+  width: 15%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: linear-gradient(45deg, #2e3548 0%, #1e222f);
+  height: 100%;
+}
+
+.App #admin #admin-side #profile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.App #admin #admin-side #profile h1 {
+  color: white;
+  text-align: center;
+}
+
+.App #admin #admin-side #profile .avatar {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-color: #ff3366;
+}
+
+.App #admin #admin-side #profile .role {
+  color: white;
+}
+
+.App #admin #admin-side #profile .role span {
+  font-size: 1.7em;
+}
+
+.App #admin #admin-side .nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 100%;
+  margin-top: 3em;
+}
+
+.App #admin #admin-side .nav a {
+  color: white;
+  font-size: 1.5em;
+  text-decoration: none;
+  width: 100%;
+  padding: 12px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.App #admin #admin-side .nav a:hover {
+  background-color: #282e42;
+}
+
+.App #admin #a-dash {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding: 16px;
+  padding-left: 50px;
+  width: 85%;
+}
+
+.App #admin #a-dash h1 {
+  font-size: 4em;
+  font-weight: bold;
+}
+
+.App #admin #a-dash .dash-content {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  height: 90%;
+}
+
+.App #admin #a-dash .dash-content .forms {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 95%;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  position: relative;
+}
+
+.App #admin #a-dash .dash-content .forms .confirm-form,
+.App #admin #a-dash .dash-content .forms .change-form {
+  background-color: white;
+  -webkit-box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
+  height: 20vh;
+  width: 45%;
+  border-radius: 0.5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-right: 2em;
+  z-index: 1;
+}
+
+.App #admin #a-dash .dash-content .forms .confirm-form p,
+.App #admin #a-dash .dash-content .forms .change-form p {
+  font-size: 32px;
+  font-weight: bold;
+  padding: 16px;
+  margin-bottom: 0;
+}
+
+.App #admin #a-dash .dash-content .forms .confirm-form form,
+.App #admin #a-dash .dash-content .forms .change-form form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding: 16px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
+.App #admin #a-dash .dash-content .forms .confirm-form form .input-box input,
+.App #admin #a-dash .dash-content .forms .change-form form .input-box input {
+  border: none;
+  background-color: #f2f2f2;
+  border-radius: 0.2em;
+  height: 2.5em;
+  padding: 0.5em;
+  width: 90%;
+}
+
+.App #admin #a-dash .dash-content .forms .confirm-form form .input-box label,
+.App #admin #a-dash .dash-content .forms .change-form form .input-box label {
+  font-weight: bold;
+}
+
+.App #admin #a-dash .dash-content .forms .confirm-form form button,
+.App #admin #a-dash .dash-content .forms .change-form form button {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  font-weight: bold;
+  padding: 8px;
+  border: none;
+  height: 2.5em;
+  background-color: #ff3366;
+  color: white;
+  border-radius: 0.3em;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  -webkit-box-shadow: 0rem 0.55rem 1rem 0 rgba(255, 51, 102, 0.4);
+          box-shadow: 0rem 0.55rem 1rem 0 rgba(255, 51, 102, 0.4);
+}
+
+.App #admin #a-dash .dash-content .forms .confirm-form form button:hover,
+.App #admin #a-dash .dash-content .forms .change-form form button:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  -webkit-box-shadow: 0rem 1rem 1rem 0 rgba(255, 51, 102, 0.4);
+          box-shadow: 0rem 1rem 1rem 0 rgba(255, 51, 102, 0.4);
+}
+
+.App #admin #a-dash .dash-content .pickup,
+.App #admin #a-dash .dash-content .active {
+  -webkit-box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
+  background-color: white;
+  height: 24vh;
+  width: 90%;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  border-radius: 0.5em;
+  padding: 16px;
+}
+
+.App #admin #a-dash .dash-content .pickup h1,
+.App #admin #a-dash .dash-content .active h1 {
+  font-size: 2em;
+}
+
+.App #admin #all-jobs {
+  height: 100%;
+  width: 85%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.App #admin #all-jobs .all-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  border-radius: 0.5em;
+  -webkit-box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
+  height: 90%;
+  width: 95%;
+  background-color: white;
+}
+
+.App .login-page {
+  height: 100vh;
+  width: 100vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.App .login-page #back-box {
+  margin-top: 1em;
+  border-radius: 0.5em;
+  width: 95vw;
+  height: 65vh;
+  background: -webkit-gradient(linear, left top, right top, from(#4625ca), to(#4a14ff));
+  background: linear-gradient(90deg, #4625ca 0%, #4a14ff);
+  color: white;
+  -webkit-box-shadow: 0rem 0.35rem 1rem 0 rgba(51, 65, 255, 0.4);
+          box-shadow: 0rem 0.35rem 1rem 0 rgba(51, 65, 255, 0.4);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.App .login-page #back-box #reg-text {
+  font-size: 2em;
+}
+
+.App .login-page #back-box #welcome {
+  font-size: 3.5em;
+  font-weight: bolder;
+}
+
+.App .login-page #back-box #login-box {
+  color: #333;
+  background-color: white;
+  width: 25%;
+  height: 90%;
+  border-radius: 0.5em;
+  margin-bottom: -12em;
+  -webkit-box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.2);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  padding-right: 3em;
+  padding-left: 3em;
+}
+
+.App .login-page #back-box #login-box h4 {
+  font-size: 3.3em;
+}
+
+.App .login-page #back-box #login-box button {
+  -ms-flex-item-align: center !important;
+      -ms-grid-row-align: center !important;
+      align-self: center !important;
+  border: none;
+  color: white;
+  font-size: 2em;
+  border-radius: 0.1em;
+  background-color: #4a14ff;
+  -webkit-box-shadow: 0rem 0.35rem 1rem 0 rgba(51, 65, 255, 0.4);
+          box-shadow: 0rem 0.35rem 1rem 0 rgba(51, 65, 255, 0.4);
+  font-weight: bold;
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+}
+
+.App .login-page #back-box #login-box .form-box {
+  margin-top: 2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 50%;
+  width: 100%;
+}
+
+.App .login-page #back-box #login-box .form-box input {
+  border: none;
+  background-color: #f2f2f2;
+  border-radius: 0.2em;
+  width: 100%;
+  height: 2.5em;
+  padding: 0.5em;
+}
+
+.App .login-page #back-box #login-box .form-box label {
+  font-weight: bold;
+}
+
+.App .dashboard {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.App .dashboard .header {
+  background-color: white;
+  height: 10%;
+  width: 85%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-left: 3em;
+  padding-right: 3em;
+  font-size: 1.5em;
+}
+
+.App .dashboard .header #enquiry-btn {
+  font-size: 0.8em;
+  font-weight: bold;
+  padding: 0.5em;
+  border: none;
+  border-radius: 0.5em;
+  color: white;
+  margin-bottom: -4.7em;
+  -webkit-box-shadow: 0rem 0.35rem 1rem 0 rgba(51, 65, 255, 0.4);
+          box-shadow: 0rem 0.35rem 1rem 0 rgba(51, 65, 255, 0.4);
+  background: -webkit-gradient(linear, left top, right top, from(#020024), color-stop(0%, #3341ff), to(#402ce6));
+  background: linear-gradient(90deg, #020024 0%, #3341ff 0%, #402ce6);
+}
+
+.App .dashboard .header #header-title {
+  font-weight: bold;
+}
+
+.App .dashboard .side-bar {
+  background: linear-gradient(45deg, #4625ca 0%, #4a14ff);
+  height: 100%;
+  width: 15%;
+}
+
+@media only screen and (max-width: 500px) {
+  /* For mobile phones: */
+  .App .login-page #back-box {
+    width: 100%;
+    margin-top: 0;
+    border-radius: 0;
+  }
+  .App .login-page #back-box #welcome {
+    font-size: 2.5em;
+    text-align: center;
+    margin-top: 1em;
+  }
+  .App .login-page #back-box #reg-text {
+    font-size: 1.7em;
+    width: 70%;
+    text-align: center;
+  }
+  .App .login-page #back-box #login-box {
+    width: 90%;
+    padding: 2em;
+    padding-top: 0;
+  }
+  .App .login-page #back-box #login-box h4 {
+    font-size: 2.5em;
+  }
+  .App .login-page #back-box #login-box button {
+    font-size: 1.5em;
+  }
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.test5 {
+  padding: 16px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: #1fed97;
+  height: 20vh;
+  width: 45%;
+  border-radius: 0.5em;
+  -webkit-clip-path: circle(0% at 83% 72%);
+          clip-path: circle(0% at 83% 72%);
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  z-index: 2;
+}
+
+.test6-enter {
+  -webkit-clip-path: circle(0% at 100% 0%);
+          clip-path: circle(0% at 100% 0%);
+}
+
+.test6-enter-active {
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  -webkit-clip-path: circle(75%);
+          clip-path: circle(75%);
+}
+
+.test6-exit {
+  -webkit-clip-path: circle(75%);
+          clip-path: circle(75%);
+}
+/*# sourceMappingURL=style.css.map */
