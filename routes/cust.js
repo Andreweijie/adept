@@ -55,4 +55,14 @@ router.get("/history", (req, res) => {
   });
 });
 
+//get pending jobs
+router.get("/pending-jobs", (req, res) => {
+  Temp.find({ email: req.query.email }, (err, docs) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(docs);
+    }
+  });
+});
 module.exports = router;

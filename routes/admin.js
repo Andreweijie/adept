@@ -22,7 +22,6 @@ router.post("/confirm", (req, res) => {
   Temp.findOne({ enquiryId: enquiryId }, (err, doc) => {
     let newTask = doc;
     doc.quote = parseInt(req.body.quote);
-    doc.test = "TESTINGGGGGGGGGGGGGGGGGGGGGGGGG";
     console.log(doc);
     const newJob = new Job(newTask.toObject());
     newJob.save(err => {
@@ -52,4 +51,16 @@ router.post("/change-status", (req, res) => {
     }
   );
 });
+
+//get all jobs
+router.get("/all-jobs", (req, res) => {
+  Job.find({}, (err, docs) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(docs);
+    }
+  });
+});
+
 module.exports = router;

@@ -239,42 +239,6 @@
   font-size: 2em;
 }
 
-.App #admin #all-jobs {
-  height: 100%;
-  width: 85%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.App #admin #all-jobs .all-box {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  border-radius: 0.5em;
-  -webkit-box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
-          box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
-  height: 90%;
-  width: 95%;
-  background-color: white;
-}
-
 .App .login-page {
   height: 100vh;
   width: 100vw;
@@ -476,23 +440,6 @@
   }
 }
 
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td,
-th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
 .test5 {
   padding: 16px;
   height: 100%;
@@ -537,5 +484,32 @@ tr:nth-child(even) {
 .test6-exit {
   -webkit-clip-path: circle(75%);
           clip-path: circle(75%);
+}
+
+#all-jobs {
+  width: 85%;
+}
+
+.all-box {
+  height: 90vh;
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+
+table {
+  margin-top: 10px;
+  width: 100%;
+}
+
+table tr td span {
+  display: block;
+  width: 200px;
+  word-wrap: break-word;
+  white-space: normal;
+  font-weight: bold;
+}
+
+.tableData {
+  font-size: 15px;
 }
 /*# sourceMappingURL=style.css.map */

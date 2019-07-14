@@ -99,9 +99,6 @@ export default class ADashboard extends Component {
           <div className="pickup">
             <h1>Pickups</h1>
           </div>
-          <div className="active">
-            <h1>Active Jobs</h1>
-          </div>
         </div>
       </div>
     );
