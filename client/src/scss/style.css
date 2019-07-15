@@ -237,7 +237,8 @@
   font-size: 2em;
 }
 
-.App .login-page {
+.App .login-page,
+.App .register-page {
   height: 100vh;
   width: 100vw;
   display: -webkit-box;
@@ -248,7 +249,8 @@
           justify-content: center;
 }
 
-.App .login-page #back-box {
+.App .login-page #back-box,
+.App .register-page #back-box {
   margin-top: 1em;
   border-radius: 0.5em;
   width: 95vw;
@@ -272,16 +274,19 @@
           align-items: center;
 }
 
-.App .login-page #back-box #reg-text {
+.App .login-page #back-box #reg-text,
+.App .register-page #back-box #reg-text {
   font-size: 2em;
 }
 
-.App .login-page #back-box #welcome {
+.App .login-page #back-box #welcome,
+.App .register-page #back-box #welcome {
   font-size: 3.5em;
   font-weight: bolder;
 }
 
-.App .login-page #back-box #login-box {
+.App .login-page #back-box #login-box,
+.App .register-page #back-box #login-box {
   color: #333;
   background-color: white;
   width: 25%;
@@ -307,11 +312,13 @@
   padding-left: 3em;
 }
 
-.App .login-page #back-box #login-box h4 {
+.App .login-page #back-box #login-box h4,
+.App .register-page #back-box #login-box h4 {
   font-size: 3.3em;
 }
 
-.App .login-page #back-box #login-box button {
+.App .login-page #back-box #login-box button,
+.App .register-page #back-box #login-box button {
   -ms-flex-item-align: center !important;
       -ms-grid-row-align: center !important;
       align-self: center !important;
@@ -327,7 +334,8 @@
   padding-right: 0.8em;
 }
 
-.App .login-page #back-box #login-box .form-box {
+.App .login-page #back-box #login-box .form-box,
+.App .register-page #back-box #login-box .form-box {
   margin-top: 2em;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -343,7 +351,8 @@
   width: 100%;
 }
 
-.App .login-page #back-box #login-box .form-box input {
+.App .login-page #back-box #login-box .form-box input,
+.App .register-page #back-box #login-box .form-box input {
   border: none;
   background-color: #f2f2f2;
   border-radius: 0.2em;
@@ -352,7 +361,8 @@
   padding: 0.5em;
 }
 
-.App .login-page #back-box #login-box .form-box label {
+.App .login-page #back-box #login-box .form-box label,
+.App .register-page #back-box #login-box .form-box label {
   font-weight: bold;
 }
 

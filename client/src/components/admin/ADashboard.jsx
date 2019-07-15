@@ -13,6 +13,27 @@ export default class ADashboard extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
+  changeStatus = e => {
+    e.preventDefault();
+    const status = {
+      jobId: this.state.jobid,
+      status: this.state.status
+    };
+
+    fetch("http://localhost:5000/admin/change-status", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(status)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+      });
+  };
+
   confirmOrder = e => {
     e.preventDefault();
     const confirm = {
@@ -32,9 +53,7 @@ export default class ADashboard extends Component {
       .then(data => {
         console.log(data);
         this.setState({
-          test: !this.state.test,
-          enquiryId: "",
-          quote: ""
+          test: !this.state.test
         });
       });
   };
@@ -92,7 +111,7 @@ export default class ADashboard extends Component {
                   <input onChange={this.onChange} type="text" id="status" />
                 </div>
 
-                <button>SUBMIT</button>
+                <button onClick={this.changeStatus}>SUBMIT</button>
               </form>
             </div>
           </div>

@@ -1,16 +1,22 @@
 import React, { Component } from "react";
+import AuthUtils from "./AuthUtils";
 import { Link } from "react-router-dom";
 
 class Register extends Component {
   constructor() {
     super();
     this.state = {
-      name: "",
       email: "",
       password: "",
-      password2: "",
       errors: {}
     };
+    this.auth = new AuthUtils();
+  }
+  componentDidMount() {
+    if (this.auth.loggedIn()) {
+      console.log("loggedin");
+      this.props.history.replace("/");
+    }
   }
 
   onChange = e => {
@@ -18,51 +24,37 @@ class Register extends Component {
   };
   onSubmit = e => {
     e.preventDefault();
-    const newUser = {
-      name: this.state.name,
+    const userData = {
       email: this.state.email,
-      password: this.state.password,
-      password2: this.state.password2
+      password: this.state.password
     };
-    fetch("http://localhost:5000/api/register", {
+    fetch("http://localhost:5000/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(newUser)
-    }).then(response => console.log(response));
+      body: JSON.stringify(userData)
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log("loggedin");
+        this.auth.setToken(data.token);
+        this.props.handleStatus(true);
+        this.props.history.replace("/");
+      });
   };
-
   render() {
     const { errors } = this.state;
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col s8 offset-s2">
-            <Link to="/" className="btn-flat waves-effect">
-              <i className="material-icons left">keyboard_backspace</i> Back to
-              home
-            </Link>
-            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-              <h4>
-                <b>Register</b> below
-              </h4>
-              <p className="grey-text text-darken-1">
-                Already have an account? <Link to="/login">Log in</Link>
-              </p>
-            </div>
-            <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.name}
-                  error={errors.name}
-                  id="name"
-                  type="text"
-                />
-                <label htmlFor="name">Name</label>
-              </div>
-              <div className="input-field col s12">
+      <div className="register-page">
+        <div id="back-box">
+          <div id="login-box">
+            <h4>
+              <b>Register Below</b>
+            </h4>
+            <form className="form-box" noValidate onSubmit={this.onSubmit}>
+              <div className="input-field">
+                <label htmlFor="email">Email</label>
                 <input
                   onChange={this.onChange}
                   value={this.state.email}
@@ -70,9 +62,9 @@ class Register extends Component {
                   id="email"
                   type="email"
                 />
-                <label htmlFor="email">Email</label>
               </div>
-              <div className="input-field col s12">
+              <div className="input-field">
+                <label htmlFor="password">Password</label>
                 <input
                   onChange={this.onChange}
                   value={this.state.password}
@@ -80,9 +72,9 @@ class Register extends Component {
                   id="password"
                   type="password"
                 />
-                <label htmlFor="password">Password</label>
               </div>
-              <div className="input-field col s12">
+              <div className="input-field">
+                <label htmlFor="password2">Confirm Password</label>
                 <input
                   onChange={this.onChange}
                   value={this.state.password2}
@@ -90,28 +82,16 @@ class Register extends Component {
                   id="password2"
                   type="password"
                 />
-                <label htmlFor="password2">Confirm Password</label>
               </div>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <button
-                  style={{
-                    width: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem"
-                  }}
-                  type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
-                  Sign up
-                </button>
-              </div>
+              <div />
             </form>
+            <button type="submit" onClick={this.onSubmit}>
+              Register
+            </button>
           </div>
         </div>
       </div>
     );
   }
 }
-
 export default Register;

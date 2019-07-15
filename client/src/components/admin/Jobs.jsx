@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import JobItem from "./JobItem";
-import Loader from "react-loader-spinner";
 
 export default class Jobs extends Component {
   state = {
@@ -24,7 +23,6 @@ export default class Jobs extends Component {
       <div id="all-jobs">
         <div className="job-header">
           <h1>All Jobs</h1>
-          <Loader height={60} width={60} type="Bars" />
         </div>
         <div class="all-box">
           <table className="table">

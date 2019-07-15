@@ -7,9 +7,9 @@ export default class SideBar extends Component {
       <div className="side-bar">
         <div id="profile">
           <h1>
-            <b>Admin</b> Panel
+            <b>Account</b> Panel
           </h1>
-          <div className="avatar" />
+
           <span className="role">
             <span>
               Jonathan | <b>Sales</b>
@@ -17,8 +17,9 @@ export default class SideBar extends Component {
           </span>
         </div>
         <div className="nav">
-          <Link to="/admin/all-jobs">All Jobs</Link>
-          <Link to="/admin/customers">Customers</Link>
+          <Link to="/admin/all-jobs">Order History</Link>
+          <Link to="/admin/customers">Edit Profile</Link>
+          <Link to="/admin/customers">Change Password</Link>
         </div>
         <button>Logout</button>
       </div>
