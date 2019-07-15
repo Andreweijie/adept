@@ -18,7 +18,7 @@
 }
 
 .App #admin #admin-side {
-  width: 15%;
+  width: 15vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -221,12 +221,11 @@
           box-shadow: 0rem 1rem 1rem 0 rgba(255, 51, 102, 0.4);
 }
 
-.App #admin #a-dash .dash-content .pickup,
-.App #admin #a-dash .dash-content .active {
+.App #admin #a-dash .dash-content .pickup {
   -webkit-box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
           box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
   background-color: white;
-  height: 24vh;
+  height: 70%;
   width: 90%;
   -ms-flex-item-align: start;
       align-self: flex-start;
@@ -234,8 +233,7 @@
   padding: 16px;
 }
 
-.App #admin #a-dash .dash-content .pickup h1,
-.App #admin #a-dash .dash-content .active h1 {
+.App #admin #a-dash .dash-content .pickup h1 {
   font-size: 2em;
 }
 
@@ -358,9 +356,7 @@
   font-weight: bold;
 }
 
-.App .dashboard {
-  padding-left: 0px !important;
-  padding-right: 0px !important;
+.App #cust {
   height: 100%;
   width: 100%;
   display: -webkit-box;
@@ -368,46 +364,136 @@
   display: flex;
 }
 
-.App .dashboard .header {
-  background-color: white;
-  height: 10%;
-  width: 85%;
+.App #cust .side-bar {
+  background: linear-gradient(45deg, #4625ca 0%, #4a14ff);
+  height: 100%;
+  width: 15vw;
+}
+
+.App #cust .side-bar #profile {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding-left: 3em;
-  padding-right: 3em;
-  font-size: 1.5em;
 }
 
-.App .dashboard .header #enquiry-btn {
-  font-size: 0.8em;
-  font-weight: bold;
-  padding: 0.5em;
-  border: none;
-  border-radius: 0.5em;
+.App #cust .side-bar #profile h1 {
   color: white;
-  margin-bottom: -4.7em;
-  -webkit-box-shadow: 0rem 0.35rem 1rem 0 rgba(51, 65, 255, 0.4);
-          box-shadow: 0rem 0.35rem 1rem 0 rgba(51, 65, 255, 0.4);
-  background: -webkit-gradient(linear, left top, right top, from(#020024), color-stop(0%, #3341ff), to(#402ce6));
-  background: linear-gradient(90deg, #020024 0%, #3341ff 0%, #402ce6);
+  text-align: center;
 }
 
-.App .dashboard .header #header-title {
-  font-weight: bold;
+.App #cust .side-bar #profile .avatar {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-color: #ff3366;
 }
 
-.App .dashboard .side-bar {
-  background: linear-gradient(45deg, #4625ca 0%, #4a14ff);
+.App #cust .side-bar #profile .role {
+  color: white;
+}
+
+.App #cust .side-bar #profile .role span {
+  font-size: 1.7em;
+}
+
+.App #cust .side-bar .nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 100%;
+  margin-top: 3em;
+}
+
+.App #cust .side-bar .nav a {
+  color: white;
+  font-size: 1.5em;
+  text-decoration: none;
+  width: 100%;
+  padding: 12px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.App #cust .side-bar .nav a:hover {
+  background-color: #282e42;
+}
+
+.App #cust .dashboard {
   height: 100%;
-  width: 15%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 16px;
+  padding-left: 48px;
+}
+
+.App #cust .dashboard h1 {
+  padding-bottom: 8px;
+  font-weight: bold;
+  font-size: 4em;
+}
+
+.App #cust .dashboard .dash-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+  width: 100%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.App #cust .dashboard .dash-content .pending-jobs {
+  height: 30%;
+}
+
+.App #cust .dashboard .dash-content .active-jobs {
+  height: 65%;
+}
+
+.App #cust .dashboard .dash-content .pending-jobs,
+.App #cust .dashboard .dash-content .active-jobs {
+  background-color: white;
+  -webkit-box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
+  width: 90%;
+  border-radius: 0.5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 16px;
+}
+
+.App #cust .dashboard .dash-content .pending-jobs h1,
+.App #cust .dashboard .dash-content .active-jobs h1 {
+  font-size: 32px;
 }
 
 @media only screen and (max-width: 500px) {
@@ -490,6 +576,17 @@
   width: 85%;
 }
 
+#all-jobs .job-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#all-jobs .job-header h1 {
+  padding: 16px;
+  font-weight: bold;
+}
+
 .all-box {
   height: 90vh;
   overflow-y: scroll;
@@ -501,9 +598,13 @@ table {
   width: 100%;
 }
 
+table tr td {
+  vertical-align: baseline !important;
+}
+
 table tr td span {
   display: block;
-  width: 200px;
+  width: 160px;
   word-wrap: break-word;
   white-space: normal;
   font-weight: bold;
@@ -511,5 +612,42 @@ table tr td span {
 
 .tableData {
   font-size: 15px;
+}
+
+#set-time {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#set-date {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  font-weight: bold;
+  padding: 8px;
+  border: none;
+  height: 2.5em;
+  background-color: #4a14ff;
+  color: white;
+  border-radius: 0.3em;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+input {
+  border: none;
+  border-radius: 0.3em;
+  background-color: #f2f2f2;
+}
+
+.all-box::-webkit-scrollbar {
+  width: 0px;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
+}
+
+.all-box::-webkit-scrollbar-thumb {
+  background: #f2f2f2;
 }
 /*# sourceMappingURL=style.css.map */

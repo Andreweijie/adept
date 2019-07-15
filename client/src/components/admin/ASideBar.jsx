@@ -21,6 +21,7 @@ class ASideBar extends Component {
           <Link to="/admin/all-jobs">All Jobs</Link>
           <Link to="/admin/customers">Customers</Link>
         </div>
+        <button>Logout</button>
       </div>
     );
   }

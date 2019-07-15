@@ -140,6 +140,9 @@ const JobSchema = new Schema({
   salesperson: {
     type: String,
     default: ""
+  },
+  pickUpDate: {
+    type: Date
   }
 });
 module.exports = Job = mongoose.model("jobs", JobSchema);

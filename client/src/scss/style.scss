@@ -11,7 +11,7 @@
     height: 100%;
     width: 100%;
     #admin-side {
-      width: 15%;
+      width: 15vw;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -136,11 +136,10 @@
             }
           }
         }
-        .pickup,
-        .active {
+        .pickup {
           box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
           background-color: white;
-          height: 24vh;
+          height: 70%;
           width: 90%;
           align-self: flex-start;
           border-radius: 0.5em;
@@ -229,48 +228,94 @@
       }
     }
   }
-  .dashboard {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
+  //Customer Panel CSS
+  #cust {
     height: 100%;
     width: 100%;
     display: flex;
-    .header {
-      background-color: white;
-      height: 10%;
-      width: 85%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-left: 3em;
-      padding-right: 3em;
-      font-size: 1.5em;
-      #enquiry-btn {
-        font-size: 0.8em;
-        font-weight: bold;
-        padding: 0.5em;
-        border: none;
-        border-radius: 0.5em;
-        color: white;
-        margin-bottom: -4.7em;
-        box-shadow: 0rem 0.35rem 1rem 0 rgba(51, 65, 255, 0.4);
-        background: linear-gradient(
-          90deg,
-          rgba(2, 0, 36, 1) 0%,
-          rgba(51, 65, 255, 1) 0%,
-          rgba(64, 44, 230, 1)
-        );
-      }
-
-      #header-title {
-        font-weight: bold;
-      }
-    }
-
     .side-bar {
       background: linear-gradient(45deg, #4625ca 0%, #4a14ff);
       height: 100%;
-      width: 15%;
+      width: 15vw;
+      #profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h1 {
+          color: white;
+          text-align: center;
+        }
+        .avatar {
+          height: 100px;
+          width: 100px;
+          border-radius: 50%;
+          background-color: #ff3366;
+        }
+        .role {
+          color: white;
+          span {
+            font-size: 1.7em;
+          }
+        }
+      }
+      .nav {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        margin-top: 3em;
+        a {
+          color: white;
+          font-size: 1.5em;
+          text-decoration: none;
+          width: 100%;
+          padding: 12px;
+          transition: 0.2s;
+          &:hover {
+            background-color: #282e42;
+          }
+        }
+      }
+    }
+    .dashboard {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+      padding-left: 48px;
+      h1 {
+        padding-bottom: 8px;
+        font-weight: bold;
+        font-size: 4em;
+      }
+      .dash-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        justify-content: space-around;
+        .pending-jobs {
+          height: 30%;
+        }
+        .active-jobs {
+          height: 65%;
+        }
+        .pending-jobs,
+        .active-jobs {
+          background-color: white;
+          box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
+
+          width: 90%;
+          border-radius: 0.5em;
+          display: flex;
+          flex-direction: column;
+          padding: 16px;
+          h1 {
+            font-size: 32px;
+          }
+        }
+      }
     }
   }
 }
@@ -342,6 +387,13 @@
 }
 #all-jobs {
   width: 85%;
+  .job-header {
+    display: flex;
+    h1 {
+      padding: 16px;
+      font-weight: bold;
+    }
+  }
 }
 .all-box {
   height: 90vh;
@@ -353,9 +405,10 @@ table {
   width: 100%;
   tr {
     td {
+      vertical-align: baseline !important;
       span {
         display: block;
-        width: 200px;
+        width: 160px;
         word-wrap: break-word;
         white-space: normal;
         font-weight: bold;
@@ -365,4 +418,35 @@ table {
 }
 .tableData {
   font-size: 15px;
+}
+
+#set-time {
+  display: flex;
+}
+
+#set-date {
+  align-self: flex-end;
+  font-weight: bold;
+  padding: 8px;
+  border: none;
+  height: 2.5em;
+  background-color: #4a14ff;
+  color: white;
+  border-radius: 0.3em;
+  transition: 0.5s;
+}
+
+input {
+  border: none;
+  border-radius: 0.3em;
+  background-color: #f2f2f2;
+}
+
+.all-box::-webkit-scrollbar {
+  width: 0px; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+.all-box::-webkit-scrollbar-thumb {
+  background: #f2f2f2;
 }

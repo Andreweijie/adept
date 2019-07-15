@@ -63,6 +63,34 @@ router.get("/pending-jobs", (req, res) => {
     } else {
       res.json(docs);
     }
-  });
+  }).select(
+    "enquiryId custId manufacturer modelNo serialNo faultDesc itemDesc entryDateTime -_id"
+  );
+});
+
+//get active jobs
+router.get("/active-jobs", (req, res) => {
+  Job.find(
+    {
+      $and: [
+        {
+          $and: [
+            { jobStatus: { $ne: "Complete" } },
+            { jobStatus: { $ne: "Return Not Repair" } }
+          ]
+        },
+        { custID: parseInt(req.query.custID) }
+      ]
+    },
+    (err, docs) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json(docs);
+      }
+    }
+  ).select(
+    "custId manufacturer modelNo serialNo itemDesc entryDateTime jobStatus -_id"
+  );
 });
 module.exports = router;

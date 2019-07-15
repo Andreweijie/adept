@@ -20,6 +20,9 @@ router.post("/confirm", (req, res) => {
   let enquiryId = req.body.enquiryId;
   let quote = req.body.quote;
   Temp.findOne({ enquiryId: enquiryId }, (err, doc) => {
+    if (err) {
+      console.log(err);
+    }
     let newTask = doc;
     doc.quote = parseInt(req.body.quote);
     console.log(doc);
@@ -60,7 +63,9 @@ router.get("/all-jobs", (req, res) => {
     } else {
       res.json(docs);
     }
-  });
+  }).select(
+    "-_id -id -jobName -freightTerm -orderNo -adviceNoticeNo -partID -partQty -goaheaddate -repBy -finalOutBy -engReport -previousjobid -isjobwarranty -quoteCost -quoteHour"
+  );
 });
 
 module.exports = router;

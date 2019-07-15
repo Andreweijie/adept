@@ -1,27 +1,38 @@
 import React, { Component } from "react";
 import JobItem from "./JobItem";
+import Loader from "react-loader-spinner";
 
 export default class Jobs extends Component {
   state = {
-    data: []
+    headers: [],
+    body: [],
+    loading: true
   };
   componentDidMount() {
     fetch("/admin/all-jobs")
       .then(res => res.json())
       .then(data => {
-        this.setState({ data: data });
+        this.setState({
+          headers: Object.values(data[0]),
+          body: data.splice(1)
+        });
       });
   }
 
   render() {
-    console.log(this.state.data);
     return (
       <div id="all-jobs">
-        <h1>All Jobs</h1>
+        <div className="job-header">
+          <h1>All Jobs</h1>
+          <Loader height={60} width={60} type="Bars" />
+        </div>
         <div class="all-box">
           <table className="table">
-            {this.state.data
-              ? this.state.data.map(e => {
+            {this.state.headers.map(header => {
+              return <th>{header}</th>;
+            })}
+            {this.state.body
+              ? this.state.body.map(e => {
                   return <JobItem data={e} />;
                 })
               : null}

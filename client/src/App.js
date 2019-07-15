@@ -7,7 +7,7 @@ import ChangePassword from "./components/auth/ChangePassword";
 import Register from "./components/auth/Register";
 import Reset from "./components/auth/Reset";
 import Admin from "./components/admin/Admin";
-import Test from "./components/Test";
+import Cust from "./components/customers/Cust";
 import "./scss/style.css";
 
 const auth = new AuthUtils();
@@ -39,9 +39,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Route path="/test" component={Test} />
+        <Route path="/cust" component={Cust} />
         <Route path="/admin" component={Admin} />
-        <Route exact path="/" component={Dashboard} />
         <Route
           exact
           path="/login"
