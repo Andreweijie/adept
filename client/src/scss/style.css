@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,900&display=swap");
 .App {
-  background-color: #f9f9f9;
   font-family: "Segoe UI";
   font-weight: 200;
   height: 100vh;
@@ -114,6 +113,7 @@
 .App #admin #a-dash h1 {
   font-size: 4em;
   font-weight: bold;
+  background-blend-mode: difference;
 }
 
 .App #admin #a-dash .dash-content {
@@ -231,6 +231,7 @@
       align-self: flex-start;
   border-radius: 0.5em;
   padding: 16px;
+  overflow-x: scroll;
 }
 
 .App #admin #a-dash .dash-content .pickup h1 {
@@ -367,6 +368,7 @@
 }
 
 .App #cust {
+  background-image: url("https://i.imgur.com/NiAzsgC.png");
   height: 100%;
   width: 100%;
   display: -webkit-box;
@@ -478,6 +480,7 @@
 
 .App #cust .dashboard .dash-content .pending-jobs {
   height: 30%;
+  overflow-x: scroll;
 }
 
 .App #cust .dashboard .dash-content .active-jobs {
@@ -584,23 +587,29 @@
 
 #all-jobs {
   width: 85%;
-}
-
-#all-jobs .job-header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-#all-jobs .job-header h1 {
-  padding: 16px;
-  font-weight: bold;
-}
-
-.all-box {
-  height: 90vh;
+#all-jobs .all-box {
+  margin-left: 2.5%;
+  height: 95vh;
   overflow-y: scroll;
   overflow-x: scroll;
+  background-color: white;
+  -webkit-box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
+  width: 95%;
+  border-radius: 0.3em;
+}
+
+#all-jobs .all-box h1 {
+  padding: 16px;
+  font-weight: bold;
 }
 
 table {
@@ -659,5 +668,141 @@ input {
 
 .all-box::-webkit-scrollbar-thumb {
   background: #f2f2f2;
+}
+
+.confirm-date {
+  font-weight: bold;
+  padding: 4px;
+  border: 2px solid #4a14ff;
+  background-color: white;
+  color: #4a14ff;
+  border-radius: 0.3em;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.enquiry {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  font-weight: bold;
+}
+
+.enquiry .enquiry-box {
+  height: 50em;
+  padding: 3em;
+  background-color: white;
+  -webkit-box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
+  width: 30em;
+  border-radius: 0.3em;
+}
+
+.enquiry .enquiry-box input {
+  height: 2.5em;
+  padding: 0.5em;
+}
+
+.enquiry .enquiry-box form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  height: 90%;
+}
+
+.enquiry .enquiry-box form .item-desc {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+}
+
+.enquiry .enquiry-box form .brand-model {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.enquiry .enquiry-box form .brand-model div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+}
+
+.enquiry .enquiry-box form .brand-model div input {
+  width: 95%;
+}
+
+.enquiry .enquiry-box form .fault-desc {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+}
+
+.enquiry .enquiry-box form .fault-desc textarea {
+  height: 6em;
+  border: none;
+  background-color: #f2f2f2;
+  border-radius: 0.3em;
+}
+
+.enquiry .enquiry-box h4 {
+  font-size: 3em;
+}
+
+.last-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.last-row .urgency {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.last-row .urgency input {
+  margin-right: 0.5em;
+}
+
+.last-row .urgency label {
+  margin: 0;
 }
 /*# sourceMappingURL=style.css.map */

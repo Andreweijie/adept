@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const User = require("../models/User");
+const Pickup = require("../models/Pickup");
 const Temp = require("../models/Temp");
 const Job = require("../models/Job");
 const multer = require("multer");
@@ -32,7 +33,13 @@ router.post("/confirm", (req, res) => {
         console.log(err);
       }
       console.log("success");
-      res.json({ message: "success" });
+      Temp.deleteOne({ enquiryId: enquiryId }, err => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.json({ message: "success" });
+        }
+      });
     });
   });
 });
@@ -66,6 +73,16 @@ router.get("/all-jobs", (req, res) => {
   }).select(
     "-_id -id -jobName -freightTerm -orderNo -adviceNoticeNo -partID -partQty -goaheaddate -repBy -finalOutBy -engReport -previousjobid -isjobwarranty -quoteCost -quoteHour"
   );
+});
+
+router.get("/pickups", (req, res) => {
+  Pickup.find({}, (err, docs) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(docs);
+    }
+  }).select("-__v -_id");
 });
 
 module.exports = router;

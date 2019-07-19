@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import AuthUtils from "./AuthUtils";
-import { Link } from "react-router-dom";
+import AuthUtils from "../auth/AuthUtils";
 
-class Login extends Component {
+class ALogin extends Component {
   constructor() {
     super();
     this.state = {
@@ -14,8 +13,7 @@ class Login extends Component {
   }
   componentDidMount() {
     if (this.auth.loggedIn()) {
-      console.log("loggedin");
-      this.props.history.replace("/");
+      this.props.history.replace("/admin/dashboard");
     }
   }
 
@@ -27,7 +25,7 @@ class Login extends Component {
     const userData = {
       email: this.state.email,
       password: this.state.password,
-      accountType: "customer"
+      accountType: "admin"
     };
     fetch("http://localhost:5000/api/login", {
       method: "POST",
@@ -38,10 +36,8 @@ class Login extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        console.log("loggedin");
-        this.auth.setToken(data.adeptcust_token, "adeptcust_token");
-        this.props.handleStatus(true);
-        this.props.history.replace("/cust/dashboard");
+        this.auth.setToken(data.adeptadmin_token, "adeptadmin_token");
+        this.props.history.replace("/");
       });
   };
   render() {
@@ -50,10 +46,7 @@ class Login extends Component {
       <div className="login-page">
         <div id="back-box">
           <p id="welcome">
-            Welcome to your <b>Adept Account</b>
-          </p>
-          <p id="reg-text">
-            Don't have an account? <b>Register Here!</b>
+            Welcome to your <b>Admin Log In</b>
           </p>
           <div id="login-box">
             <h4>
@@ -91,4 +84,4 @@ class Login extends Component {
     );
   }
 }
-export default Login;
+export default ALogin;

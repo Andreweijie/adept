@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,900&display=swap");
 .App {
-  background-color: #f9f9f9;
   font-family: "Segoe UI";
   font-weight: 200;
   height: 100vh;
@@ -68,6 +67,7 @@
       h1 {
         font-size: 4em;
         font-weight: bold;
+        background-blend-mode: difference;
       }
       .dash-content {
         width: 100%;
@@ -144,6 +144,7 @@
           align-self: flex-start;
           border-radius: 0.5em;
           padding: 16px;
+          overflow-x: scroll;
           h1 {
             font-size: 2em;
           }
@@ -231,6 +232,7 @@
   }
   //Customer Panel CSS
   #cust {
+    background-image: url("https://i.imgur.com/NiAzsgC.png");
     height: 100%;
     width: 100%;
     display: flex;
@@ -298,6 +300,7 @@
         justify-content: space-around;
         .pending-jobs {
           height: 30%;
+          overflow-x: scroll;
         }
         .active-jobs {
           height: 65%;
@@ -388,19 +391,25 @@
 }
 #all-jobs {
   width: 85%;
-  .job-header {
-    display: flex;
+  display: flex;
+  align-items: center;
+  .all-box {
+    margin-left: 2.5%;
+    height: 95vh;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    background-color: white;
+    box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
+    width: 95%;
+    border-radius: 0.3em;
+
     h1 {
       padding: 16px;
       font-weight: bold;
     }
   }
 }
-.all-box {
-  height: 90vh;
-  overflow-y: scroll;
-  overflow-x: scroll;
-}
+
 table {
   margin-top: 10px;
   width: 100%;
@@ -450,4 +459,85 @@ input {
 
 .all-box::-webkit-scrollbar-thumb {
   background: #f2f2f2;
+}
+
+.confirm-date {
+  font-weight: bold;
+  padding: 4px;
+  border: 2px solid #4a14ff;
+  background-color: white;
+  color: #4a14ff;
+  border-radius: 0.3em;
+  transition: 0.5s;
+}
+
+.enquiry {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-weight: bold;
+  .enquiry-box {
+    height: 50em;
+    padding: 3em;
+    background-color: white;
+    box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
+    width: 30em;
+    border-radius: 0.3em;
+    input {
+      height: 2.5em;
+      padding: 0.5em;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      height: 90%;
+      .item-desc {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+      .brand-model {
+        display: flex;
+        justify-content: space-between;
+        div {
+          display: flex;
+          flex-direction: column-reverse;
+          input {
+            width: 95%;
+          }
+        }
+      }
+      .fault-desc {
+        display: flex;
+        flex-direction: column-reverse;
+        textarea {
+          height: 6em;
+          border: none;
+          background-color: #f2f2f2;
+          border-radius: 0.3em;
+        }
+      }
+    }
+
+    h4 {
+      font-size: 3em;
+    }
+  }
+}
+
+.last-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .urgency {
+    display: flex;
+    align-items: center;
+    input {
+      margin-right: 0.5em;
+    }
+    label {
+      margin: 0;
+    }
+  }
 }

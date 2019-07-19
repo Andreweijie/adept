@@ -1,31 +1,42 @@
 import React, { Component } from "react";
 import JobItem from "../admin/JobItem";
+import AuthUtils from "../auth/AuthUtils";
+import decode from "jwt-decode";
 
 export default class Dashboard extends Component {
-  state = {
-    pendingHeaders: [],
-    pendingBody: [],
-    activeHeaders: [],
-    activeBody: []
-  };
+  constructor() {
+    super();
+    this.state = {
+      pendingHeaders: [],
+      pendingBody: [],
+      activeHeaders: [],
+      activeBody: [],
+      custID: decode(localStorage.getItem("adeptcust_token")).user.custID
+    };
+  }
 
   componentDidMount() {
+    console.log(this.state.custID);
     fetch("/cust/pending-jobs")
       .then(res => res.json())
       .then(data => {
-        this.setState({
-          pendingHeaders: Object.keys(data[0]),
-          pendingBody: data.splice(1)
-        });
+        if (data.length != 0) {
+          this.setState({
+            pendingHeaders: Object.keys(data[0]),
+            pendingBody: data.splice(1)
+          });
+        }
       });
 
     fetch("/cust/active-jobs?custID=177")
       .then(res => res.json())
       .then(data => {
-        this.setState({
-          activeHeaders: Object.keys(data[0]),
-          activeBody: data
-        });
+        if (data.length != 0) {
+          this.setState({
+            activeHeaders: Object.keys(data[0]),
+            activeBody: data
+          });
+        }
       });
   }
 
@@ -36,7 +47,7 @@ export default class Dashboard extends Component {
         <div className="dash-content">
           <div className="pending-jobs">
             <h1>Pending Jobs</h1>
-            <div class="all-box">
+            <div className="all-box">
               <table className="table">
                 {this.state.pendingHeaders.map(header => {
                   return <th>{header}</th>;
@@ -51,7 +62,7 @@ export default class Dashboard extends Component {
           </div>
           <div className="active-jobs">
             <h1>Active Jobs</h1>
-            <div class="all-box">
+            <div className="all-box">
               <table className="table">
                 <th>Pickup Date</th>
                 {this.state.activeHeaders.map(header => {
@@ -59,7 +70,13 @@ export default class Dashboard extends Component {
                 })}
                 {this.state.activeBody
                   ? this.state.activeBody.map(e => {
-                      return <JobItem active={true} data={e} />;
+                      return (
+                        <JobItem
+                          active={true}
+                          data={e}
+                          custID={this.state.custID}
+                        />
+                      );
                     })
                   : null}
               </table>

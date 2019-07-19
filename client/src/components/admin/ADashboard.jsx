@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { CSSTransition } from "react-transition-group";
+import JobItem from "./JobItem";
 
 export default class ADashboard extends Component {
   state = {
@@ -7,8 +8,15 @@ export default class ADashboard extends Component {
     quote: 0,
     jobid: "",
     status: "",
-    test: false
+    test: false,
+    headers: [],
+    body: []
   };
+
+  componentDidMount() {
+    this.getPickups();
+  }
+
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
@@ -58,13 +66,20 @@ export default class ADashboard extends Component {
       });
   };
 
-  test = e => {
-    e.preventDefault();
-    this.setState({
-      test: !this.state.test
-    });
+  getPickups = () => {
+    fetch("/admin/pickups")
+      .then(res => res.json())
+      .then(data => {
+        if (data.length != 0) {
+          this.setState({
+            headers: Object.keys(data[0]),
+            body: data
+          });
+        }
+      });
   };
   render() {
+    console.log(this.state.body);
     return (
       <div id="a-dash">
         <h1>Dashboard</h1>
@@ -117,6 +132,18 @@ export default class ADashboard extends Component {
           </div>
           <div className="pickup">
             <h1>Pickups</h1>
+            <div className="all-box">
+              <table className="table">
+                {this.state.headers.map(header => {
+                  return <th>{header}</th>;
+                })}
+                {this.state.body
+                  ? this.state.body.map(e => {
+                      return <JobItem data={e} custID={177} />;
+                    })
+                  : null}
+              </table>
+            </div>
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ export default class Jobs extends Component {
       .then(res => res.json())
       .then(data => {
         this.setState({
-          headers: Object.values(data[0]),
+          headers: Object.keys(data[0]),
           body: data.splice(1)
         });
       });
@@ -21,10 +21,8 @@ export default class Jobs extends Component {
   render() {
     return (
       <div id="all-jobs">
-        <div className="job-header">
-          <h1>All Jobs</h1>
-        </div>
         <div class="all-box">
+          <h1>All Jobs</h1>
           <table className="table">
             {this.state.headers.map(header => {
               return <th>{header}</th>;

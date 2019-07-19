@@ -88,33 +88,64 @@ router.post("/login", (req, res) => {
     password: req.body.password
   };
 
-  User.findOne({ email: userInput.email }).then(user => {
-    //check if user exists
-    if (!user) {
-      return res.status(404).json({ emailnotfound: "Email not found" });
-    }
-    console.log(user.name);
-    //Check password
-    bcrypt.compare(userInput.password, user.password).then(isMatch => {
-      if (isMatch) {
-        //create user information object
-        const payload = {
-          user: {
-            name: user.name,
-            email: user.email
-          }
-        };
-        //create and sign JSON Web Token
-        jwt.sign(payload, "secret", { expiresIn: 300000 }, (err, token) => {
-          res.json({ success: true, token });
-        });
-      } else {
-        return res
-          .status(400)
-          .json({ passwordIncorrect: "Password is incorrect" });
+  if (req.body.accountType == "admin") {
+    Admin.findOne({ email: userInput.email }).then(user => {
+      //check if user exists
+      if (!user) {
+        return res.status(404).json({ emailnotfound: "Email not found" });
       }
+
+      //Check password
+      bcrypt.compare(userInput.password, user.password).then(isMatch => {
+        if (isMatch) {
+          //create user information object
+          const payload = {
+            user: {
+              name: user.name,
+              role: user.role
+            }
+          };
+          //create and sign JSON Web Token
+          jwt.sign(payload, "secret", { expiresIn: 300000 }, (err, token) => {
+            res.json({ success: true, adeptadmin_token: token });
+          });
+        } else {
+          return res
+            .status(400)
+            .json({ passwordIncorrect: "Password is incorrect" });
+        }
+      });
     });
-  });
+  } else {
+    User.findOne({ email: userInput.email }).then(user => {
+      //check if user exists
+      if (!user) {
+        return res.status(404).json({ emailnotfound: "Email not found" });
+      }
+
+      //Check password
+      bcrypt.compare(userInput.password, user.password).then(isMatch => {
+        if (isMatch) {
+          //create user information object
+          const payload = {
+            user: {
+              name: user.name,
+              email: user.email,
+              custID: user.custId
+            }
+          };
+          //create and sign JSON Web Token
+          jwt.sign(payload, "secret", { expiresIn: 300000 }, (err, token) => {
+            res.json({ success: true, adeptcust_token: token });
+          });
+        } else {
+          return res
+            .status(400)
+            .json({ passwordIncorrect: "Password is incorrect" });
+        }
+      });
+    });
+  }
 });
 
 router.get("/verification", (req, res) => {

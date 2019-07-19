@@ -2,10 +2,20 @@ const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const User = require("../models/User");
+const Customer = require("../models/Customer");
+const Pickup = require("../models/Pickup");
 const Temp = require("../models/Temp");
 const Job = require("../models/Job");
 const multer = require("multer");
-let upload = multer({ dest: "uploads/" });
+let storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.filename + ".jpg");
+  }
+});
+let upload = multer({ storage: storage });
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -15,36 +25,39 @@ const transporter = nodemailer.createTransport({
 });
 
 //route for submitting enquiry form
-router.post("/enquiry", upload.single("jobImage"), (req, res) => {
-  /*const emailTemplate = `<h2>${req.body.enquiryID}</h2><h2>${
-    req.body.enquiryID
-  }</h2><h2>${req.body.enquiryID}</h2z><h2>${req.body.enquiryID}</h2><h2>${
-    req.body.enquiryID
-  }</h2><h2>${req.body.enquiryID}</h2><h2>${req.body.enquiryID}</h2>`;
+router.post("/enquiry", upload.single("productImage"), (req, res) => {
+  console.log(req.file);
+  const test2 = `<h1>${req.body.brand}</h1><h2>test</h2>`;
+  let itemDesc = req.body.itemDesc;
+  if (req.body.urgent) {
+    itemDesc = "[URGENT]" + itemDesc;
+  }
   const mailOptions = {
     from: "andregoh1996@gmail.com",
-    to: req.body.email,
-    subject: req.body.subject,
+    to: "andreweijie@outlook.com",
+    subject: itemDesc,
     html: test2,
     attachments: [
       {
         filename: "image.jpg",
-        path: "uploads/a.jpg" //same cid value as in the html img src
+        path: req.file.path //same cid value as in the html img src
       }
     ]
   };
-*/
-  const testTemp = new Temp({
-    enquiryId: 5
+  transporter.sendMail(mailOptions, (err, info) => {
+    if (err) console.log(err);
+    else console.log("success!");
   });
 
-  testTemp.save(err => {
-    if (err) {
-      console.log(err);
-    }
-    console.log("success");
-    res.json({ message: "success" });
+  const newTempJob = new Temp({
+    enquiryId: "6",
+    custID: req.query.custID,
+    manufacturer: req.body.brand,
+    modelNo: req.body.brand,
+    serialNo: req.body.serialNo,
+    faultDesc: req.body.faultDesc
   });
+  newTempJob.save();
 });
 
 //route for getting order history
@@ -64,7 +77,7 @@ router.get("/pending-jobs", (req, res) => {
       res.json(docs);
     }
   }).select(
-    "enquiryId custId manufacturer modelNo serialNo faultDesc itemDesc entryDateTime -_id"
+    "enquiryId custId manufacturer modelNo serialNo faultDesc itemDesc -_id"
   );
 });
 
@@ -90,7 +103,30 @@ router.get("/active-jobs", (req, res) => {
       }
     }
   ).select(
-    "custId manufacturer modelNo serialNo itemDesc entryDateTime jobStatus -_id"
+    "custId manufacturer modelNo serialNo itemDesc jobStatus jobid -_id"
   );
+});
+
+//set pickup date
+router.post("/set-pickup", (req, res) => {
+  Customer.findOne({ id: req.body.custID }, (err, doc) => {
+    const newPickup = {
+      date: req.body.date,
+      custId: req.body.custID,
+      jobid: req.body.jobid,
+      custAddress: doc.custAddress,
+      email: doc.email,
+      company: doc.company,
+      custTel: doc.custTel
+    };
+    let insert = new Pickup(newPickup);
+    insert.save(err => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json({ message: "message" });
+      }
+    });
+  });
 });
 module.exports = router;

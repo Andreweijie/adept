@@ -6,13 +6,9 @@ const TempSchema = new Schema({
     type: String,
     default: ""
   },
-  custId: {
+  custID: {
     type: Number,
-    default: "0"
-  },
-  email: {
-    type: String,
-    required: true
+    default: 0
   },
   manufacturer: {
     type: String,
@@ -31,10 +27,6 @@ const TempSchema = new Schema({
     default: ""
   },
   jobStatus: {
-    type: String,
-    default: ""
-  },
-  jobid: {
     type: String,
     default: ""
   },

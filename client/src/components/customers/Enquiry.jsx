@@ -1,148 +1,126 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
 
 class Register extends Component {
   constructor() {
     super();
+    this.formRef = React.createRef();
     this.state = {
-      name: "",
-      email: "",
-      password: "",
-      password2: "",
-      errors: {}
+      itemDesc: "",
+      brand: "",
+      model: "",
+      serialNo: "",
+      urgent: false,
+      faultDesc: "",
+      files: null
     };
   }
 
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
+  onUrgentCheck = () => {
+    this.setState(
+      { urgent: !this.state.urgent },
+      console.log(this.state.urgent)
+    );
+  };
   onSubmit = e => {
     e.preventDefault();
-    const newUser = {
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password,
-      password2: this.state.password2
-    };
-    fetch("http://localhost:5000/register", {
+    let dataToSubmit = new FormData(this.formRef.current);
+    fetch("/cust/enquiry?custID=177", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newUser)
-    }).then(response => console.log(response));
+      body: dataToSubmit
+    })
+      .then(res => res.json())
+      .then(data => console.log(data));
   };
 
   render() {
-    const { errors } = this.state;
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col s8 offset-s2">
-            <Link to="/" className="btn-flat waves-effect">
-              <i className="material-icons left">keyboard_backspace</i> Back to
-              home
-            </Link>
-            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-              <h4>
-                <b>Enquire</b> below
-              </h4>
-              <p className="grey-text text-darken-1">
-                Already have an account? <Link to="/login">Log in</Link>
-              </p>
+      <div className="enquiry">
+        <div className="enquiry-box">
+          <h4>
+            <b>Job</b> Enquiry
+          </h4>
+          <form ref={this.formRef} noValidate onSubmit={this.onSubmit}>
+            <div className="item-desc">
+              <input
+                onChange={this.onChange}
+                value={this.state.itemDesc}
+                id="itemDesc"
+                type="text"
+                name="itemDesc"
+              />
+              <label htmlFor="itemDesc">Item Description</label>
             </div>
-            <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.name}
-                  error={errors.name}
-                  id="name"
-                  type="text"
-                />
-                <label htmlFor="name">Name</label>
-              </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.email}
-                  error={errors.email}
-                  id="email"
-                  type="email"
-                />
-                <label htmlFor="email">Email</label>
-              </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.subject}
-                  error={errors.subject}
-                  id="subject"
-                  type="text"
-                />
-                <label htmlFor="subject">subject</label>
-              </div>
-              <div className="input-field col s6">
+            <div className="brand-model">
+              <div>
                 <input
                   onChange={this.onChange}
                   value={this.state.brand}
-                  error={errors.brand}
                   id="brand"
                   type="text"
+                  name="brand"
                 />
-                <label htmlFor="brand">brand</label>
+                <label htmlFor="brand">Brand</label>
               </div>
-              <div className="input-field col s6">
+              <div>
                 <input
                   onChange={this.onChange}
                   value={this.state.model}
-                  error={errors.model}
                   id="model"
                   type="text"
+                  name="model"
                 />
-                <label htmlFor="model">model</label>
+                <label htmlFor="model">Model</label>
               </div>
-
-              <TextField
-                id="outlined-multiline-static"
-                label="Symptoms"
-                multiline
-                rows="4"
-                defaultValue="Describe the sysmptoms here..."
-                margin="normal"
-                variant="outlined"
-                fullWidth
+            </div>
+            <div className="item-desc">
+              <input
+                onChange={this.onChange}
+                value={this.state.serialNo}
+                id="serialNo"
+                type="text"
+                name="serialNo"
               />
+              <label htmlFor="subject">Serial No</label>
+            </div>
+            <div className="fault-desc">
+              <textarea
+                onChange={this.onChange}
+                value={this.state.faultDesc}
+                id="faultDesc"
+                name="faultDesc"
+              />
+              <label htmlFor="faultDesc">Symptoms</label>
+            </div>
+            <div className="last-row">
               <input
                 accept="image/*"
                 style={{ display: "none" }}
                 id="raised-button-file"
                 multiple
                 type="file"
+                name="productImage"
               />
               <label htmlFor="raised-button-file">
                 <Button variant="raised" component="span">
                   Upload Images
                 </Button>
               </label>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <button
-                  style={{
-                    width: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem"
-                  }}
-                  type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
-                  Sign up
-                </button>
+              <div className="urgency">
+                <input
+                  onChange={this.onUrgentCheck}
+                  id="urgent"
+                  type="checkbox"
+                  name="urgent"
+                />
+                <label htmlFor="subject">Urgent?</label>
               </div>
-            </form>
-          </div>
+              <button type="submit">Submit</button>
+            </div>
+          </form>
         </div>
       </div>
     );

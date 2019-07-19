@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import { Route, withRouter } from "react-router-dom";
 import AuthUtils from "./components/auth/AuthUtils";
 import Login from "./components/auth/Login";
-import Dashboard from "./components/customers/Dashboard";
+import Alogin from "./components/admin/ALogin";
 import ChangePassword from "./components/auth/ChangePassword";
 import Register from "./components/auth/Register";
 import Reset from "./components/auth/Reset";
 import Admin from "./components/admin/Admin";
 import Cust from "./components/customers/Cust";
+import decode from "jwt-decode";
 import "./scss/style.css";
 
 const auth = new AuthUtils();
@@ -20,10 +21,6 @@ class App extends Component {
   state = {
     loggedIn: auth.loggedIn()
   };
-
-  componentDidMount() {
-    localStorage.removeItem("id_token");
-  }
 
   handleStatus = trueOrFalse => {
     console.log("changing");
@@ -41,6 +38,7 @@ class App extends Component {
       <div className="App">
         <Route path="/cust" component={Cust} />
         <Route path="/admin" component={Admin} />
+        <Route exact path="/admin/login" component={Alogin} />
         <Route
           exact
           path="/login"

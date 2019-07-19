@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
+import AuthUtils from "../auth/AuthUtils";
 
 class ASideBar extends Component {
+  auth = new AuthUtils();
+  logOut = () => {
+    this.auth.logout();
+    this.props.history.replace("/login");
+  };
   render() {
     return (
       <div id="admin-side">
@@ -21,7 +27,7 @@ class ASideBar extends Component {
           <Link to="/admin/all-jobs">All Jobs</Link>
           <Link to="/admin/customers">Customers</Link>
         </div>
-        <button>Logout</button>
+        <button onClick={this.auth.logout}>Logout</button>
       </div>
     );
   }

@@ -2,7 +2,7 @@ const mongoose = require("mongoose"),
   Schema = mongoose.Schema;
 // Create Schema
 const JobSchema = new Schema({
-  custId: {
+  custID: {
     type: Number
   },
   manufacturer: {
