@@ -6,7 +6,7 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  custID: {
+  custId: {
     type: Number,
     required: true
   },

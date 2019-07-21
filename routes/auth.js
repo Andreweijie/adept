@@ -127,6 +127,7 @@ router.post("/login", (req, res) => {
       bcrypt.compare(userInput.password, user.password).then(isMatch => {
         if (isMatch) {
           //create user information object
+          console.log(user.custId);
           const payload = {
             user: {
               name: user.name,

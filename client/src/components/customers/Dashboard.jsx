@@ -16,19 +16,19 @@ export default class Dashboard extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state.custID);
     fetch("/cust/pending-jobs")
       .then(res => res.json())
       .then(data => {
         if (data.length != 0) {
+          console.log(data);
           this.setState({
             pendingHeaders: Object.keys(data[0]),
-            pendingBody: data.splice(1)
+            pendingBody: data
           });
         }
       });
 
-    fetch("/cust/active-jobs?custID=177")
+    fetch("/cust/active-jobs?custID=" + this.state.custID)
       .then(res => res.json())
       .then(data => {
         if (data.length != 0) {
@@ -52,7 +52,7 @@ export default class Dashboard extends Component {
                 {this.state.pendingHeaders.map(header => {
                   return <th>{header}</th>;
                 })}
-                {this.state.pendingBody
+                {true
                   ? this.state.pendingBody.map(e => {
                       return <JobItem data={e} />;
                     })

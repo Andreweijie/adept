@@ -50,12 +50,13 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
   });
 
   const newTempJob = new Temp({
-    enquiryId: "6",
+    enquiryId: "7",
     custID: req.query.custID,
     manufacturer: req.body.brand,
     modelNo: req.body.brand,
     serialNo: req.body.serialNo,
-    faultDesc: req.body.faultDesc
+    faultDesc: req.body.faultDesc,
+    itemDesc: req.body.itemDesc
   });
   newTempJob.save();
 });
@@ -70,10 +71,11 @@ router.get("/history", (req, res) => {
 
 //get pending jobs
 router.get("/pending-jobs", (req, res) => {
-  Temp.find({ email: req.query.email }, (err, docs) => {
+  Temp.find({}, (err, docs) => {
     if (err) {
       console.log(err);
     } else {
+      console.log(docs);
       res.json(docs);
     }
   }).select(
@@ -112,7 +114,7 @@ router.post("/set-pickup", (req, res) => {
   Customer.findOne({ id: req.body.custID }, (err, doc) => {
     const newPickup = {
       date: req.body.date,
-      custId: req.body.custID,
+      custID: req.body.custID,
       jobid: req.body.jobid,
       custAddress: doc.custAddress,
       email: doc.email,

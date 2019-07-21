@@ -13,15 +13,12 @@ import "./scss/style.css";
 
 const auth = new AuthUtils();
 class App extends Component {
-  constructor() {
-    super();
-
-    this.handleStatus = this.handleStatus.bind(this);
-  }
   state = {
     loggedIn: auth.loggedIn()
   };
-
+  componentDidMount() {
+    console.log(decode(localStorage.getItem("adeptcust_token")));
+  }
   handleStatus = trueOrFalse => {
     console.log("changing");
     this.setState(
