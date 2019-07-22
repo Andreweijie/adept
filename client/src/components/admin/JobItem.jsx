@@ -10,7 +10,7 @@ export default class JobItem extends Component {
   };
 
   setMessage = () => {
-    message("TRESFSFSSF", "success");
+    message("Success!", "success");
   };
 
   setPickupDate = () => {

@@ -19,7 +19,7 @@ const JobSchema = new Schema({
   },
   faultDesc: {
     type: String,
-    default: ""
+    default: "Awaiting Pickup"
   },
   jobStatus: {
     type: String,

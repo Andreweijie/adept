@@ -132,7 +132,7 @@ router.post("/login", (req, res) => {
             user: {
               name: user.name,
               email: user.email,
-              custID: user.custId
+              custID: user.custID
             }
           };
           //create and sign JSON Web Token

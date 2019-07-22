@@ -29,6 +29,15 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
   console.log(req.file);
   const test2 = `<h1>${req.body.brand}</h1><h2>test</h2>`;
   let itemDesc = req.body.itemDesc;
+  let attach = [];
+  if (req.file) {
+    attach = [
+      {
+        filename: "image.jpg",
+        path: req.file.path //same cid value as in the html img src
+      }
+    ];
+  }
   if (req.body.urgent) {
     itemDesc = "[URGENT]" + itemDesc;
   }
@@ -37,12 +46,7 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
     to: "andreweijie@outlook.com",
     subject: itemDesc,
     html: test2,
-    attachments: [
-      {
-        filename: "image.jpg",
-        path: req.file.path //same cid value as in the html img src
-      }
-    ]
+    attachments: attach
   };
   transporter.sendMail(mailOptions, (err, info) => {
     if (err) console.log(err);
@@ -50,7 +54,6 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
   });
 
   const newTempJob = new Temp({
-    enquiryId: "7",
     custID: req.query.custID,
     manufacturer: req.body.brand,
     modelNo: req.body.brand,

@@ -1,5 +1,12 @@
 const mongoose = require("mongoose"),
-  Schema = mongoose.Schema;
+  Schema = mongoose.Schema,
+  autoIncrement = require("mongoose-auto-increment");
+
+let connection = mongoose.createConnection(
+  "mongodb+srv://andreweijie:1234@users-aeexa.mongodb.net/test?retryWrites=true"
+);
+
+autoIncrement.initialize(connection);
 // Create Schema
 const TempSchema = new Schema({
   enquiryId: {
@@ -143,4 +150,6 @@ const TempSchema = new Schema({
     default: ""
   }
 });
+
+TempSchema.plugin(autoIncrement.plugin, { model: "Temp", field: "enquiryId" });
 module.exports = Temp = mongoose.model("temps", TempSchema);

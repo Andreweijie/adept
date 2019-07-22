@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import decode from "jwt-decode";
 import { Button } from "@material-ui/core";
 
 class Register extends Component {
@@ -12,7 +13,8 @@ class Register extends Component {
       serialNo: "",
       urgent: false,
       faultDesc: "",
-      files: null
+      files: null,
+      custID: decode(localStorage.getItem("adeptcust_token")).user.custID
     };
   }
 
@@ -20,15 +22,12 @@ class Register extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
   onUrgentCheck = () => {
-    this.setState(
-      { urgent: !this.state.urgent },
-      console.log(this.state.urgent)
-    );
+    this.setState({ urgent: !this.state.urgent });
   };
   onSubmit = e => {
     e.preventDefault();
     let dataToSubmit = new FormData(this.formRef.current);
-    fetch("/cust/enquiry?custID=177", {
+    fetch("/cust/enquiry?custID=" + this.state.custID, {
       method: "POST",
       body: dataToSubmit
     })
