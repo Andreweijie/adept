@@ -1,27 +1,40 @@
 import React, { Component } from "react";
+import JobItem from "../admin/JobItem";
+import decode from "jwt-decode";
 
 export default class Customers extends Component {
+  state = {
+    headers: [],
+    body: []
+  };
+  componentDidMount() {
+    fetch("/admin/customers")
+      .then(res => res.json())
+      .then(data => {
+        if (data.length != 0) {
+          console.log(data);
+          this.setState({
+            headers: Object.keys(data[0]),
+            body: data.splice(1)
+          });
+        }
+      });
+  }
+
   render() {
     return (
       <div id="all-jobs">
-        <h1>All Customers</h1>
         <div class="all-box">
-          <table>
-            <tr>
-              <td>hi</td>
-              <td>Im</td>
-              <td>Im</td>
-            </tr>
-            <tr>
-              <td>
-                hi<button>aaa</button>
-              </td>
-              <td>Im</td>
-            </tr>
-            <tr>
-              <td>hi</td>
-              <td>Im</td>
-            </tr>
+          <h1>Customers</h1>
+          <table className="table">
+            {this.state.headers.map(header => {
+              return <th>{header}</th>;
+            })}
+            {this.state.body
+              ? this.state.body.map(e => {
+                  return <JobItem data={e} />;
+                })
+              : null}
           </table>
         </div>
       </div>

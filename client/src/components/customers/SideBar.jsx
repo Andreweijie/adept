@@ -6,7 +6,7 @@ class SideBar extends Component {
   auth = new AuthUtils();
   logOut = () => {
     this.auth.logout();
-    this.props.history.replace("/login");
+    this.props.history.replace("/customer/login");
   };
   render() {
     return (
@@ -24,12 +24,13 @@ class SideBar extends Component {
         </div>
         <div className="nav">
           <Link to={`${this.props.match.url}/dashboard`}>Dashboard</Link>
-          <Link to="/admin/all-jobs">Order History</Link>
-          <Link to="/admin/customers">Edit Profile</Link>
-          <Link to="/admin/customers">Change Password</Link>
+          <Link to="/cust/history">Order History</Link>
+          <Link to="/cust/change-password">Change Password</Link>
           <Link to="/cust/enquiry">Job Enquiry</Link>
+          <button className="logout" onClick={this.logOut}>
+            Logout
+          </button>
         </div>
-        <button onClick={this.logOut}>Logout</button>
       </div>
     );
   }

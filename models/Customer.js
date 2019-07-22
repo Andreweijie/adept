@@ -1,7 +1,14 @@
 const mongoose = require("mongoose"),
-  Schema = mongoose.Schema;
+  Schema = mongoose.Schema,
+  autoIncrement = require("mongoose-auto-increment");
+
+let connection = mongoose.createConnection(
+  "mongodb+srv://andreweijie:1234@users-aeexa.mongodb.net/test?retryWrites=true"
+);
+
+autoIncrement.initialize(connection);
 // Create Schema
-const UserSchema = new Schema({
+const CustSchema = new Schema({
   id: {
     type: Number,
     required: true
@@ -23,18 +30,18 @@ const UserSchema = new Schema({
     required: true
   },
   custPostCode: {
-    type: Number,
+    type: String,
     required: true
   },
   custCountry: {
     type: String
   },
   custTel: {
-    type: Number,
+    type: String,
     required: true
   },
   custFax: {
-    type: Number
+    type: String
   },
   custLanguage: {
     type: String
@@ -46,4 +53,6 @@ const UserSchema = new Schema({
     type: String
   }
 });
-module.exports = Customer = mongoose.model("customers", UserSchema);
+
+CustSchema.plugin(autoIncrement.plugin, { model: "Cust", field: "id" });
+module.exports = Customer = mongoose.model("customers", CustSchema);

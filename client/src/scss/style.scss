@@ -16,7 +16,6 @@
       align-items: center;
       background: linear-gradient(45deg, #2e3548 0%, #1e222f);
       height: 100%;
-
       #profile {
         display: flex;
         flex-direction: column;
@@ -44,7 +43,8 @@
         align-items: flex-start;
         width: 100%;
         margin-top: 3em;
-        a {
+        a,
+        .logout {
           color: white;
           font-size: 1.5em;
           text-decoration: none;
@@ -54,6 +54,11 @@
           &:hover {
             background-color: #282e42;
           }
+        }
+        .logout {
+          border: none;
+          background: none;
+          text-align: start;
         }
       }
     }
@@ -153,8 +158,21 @@
     }
   }
   /* Login Page CSS */
+  .alogin-page {
+    #back-box {
+      background: linear-gradient(40deg, #dd032a 10%, #dd0339) !important;
+      box-shadow: 0rem 0.35rem 1rem 0 rgba(221, 3, 57, 0.4) !important;
+      #login-box {
+        button {
+          box-shadow: 0rem 0.35rem 1rem 0 rgba(221, 3, 57, 0.4) !important;
+          background: linear-gradient(135deg, #dd032a 10%, #dd0339) !important;
+        }
+      }
+    }
+  }
   .login-page,
-  .register-page {
+  .register-page,
+  .alogin-page {
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -228,6 +246,65 @@
           }
         }
       }
+      #register-box {
+        color: #333;
+        background-color: white;
+        width: 45%;
+        height: 120%;
+        border-radius: 0.5em;
+        margin-bottom: -12em;
+        box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 2em;
+        padding-right: 3em;
+        padding-left: 3em;
+
+        h4 {
+          font-size: 3.3em;
+        }
+        button {
+          align-self: center !important;
+          border: none;
+          color: white;
+          font-size: 2em;
+          border-radius: 0.1em;
+          background-color: #4a14ff;
+          box-shadow: 0rem 0.35rem 1rem 0 rgba(51, 65, 255, 0.4);
+          font-weight: bold;
+          padding-left: 0.8em;
+          padding-right: 0.8em;
+          margin-top: 2em;
+        }
+
+        .form-box {
+          margin-top: 1em;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          height: 90%;
+          width: 100%;
+          .cols {
+            display: flex;
+            flex-direction: column;
+            input {
+              border: none;
+              background-color: #f2f2f2;
+              border-radius: 0.2em;
+              width: 100%;
+              height: 2.5em;
+              padding: 0.5em;
+              margin-bottom: 8px;
+            }
+            label {
+              font-weight: bold;
+              margin-bottom: 4px;
+            }
+          }
+        }
+      }
     }
   }
   //Customer Panel CSS
@@ -267,7 +344,8 @@
         align-items: flex-start;
         width: 100%;
         margin-top: 3em;
-        a {
+        a,
+        .logout {
           color: white;
           font-size: 1.5em;
           text-decoration: none;
@@ -275,8 +353,13 @@
           padding: 12px;
           transition: 0.2s;
           &:hover {
-            background-color: #282e42;
+            background-color: #291aa4;
           }
+        }
+        .logout {
+          border: none;
+          background: none;
+          text-align: start;
         }
       }
     }
@@ -319,6 +402,62 @@
             font-size: 32px;
           }
         }
+      }
+    }
+  }
+}
+.change-page {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  #change-box {
+    color: #333;
+    background-color: white;
+    width: 25%;
+    height: 80%;
+    border-radius: 0.5em;
+    box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding-right: 3em;
+    padding-left: 3em;
+    h4 {
+      font-size: 3.3em;
+    }
+    button {
+      align-self: center !important;
+      border: none;
+      color: white;
+      font-size: 2em;
+      border-radius: 0.1em;
+      background-color: #4a14ff;
+      box-shadow: 0rem 0.35rem 1rem 0 rgba(51, 65, 255, 0.4);
+      font-weight: bold;
+      padding-left: 0.8em;
+      padding-right: 0.8em;
+    }
+
+    .form-box {
+      margin-top: 2em;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 50%;
+      width: 100%;
+      input {
+        border: none;
+        background-color: #f2f2f2;
+        border-radius: 0.2em;
+        width: 100%;
+        height: 2.5em;
+        padding: 0.5em;
+      }
+      label {
+        font-weight: bold;
       }
     }
   }
@@ -388,6 +527,12 @@
 
 .test6-exit {
   clip-path: circle(75%);
+}
+#ord-history {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #all-jobs {
   width: 85%;

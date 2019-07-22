@@ -11,11 +11,6 @@ class ALogin extends Component {
     };
     this.auth = new AuthUtils();
   }
-  componentDidMount() {
-    if (this.auth.loggedIn()) {
-      this.props.history.replace("/admin/dashboard");
-    }
-  }
 
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
@@ -43,10 +38,10 @@ class ALogin extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div className="login-page">
+      <div className="alogin-page">
         <div id="back-box">
           <p id="welcome">
-            Welcome to your <b>Admin Log In</b>
+            <b>Admin Log In</b>
           </p>
           <div id="login-box">
             <h4>

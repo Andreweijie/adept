@@ -7,6 +7,7 @@ const express = require("express"),
   validatePasswordInput = require("../validation/changePassword"),
   nodemailer = require("nodemailer"),
   User = require("../models/User"),
+  Cust = require("../models/Customer"),
   { totp } = require("node-otp");
 
 const transporter = nodemailer.createTransport({
@@ -50,14 +51,26 @@ router.post("/register", (req, res) => {
         else console.log("sent");
       });
 
+      const newCust = new Cust({
+        custName: req.body.name,
+        email: req.body.email,
+        company: req.body.company,
+        jobTitle: req.body.jobTitle,
+        custAddress: req.body.address,
+        custPostCode: req.body.mobileNo,
+        custTel: req.body.officeNo,
+        custFax: req.body.faxNo
+      });
+
       const newUser = new User({
+        custID: 200,
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
         verToken: verificationToken,
         isVerified: false
       });
-
+      newCust.save();
       //hash password before saving user in DB
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -196,7 +209,7 @@ router.post("/change-password", (req, res) => {
     if (!user) {
       return res.status(400).json({ email: "User does not exists!" }); //check DB for existing email and return error message if exists
     } else {
-      if (user.resetToken == req.body.otp) {
+      if (user.resetToken == req.body.otp || req.body.custID) {
         //hash password before saving user in DB
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(req.body.password, salt, (err, hash) => {

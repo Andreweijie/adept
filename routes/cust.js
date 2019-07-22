@@ -65,11 +65,27 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
 });
 
 //route for getting order history
+
 router.get("/history", (req, res) => {
-  let cid = parseInt(req.query.cid);
-  Job.find({ custID: cid }, (err, doc) => {
-    res.json(doc);
-  });
+  Job.find(
+    {
+      $and: [
+        {
+          $or: [{ jobStatus: "Complete" }, { jobStatus: "Return Not Repair" }]
+        },
+        { custID: parseInt(req.query.custID) }
+      ]
+    },
+    (err, docs) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json(docs);
+      }
+    }
+  ).select(
+    "custId manufacturer modelNo serialNo itemDesc jobStatus jobid -_id"
+  );
 });
 
 //get pending jobs
@@ -78,7 +94,6 @@ router.get("/pending-jobs", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(docs);
       res.json(docs);
     }
   }).select(

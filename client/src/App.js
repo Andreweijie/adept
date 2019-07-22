@@ -17,7 +17,7 @@ class App extends Component {
     loggedIn: auth.loggedIn()
   };
   componentDidMount() {
-    console.log(decode(localStorage.getItem("adeptcust_token")));
+    //console.log(decode(localStorage.getItem("adeptcust_token")));
   }
   handleStatus = trueOrFalse => {
     console.log("changing");
@@ -35,10 +35,10 @@ class App extends Component {
       <div className="App">
         <Route path="/cust" component={Cust} />
         <Route path="/admin" component={Admin} />
-        <Route exact path="/admin/login" component={Alogin} />
+        <Route exact path="/admins/login" component={Alogin} />
         <Route
           exact
-          path="/login"
+          path="/customer/login"
           render={props => (
             <Login {...props} handleStatus={this.handleStatus} />
           )}

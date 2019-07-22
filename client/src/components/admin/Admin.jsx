@@ -4,6 +4,7 @@ import ASideBar from "./ASideBar";
 import ADashboard from "./ADashboard";
 import Jobs from "./Jobs";
 import Customers from "./Customers";
+import Create from "./Create";
 
 export default class Admin extends Component {
   render() {
@@ -15,6 +16,7 @@ export default class Admin extends Component {
           component={ADashboard}
         />
         <Route path="/admin/all-jobs" component={Jobs} />
+        <Route path="/admin/create" component={Create} />
         <Route path="/admin/customers" component={Customers} />
       </div>
     );

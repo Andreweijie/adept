@@ -7,6 +7,12 @@ module.exports = ValidateRegisterInput = userInput => {
 
   //convert empty fields to an empty string so we can use validator on them
   userInput.name = !isEmpty(userInput.name) ? userInput.name : "";
+  userInput.company = !isEmpty(userInput.company) ? userInput.company : "";
+  userInput.jobTitle = !isEmpty(userInput.jobTitle) ? userInput.jobTitle : "";
+  userInput.address = !isEmpty(userInput.address) ? userInput.address : "";
+  userInput.mobileNo = !isEmpty(userInput.mobileNo) ? userInput.mobileNo : "";
+  userInput.officeNo = !isEmpty(userInput.officeNo) ? userInput.officeNo : "";
+  userInput.faxNo = !isEmpty(userInput.faxNo) ? userInput.faxNo : "";
   userInput.email = !isEmpty(userInput.email) ? userInput.email : "";
   userInput.password = !isEmpty(userInput.password) ? userInput.password : "";
   userInput.password2 = !isEmpty(userInput.password2)
@@ -17,6 +23,19 @@ module.exports = ValidateRegisterInput = userInput => {
   if (Validator.isEmpty(userInput.name)) {
     errors.name = "Name field is required";
   }
+  //check company
+  if (Validator.isEmpty(userInput.company)) {
+    errors.company = "company field is required";
+  }
+  //check job title
+  if (Validator.isEmpty(userInput.jobTitle)) {
+    errors.jobTitle = "Job Title field is required";
+  }
+  //check address
+  if (Validator.isEmpty(userInput.address)) {
+    errors.address = "address field is required";
+  }
+
   //check email
   if (Validator.isEmpty(userInput.email)) {
     errors.email = "Email field is required";

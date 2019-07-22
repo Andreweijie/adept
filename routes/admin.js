@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const User = require("../models/User");
+const Customer = require("../models/Customer");
 const Pickup = require("../models/Pickup");
 const Temp = require("../models/Temp");
 const Job = require("../models/Job");
@@ -15,32 +16,46 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+getNextJobID = jobid => {
+  let newID = jobid.split("");
+  newID.shift();
+  newID = parseInt(newID.join("")) + 1;
+  return "J" + newID;
+};
 //route for confirming a temporary order
 router.post("/confirm", (req, res) => {
-  console.log("test");
   let enquiryId = req.body.enquiryId;
   let quote = req.body.quote;
   Temp.findOne({ enquiryId: enquiryId }, (err, doc) => {
     if (err) {
       console.log(err);
     }
-    let newTask = doc;
-    doc.quote = parseInt(req.body.quote);
-    console.log(doc);
-    const newJob = new Job(newTask.toObject());
-    newJob.save(err => {
-      if (err) {
-        console.log(err);
-      }
-      console.log("success");
-      Temp.deleteOne({ enquiryId: enquiryId }, err => {
+    Job.findOne({ id: { $ne: "id" } })
+      .sort("-id")
+      .exec((err, doc2) => {
         if (err) {
           console.log(err);
-        } else {
-          res.json({ message: "success" });
         }
+        console.log(doc2);
+        let newTask = doc.toObject();
+        newTask.jobid = getNextJobID(doc2.toObject().jobid);
+        newTask.jobStatus = "Awaiting Pickup";
+        newTask.quote = parseInt(req.body.quote);
+
+        const newJob = new Job(newTask);
+        newJob.save(err => {
+          if (err) {
+            console.log(err);
+          }
+          Temp.deleteOne({ enquiryId: enquiryId }, err => {
+            if (err) {
+              console.log(err);
+            } else {
+              res.json({ message: "success" });
+            }
+          });
+        });
       });
-    });
   });
 });
 
@@ -85,4 +100,15 @@ router.get("/pickups", (req, res) => {
   }).select("-__v -_id");
 });
 
+router.get("/customers", (req, res) => {
+  Customer.find({}, (err, docs) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(docs);
+    }
+  }).select(
+    "-_id custName company jobTitle custAddress custPostCode custCountry custTel custFax"
+  );
+});
 module.exports = router;

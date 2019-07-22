@@ -80,7 +80,8 @@
   margin-top: 3em;
 }
 
-.App #admin #admin-side .nav a {
+.App #admin #admin-side .nav a,
+.App #admin #admin-side .nav .logout {
   color: white;
   font-size: 1.5em;
   text-decoration: none;
@@ -90,8 +91,15 @@
   transition: 0.2s;
 }
 
-.App #admin #admin-side .nav a:hover {
+.App #admin #admin-side .nav a:hover,
+.App #admin #admin-side .nav .logout:hover {
   background-color: #282e42;
+}
+
+.App #admin #admin-side .nav .logout {
+  border: none;
+  background: none;
+  text-align: start;
 }
 
 .App #admin #a-dash {
@@ -238,8 +246,21 @@
   font-size: 2em;
 }
 
+.App .alogin-page #back-box {
+  background: linear-gradient(40deg, #dd032a 10%, #dd0339) !important;
+  -webkit-box-shadow: 0rem 0.35rem 1rem 0 rgba(221, 3, 57, 0.4) !important;
+          box-shadow: 0rem 0.35rem 1rem 0 rgba(221, 3, 57, 0.4) !important;
+}
+
+.App .alogin-page #back-box #login-box button {
+  -webkit-box-shadow: 0rem 0.35rem 1rem 0 rgba(221, 3, 57, 0.4) !important;
+          box-shadow: 0rem 0.35rem 1rem 0 rgba(221, 3, 57, 0.4) !important;
+  background: linear-gradient(135deg, #dd032a 10%, #dd0339) !important;
+}
+
 .App .login-page,
-.App .register-page {
+.App .register-page,
+.App .alogin-page {
   height: 100vh;
   width: 100vw;
   display: -webkit-box;
@@ -251,7 +272,8 @@
 }
 
 .App .login-page #back-box,
-.App .register-page #back-box {
+.App .register-page #back-box,
+.App .alogin-page #back-box {
   margin-top: 1em;
   border-radius: 0.5em;
   width: 95vw;
@@ -276,18 +298,21 @@
 }
 
 .App .login-page #back-box #reg-text,
-.App .register-page #back-box #reg-text {
+.App .register-page #back-box #reg-text,
+.App .alogin-page #back-box #reg-text {
   font-size: 2em;
 }
 
 .App .login-page #back-box #welcome,
-.App .register-page #back-box #welcome {
+.App .register-page #back-box #welcome,
+.App .alogin-page #back-box #welcome {
   font-size: 3.5em;
   font-weight: bolder;
 }
 
 .App .login-page #back-box #login-box,
-.App .register-page #back-box #login-box {
+.App .register-page #back-box #login-box,
+.App .alogin-page #back-box #login-box {
   color: #333;
   background-color: white;
   width: 25%;
@@ -314,12 +339,14 @@
 }
 
 .App .login-page #back-box #login-box h4,
-.App .register-page #back-box #login-box h4 {
+.App .register-page #back-box #login-box h4,
+.App .alogin-page #back-box #login-box h4 {
   font-size: 3.3em;
 }
 
 .App .login-page #back-box #login-box button,
-.App .register-page #back-box #login-box button {
+.App .register-page #back-box #login-box button,
+.App .alogin-page #back-box #login-box button {
   -ms-flex-item-align: center !important;
       -ms-grid-row-align: center !important;
       align-self: center !important;
@@ -336,7 +363,8 @@
 }
 
 .App .login-page #back-box #login-box .form-box,
-.App .register-page #back-box #login-box .form-box {
+.App .register-page #back-box #login-box .form-box,
+.App .alogin-page #back-box #login-box .form-box {
   margin-top: 2em;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -353,7 +381,8 @@
 }
 
 .App .login-page #back-box #login-box .form-box input,
-.App .register-page #back-box #login-box .form-box input {
+.App .register-page #back-box #login-box .form-box input,
+.App .alogin-page #back-box #login-box .form-box input {
   border: none;
   background-color: #f2f2f2;
   border-radius: 0.2em;
@@ -363,8 +392,112 @@
 }
 
 .App .login-page #back-box #login-box .form-box label,
-.App .register-page #back-box #login-box .form-box label {
+.App .register-page #back-box #login-box .form-box label,
+.App .alogin-page #back-box #login-box .form-box label {
   font-weight: bold;
+}
+
+.App .login-page #back-box #register-box,
+.App .register-page #back-box #register-box,
+.App .alogin-page #back-box #register-box {
+  color: #333;
+  background-color: white;
+  width: 45%;
+  height: 120%;
+  border-radius: 0.5em;
+  margin-bottom: -12em;
+  -webkit-box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.2);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  padding-top: 2em;
+  padding-right: 3em;
+  padding-left: 3em;
+}
+
+.App .login-page #back-box #register-box h4,
+.App .register-page #back-box #register-box h4,
+.App .alogin-page #back-box #register-box h4 {
+  font-size: 3.3em;
+}
+
+.App .login-page #back-box #register-box button,
+.App .register-page #back-box #register-box button,
+.App .alogin-page #back-box #register-box button {
+  -ms-flex-item-align: center !important;
+      -ms-grid-row-align: center !important;
+      align-self: center !important;
+  border: none;
+  color: white;
+  font-size: 2em;
+  border-radius: 0.1em;
+  background-color: #4a14ff;
+  -webkit-box-shadow: 0rem 0.35rem 1rem 0 rgba(51, 65, 255, 0.4);
+          box-shadow: 0rem 0.35rem 1rem 0 rgba(51, 65, 255, 0.4);
+  font-weight: bold;
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+  margin-top: 2em;
+}
+
+.App .login-page #back-box #register-box .form-box,
+.App .register-page #back-box #register-box .form-box,
+.App .alogin-page #back-box #register-box .form-box {
+  margin-top: 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 90%;
+  width: 100%;
+}
+
+.App .login-page #back-box #register-box .form-box .cols,
+.App .register-page #back-box #register-box .form-box .cols,
+.App .alogin-page #back-box #register-box .form-box .cols {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.App .login-page #back-box #register-box .form-box .cols input,
+.App .register-page #back-box #register-box .form-box .cols input,
+.App .alogin-page #back-box #register-box .form-box .cols input {
+  border: none;
+  background-color: #f2f2f2;
+  border-radius: 0.2em;
+  width: 100%;
+  height: 2.5em;
+  padding: 0.5em;
+  margin-bottom: 8px;
+}
+
+.App .login-page #back-box #register-box .form-box .cols label,
+.App .register-page #back-box #register-box .form-box .cols label,
+.App .alogin-page #back-box #register-box .form-box .cols label {
+  font-weight: bold;
+  margin-bottom: 4px;
 }
 
 .App #cust {
@@ -430,7 +563,8 @@
   margin-top: 3em;
 }
 
-.App #cust .side-bar .nav a {
+.App #cust .side-bar .nav a,
+.App #cust .side-bar .nav .logout {
   color: white;
   font-size: 1.5em;
   text-decoration: none;
@@ -440,8 +574,15 @@
   transition: 0.2s;
 }
 
-.App #cust .side-bar .nav a:hover {
-  background-color: #282e42;
+.App #cust .side-bar .nav a:hover,
+.App #cust .side-bar .nav .logout:hover {
+  background-color: #291aa4;
+}
+
+.App #cust .side-bar .nav .logout {
+  border: none;
+  background: none;
+  text-align: start;
 }
 
 .App #cust .dashboard {
@@ -507,6 +648,93 @@
 .App #cust .dashboard .dash-content .pending-jobs h1,
 .App #cust .dashboard .dash-content .active-jobs h1 {
   font-size: 32px;
+}
+
+.change-page {
+  height: 100vh;
+  width: 100vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.change-page #change-box {
+  color: #333;
+  background-color: white;
+  width: 25%;
+  height: 80%;
+  border-radius: 0.5em;
+  -webkit-box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.2);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  padding-right: 3em;
+  padding-left: 3em;
+}
+
+.change-page #change-box h4 {
+  font-size: 3.3em;
+}
+
+.change-page #change-box button {
+  -ms-flex-item-align: center !important;
+      -ms-grid-row-align: center !important;
+      align-self: center !important;
+  border: none;
+  color: white;
+  font-size: 2em;
+  border-radius: 0.1em;
+  background-color: #4a14ff;
+  -webkit-box-shadow: 0rem 0.35rem 1rem 0 rgba(51, 65, 255, 0.4);
+          box-shadow: 0rem 0.35rem 1rem 0 rgba(51, 65, 255, 0.4);
+  font-weight: bold;
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+}
+
+.change-page #change-box .form-box {
+  margin-top: 2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 50%;
+  width: 100%;
+}
+
+.change-page #change-box .form-box input {
+  border: none;
+  background-color: #f2f2f2;
+  border-radius: 0.2em;
+  width: 100%;
+  height: 2.5em;
+  padding: 0.5em;
+}
+
+.change-page #change-box .form-box label {
+  font-weight: bold;
 }
 
 @media only screen and (max-width: 500px) {
@@ -583,6 +811,19 @@
 .test6-exit {
   -webkit-clip-path: circle(75%);
           clip-path: circle(75%);
+}
+
+#ord-history {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 #all-jobs {

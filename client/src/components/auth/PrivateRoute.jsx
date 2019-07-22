@@ -14,7 +14,7 @@ const PrivateRoute = ({ component: Component, accountType, ...rest }) => {
         ) : accountType == "admin" ? (
           <Redirect to="/admin/login" />
         ) : (
-          <Redirect to="/login" />
+          <Redirect to="/customer/login" />
         )
       }
     />
