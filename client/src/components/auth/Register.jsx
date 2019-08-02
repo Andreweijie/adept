@@ -49,7 +49,6 @@ class Register extends Component {
       });
   };
   render() {
-    const { errors } = this.state;
     return (
       <div className="register-page">
         <div id="back-box">
@@ -60,7 +59,7 @@ class Register extends Component {
             <form className="form-box" noValidate onSubmit={this.onSubmit}>
               <div class="cols">
                 <div className="input-field">
-                  <label htmlFor="name">name</label>
+                  <label htmlFor="name">Name</label>
                   <input
                     onChange={this.onChange}
                     value={this.state.name}
@@ -69,7 +68,7 @@ class Register extends Component {
                   />
                 </div>
                 <div className="input-field">
-                  <label htmlFor="company">company</label>
+                  <label htmlFor="company">Company</label>
                   <input
                     onChange={this.onChange}
                     value={this.state.company}
@@ -127,6 +126,7 @@ class Register extends Component {
                 <div className="input-field">
                   <label htmlFor="email">Email</label>
                   <input
+                    autocomplete="off"
                     onChange={this.onChange}
                     value={this.state.email}
                     id="email"
@@ -136,6 +136,7 @@ class Register extends Component {
                 <div className="input-field">
                   <label htmlFor="password">Password</label>
                   <input
+                    autocomplete="new-password"
                     onChange={this.onChange}
                     value={this.state.password}
                     id="password"
@@ -151,7 +152,11 @@ class Register extends Component {
                     type="password"
                   />
                 </div>
-                <button type="submit" onClick={this.onSubmit}>
+                <button
+                  className="submit-btn"
+                  type="submit"
+                  onClick={this.onSubmit}
+                >
                   Register
                 </button>
               </div>

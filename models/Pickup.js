@@ -6,6 +6,10 @@ const UserSchema = new Schema({
     type: Date,
     required: true
   },
+  time: {
+    type: String,
+    required: true
+  },
   custID: {
     type: Number,
     required: true

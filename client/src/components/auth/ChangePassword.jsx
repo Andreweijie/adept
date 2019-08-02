@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import decode from "jwt-decode";
 
 class ChangePassword extends Component {
@@ -62,6 +61,15 @@ class ChangePassword extends Component {
                 />
               </div>
             ) : null}
+            <div className="input-field">
+              <label htmlFor="email">Email</label>
+              <input
+                onChange={this.onChange}
+                value={this.state.email}
+                id="email"
+                type="email"
+              />
+            </div>
             <div className="input-field">
               <label htmlFor="password">Password</label>
               <input

@@ -5,10 +5,11 @@ const express = require("express"),
   validateRegisterInput = require("../validation/register"),
   validateLoginInput = require("../validation/login"),
   validatePasswordInput = require("../validation/changePassword"),
-  nodemailer = require("nodemailer"),
-  User = require("../models/User"),
-  Cust = require("../models/Customer"),
-  { totp } = require("node-otp");
+  validateAdminInput = require("../validation/adminAcc");
+(nodemailer = require("nodemailer")),
+  (User = require("../models/User")),
+  (Cust = require("../models/Customer")),
+  ({ totp } = require("node-otp"));
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -87,6 +88,36 @@ router.post("/register", (req, res) => {
   });
 });
 
+router.post("/admin-register", (req, res) => {
+  const { errors, isValid } = validateAdminInput(req.body);
+
+  //if invalid, return with error 400 and error messages
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  Admin.findOne({ email: req.body.email }).then(user => {
+    if (user) {
+      return res.status(400).json({ email: "Email already exists" }); //check DB for existing email and return error message if exists
+    } else {
+      const newUser = new Admin(req.body);
+      newUser.save();
+      //hash password before saving user in DB
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if (err) throw err;
+
+          newUser.password = hash;
+          newUser
+            .save()
+            .then(user => res.json(user))
+            .catch(err => console.log(err));
+        });
+      });
+    }
+  });
+});
+
 router.post("/login", (req, res) => {
   //validate userinput and get errors if any
   const { errors, isValid } = validateLoginInput(req.body);
@@ -105,7 +136,11 @@ router.post("/login", (req, res) => {
     Admin.findOne({ email: userInput.email }).then(user => {
       //check if user exists
       if (!user) {
-        return res.status(404).json({ emailnotfound: "Email not found" });
+        return res.status(404).json({
+          errors: {
+            email: "E-mail not found."
+          }
+        });
       }
 
       //Check password
@@ -133,7 +168,11 @@ router.post("/login", (req, res) => {
     User.findOne({ email: userInput.email }).then(user => {
       //check if user exists
       if (!user) {
-        return res.status(404).json({ emailnotfound: "Email not found" });
+        return res.status(404).json({
+          errors: {
+            email: "E-mail not found."
+          }
+        });
       }
 
       //Check password
@@ -155,7 +194,7 @@ router.post("/login", (req, res) => {
         } else {
           return res
             .status(400)
-            .json({ passwordIncorrect: "Password is incorrect" });
+            .json({ errors: { password: "Password is incorrect" } });
         }
       });
     });

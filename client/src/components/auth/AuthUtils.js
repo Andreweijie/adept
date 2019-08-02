@@ -39,10 +39,11 @@ export default class AuthUtils extends Component {
   getCustID = () => {
     return decode(localStorage.getItem("adeptcust_token")).user.custID;
   };
-
+  adminLogOut = () => {
+    localStorage.removeItem("adeptadmin_token");
+  };
   logout = () => {
     localStorage.removeItem("adeptcust_token");
-    localStorage.removeItem("adeptadmin_token");
   };
 
   _checkStatus = response => {

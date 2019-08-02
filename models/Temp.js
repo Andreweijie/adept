@@ -148,6 +148,10 @@ const TempSchema = new Schema({
   salesperson: {
     type: String,
     default: ""
+  },
+  dateOfEnquiry: {
+    type: Date,
+    default: Date.now()
   }
 });
 

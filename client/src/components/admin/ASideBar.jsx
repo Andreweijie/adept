@@ -5,8 +5,8 @@ import AuthUtils from "../auth/AuthUtils";
 class ASideBar extends Component {
   auth = new AuthUtils();
   logOut = () => {
-    this.auth.logout();
-    this.props.history.replace("/login");
+    this.auth.adminLogOut();
+    this.props.history.replace("/admins/login");
   };
   render() {
     return (
@@ -27,7 +27,7 @@ class ASideBar extends Component {
           <Link to="/admin/all-jobs">All Jobs</Link>
           <Link to="/admin/customers">Customers</Link>
           <Link to="/admin/create">Create Admin Account</Link>
-          <button className="logout" onClick={this.auth.logout}>
+          <button className="logout" onClick={this.logOut}>
             Logout
           </button>
         </div>

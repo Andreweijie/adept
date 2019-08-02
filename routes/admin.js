@@ -25,7 +25,6 @@ getNextJobID = jobid => {
 //route for confirming a temporary order
 router.post("/confirm", (req, res) => {
   let enquiryId = req.body.enquiryId;
-  let quote = req.body.quote;
   Temp.findOne({ enquiryId: enquiryId }, (err, doc) => {
     if (err) {
       console.log(err);
@@ -38,7 +37,9 @@ router.post("/confirm", (req, res) => {
         }
         console.log(doc2);
         let newTask = doc.toObject();
+        console.log(newTask);
         newTask.jobid = getNextJobID(doc2.toObject().jobid);
+        newTask.id = doc2.toObject().id + 1;
         newTask.jobStatus = "Awaiting Pickup";
         newTask.quote = parseInt(req.body.quote);
 
@@ -79,13 +80,16 @@ router.post("/change-status", (req, res) => {
 
 //get all jobs
 router.get("/all-jobs", (req, res) => {
-  Job.find({}, (err, docs) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(docs);
+  Job.find(
+    { $or: [{ jobStatus: "Complete" }, { jobStatus: "Return Not Repair" }] },
+    (err, docs) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json(docs);
+      }
     }
-  }).select(
+  ).select(
     "-_id -id -jobName -freightTerm -orderNo -adviceNoticeNo -partID -partQty -goaheaddate -repBy -finalOutBy -engReport -previousjobid -isjobwarranty -quoteCost -quoteHour"
   );
 });
@@ -95,7 +99,19 @@ router.get("/pickups", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.json(docs);
+      let options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      };
+      let newDocs = docs.map(e => {
+        let newObj = e.toObject();
+        newObj.date = newObj.date.toLocaleString("en-US", options);
+        console.log(newObj.date);
+        return newObj;
+      });
+      res.json(newDocs);
     }
   }).select("-__v -_id");
 });

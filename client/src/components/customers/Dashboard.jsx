@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import JobItem from "../admin/JobItem";
+import JobItem from "../utils/JobItem";
 import AuthUtils from "../auth/AuthUtils";
 import decode from "jwt-decode";
 
@@ -7,9 +7,27 @@ export default class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
-      pendingHeaders: [],
+      pendingHeaders: [
+        "Enquiry ID",
+        "Manufacturer",
+        "Model No",
+        "Serial No",
+        "Fault Symptoms",
+        "Item Description",
+        "Job Class",
+        "Date Of Enquiry"
+      ],
       pendingBody: [],
-      activeHeaders: [],
+      activeHeaders: [
+        "Manufacturer",
+        "Model No",
+        "Serial No",
+        "Fault Description",
+        "Job Status",
+        "Job ID",
+        "Item Description",
+        "Quote Amt"
+      ],
       activeBody: [],
       custID: decode(localStorage.getItem("adeptcust_token")).user.custID
     };
@@ -22,7 +40,6 @@ export default class Dashboard extends Component {
         if (data.length != 0) {
           console.log(data);
           this.setState({
-            pendingHeaders: Object.keys(data[0]),
             pendingBody: data
           });
         }
@@ -33,7 +50,6 @@ export default class Dashboard extends Component {
       .then(data => {
         if (data.length != 0) {
           this.setState({
-            activeHeaders: Object.keys(data[0]),
             activeBody: data
           });
         }
@@ -45,8 +61,9 @@ export default class Dashboard extends Component {
       <div className="dashboard">
         <h1>Dashboard</h1>
         <div className="dash-content">
-          <div className="pending-jobs">
+          <div className="pending-jobs containers">
             <h1>Pending Jobs</h1>
+            <hr />
             <div className="all-box">
               <table className="table">
                 {this.state.pendingHeaders.map(header => {
@@ -60,8 +77,9 @@ export default class Dashboard extends Component {
               </table>
             </div>
           </div>
-          <div className="active-jobs">
+          <div className="active-jobs containers">
             <h1>Active Jobs</h1>
+            <hr />
             <div className="all-box">
               <table className="table">
                 <th>Pickup Date</th>
@@ -73,7 +91,7 @@ export default class Dashboard extends Component {
                       return (
                         <JobItem
                           active={true}
-                          data={e}
+                          data={Object.values(e)}
                           custID={this.state.custID}
                         />
                       );

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import AuthUtils from "./AuthUtils";
 import { Link } from "react-router-dom";
 class Reset extends Component {
   constructor() {

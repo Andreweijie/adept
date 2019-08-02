@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import JobItem from "./JobItem";
+import JobItem from "../utils/JobItem";
 
 export default class Jobs extends Component {
   state = {
@@ -20,16 +20,23 @@ export default class Jobs extends Component {
 
   render() {
     return (
-      <div id="all-jobs">
-        <div class="all-box">
+      <div className="all-jobs containers">
+        <div className="head-title">
           <h1>All Jobs</h1>
+          {this.state.body.length == 0 ? <div className="loader" /> : null}
+        </div>
+        <hr className="admin-hr" />
+        <div className="all-box">
           <table className="table">
-            {this.state.headers.map(header => {
-              return <th>{header}</th>;
-            })}
+            <thead>
+              {this.state.headers.map(header => {
+                return <th>{header}</th>;
+              })}
+            </thead>
+
             {this.state.body
               ? this.state.body.map(e => {
-                  return <JobItem data={e} />;
+                  return <JobItem data={Object.values(e)} />;
                 })
               : null}
           </table>

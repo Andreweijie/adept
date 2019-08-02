@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import AuthUtils from "./AuthUtils";
 import { Link } from "react-router-dom";
+import AuthUtils from "./AuthUtils";
 
 class Login extends Component {
   constructor() {
@@ -8,14 +8,14 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      errors: {}
+      errors: { email: "", password: "" }
     };
     this.auth = new AuthUtils();
   }
   componentDidMount() {
     if (this.auth.loggedIn()) {
       console.log("loggedin");
-      this.props.history.replace("/");
+      this.props.history.replace("/cust/dashboard");
     }
   }
 
@@ -38,14 +38,18 @@ class Login extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        console.log("loggedin");
-        this.auth.setToken(data.adeptcust_token, "adeptcust_token");
-        this.props.handleStatus(true);
-        this.props.history.replace("/cust/dashboard");
+        if (data.errors) {
+          this.setState({ errors: data.errors }, () =>
+            console.log(this.state.errors)
+          );
+        } else {
+          console.log("loggedin");
+          this.auth.setToken(data.adeptcust_token, "adeptcust_token");
+          this.props.history.replace("/cust/dashboard");
+        }
       });
   };
   render() {
-    const { errors } = this.state;
     return (
       <div className="login-page">
         <div id="back-box">
@@ -53,38 +57,45 @@ class Login extends Component {
             Welcome to your <b>Adept Account</b>
           </p>
           <p id="reg-text">
-            Don't have an account? <b>Register Here!</b>
+            Don't have an account?{" "}
+            <Link to="/register">
+              <b className="reg-link">Register Here!</b>
+            </Link>
           </p>
           <div id="login-box">
             <h4>
               <b>Login Below</b>
             </h4>
-            <form className="form-box" noValidate onSubmit={this.onSubmit}>
+            <form className="form-box" onSubmit={this.onSubmit}>
               <div className="input-field">
                 <label htmlFor="email">Email</label>
+                {this.state.errors.email ? (
+                  <label htmlFor="email">E-mail Does not Exist</label>
+                ) : null}
                 <input
+                  required
                   onChange={this.onChange}
                   value={this.state.email}
-                  error={errors.email}
                   id="email"
                   type="email"
                 />
               </div>
               <div className="input-field">
                 <label htmlFor="password">Password</label>
+                {this.state.errors.password ? (
+                  <label htmlFor="password">{this.state.errors.password}</label>
+                ) : null}
                 <input
+                  required
                   onChange={this.onChange}
                   value={this.state.password}
-                  error={errors.password}
                   id="password"
                   type="password"
                 />
               </div>
               <div />
+              <button type="submit">LOGIN</button>
             </form>
-            <button type="submit" onClick={this.onSubmit}>
-              LOGIN
-            </button>
           </div>
         </div>
       </div>

@@ -30,6 +30,7 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
   const test2 = `<h1>${req.body.brand}</h1><h2>test</h2>`;
   let itemDesc = req.body.itemDesc;
   let attach = [];
+  let jobClass;
   if (req.file) {
     attach = [
       {
@@ -40,6 +41,7 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
   }
   if (req.body.urgent) {
     itemDesc = "[URGENT]" + itemDesc;
+    jobClass = "Emergency";
   }
   const mailOptions = {
     from: "andregoh1996@gmail.com",
@@ -59,7 +61,8 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
     modelNo: req.body.brand,
     serialNo: req.body.serialNo,
     faultDesc: req.body.faultDesc,
-    itemDesc: req.body.itemDesc
+    itemDesc: req.body.itemDesc,
+    jobClass: jobClass
   });
   newTempJob.save();
 });
@@ -80,7 +83,12 @@ router.get("/history", (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        res.json(docs);
+        let dataToSend = [];
+        docs.map(e => {
+          dataToSend.push(Object.values(e.toObject()));
+        });
+
+        res.json(dataToSend);
       }
     }
   ).select(
@@ -94,10 +102,19 @@ router.get("/pending-jobs", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.json(docs);
+      let dataToSend = [];
+      docs.map(e => {
+        dataToSend.push(Object.values(e.toObject()));
+      });
+      dataToSend = dataToSend.map(e => {
+        let ele = e.pop();
+        e.unshift(ele);
+        return e;
+      });
+      res.json(dataToSend);
     }
   }).select(
-    "enquiryId custId manufacturer modelNo serialNo faultDesc itemDesc -_id"
+    "enquiryId manufacturer modelNo serialNo faultDesc itemDesc jobClass dateOfEnquiry -_id"
   );
 });
 
@@ -123,7 +140,7 @@ router.get("/active-jobs", (req, res) => {
       }
     }
   ).select(
-    "custId manufacturer modelNo serialNo itemDesc jobStatus jobid -_id"
+    "manufacturer modelNo serialNo itemDesc faultDesc jobStatus jobid quote -_id"
   );
 });
 
@@ -132,6 +149,7 @@ router.post("/set-pickup", (req, res) => {
   Customer.findOne({ id: req.body.custID }, (err, doc) => {
     const newPickup = {
       date: req.body.date,
+      time: req.body.time,
       custID: req.body.custID,
       jobid: req.body.jobid,
       custAddress: doc.custAddress,

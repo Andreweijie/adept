@@ -32,11 +32,10 @@ class ALogin extends Component {
       .then(response => response.json())
       .then(data => {
         this.auth.setToken(data.adeptadmin_token, "adeptadmin_token");
-        this.props.history.replace("/");
+        this.props.history.replace("/admin/dashboard");
       });
   };
   render() {
-    const { errors } = this.state;
     return (
       <div className="alogin-page">
         <div id="back-box">
@@ -53,7 +52,6 @@ class ALogin extends Component {
                 <input
                   onChange={this.onChange}
                   value={this.state.email}
-                  error={errors.email}
                   id="email"
                   type="email"
                 />
@@ -63,7 +61,6 @@ class ALogin extends Component {
                 <input
                   onChange={this.onChange}
                   value={this.state.password}
-                  error={errors.password}
                   id="password"
                   type="password"
                 />

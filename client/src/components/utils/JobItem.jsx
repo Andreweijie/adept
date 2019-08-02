@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
-import { Button, message } from "flwww";
+import TimeInput from "react-time-input";
+import { message } from "flwww";
 
 export default class JobItem extends Component {
   state = {
     show: false,
-    selectedDay: undefined
+    selectedDay: undefined,
+    time: ""
   };
 
   setMessage = () => {
@@ -14,11 +16,11 @@ export default class JobItem extends Component {
   };
 
   setPickupDate = () => {
-    console.log(this.props.custID);
     const pickUpDate = {
       custID: parseInt(this.props.custID),
-      jobid: this.props.data.jobid,
-      date: this.state.selectedDay
+      jobid: this.props.data[5],
+      date: this.state.selectedDay,
+      time: this.state.time
     };
 
     fetch("/cust/set-pickup", {
@@ -36,9 +38,12 @@ export default class JobItem extends Component {
       });
   };
   handleDayChange = day => {
-    this.setState({ selectedDay: day }, () =>
-      console.log(this.state.selectedDay)
-    );
+    this.setState({ selectedDay: day });
+  };
+  handleTimeChange = time => {
+    this.setState({ time }, () => {
+      console.log(this.state.time);
+    });
   };
   render() {
     return (
@@ -46,8 +51,14 @@ export default class JobItem extends Component {
         {this.props.active ? (
           <td id="set-time">
             {this.state.show ? (
-              <div>
+              <div className="date-time-div">
                 <DayPickerInput onDayChange={this.handleDayChange} />{" "}
+                <TimeInput
+                  initTime="12:00"
+                  className="form-control"
+                  mountFocus="true"
+                  onTimeChange={this.handleTimeChange}
+                />{" "}
                 <button className="confirm-date" onClick={this.setPickupDate}>
                   Confirm
                 </button>
@@ -63,12 +74,20 @@ export default class JobItem extends Component {
           </td>
         ) : null}
 
-        {Object.keys(this.props.data).map(fields => {
-          return (
-            <td>
-              <span className="tableData">{this.props.data[fields]}</span>
-            </td>
-          );
+        {this.props.data.map((fields, index) => {
+          if (index == 7) {
+            return (
+              <td>
+                <span className="tableData">${fields}</span>
+              </td>
+            );
+          } else {
+            return (
+              <td>
+                <span className="tableData">{fields}</span>
+              </td>
+            );
+          }
         })}
       </tr>
     );

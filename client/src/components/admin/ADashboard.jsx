@@ -1,15 +1,22 @@
 import React, { Component } from "react";
-import { CSSTransition } from "react-transition-group";
-import JobItem from "./JobItem";
+import { message } from "flwww";
+import Tables from "../utils/Tables";
 
 export default class ADashboard extends Component {
   state = {
-    enquiryid: "",
+    enquiryId: "",
     quote: 0,
     jobid: "",
     status: "",
-    test: false,
-    headers: [],
+    headers: [
+      "Date",
+      "Customer ID",
+      "Job ID",
+      "Address",
+      "Email",
+      "Company",
+      "Contact No"
+    ],
     body: []
   };
 
@@ -21,49 +28,48 @@ export default class ADashboard extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
-  changeStatus = e => {
-    e.preventDefault();
-    const status = {
-      jobId: this.state.jobid,
-      status: this.state.status
-    };
-
-    fetch("http://localhost:5000/admin/change-status", {
+  postNewData = (newData, endpoint, msg, update) => {
+    fetch(`http://localhost:5000/admin/${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
       },
-      body: JSON.stringify(status)
+      body: JSON.stringify(newData)
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        message(msg, "success");
+        this.setState(update);
       });
+  };
+
+  changeStatus = e => {
+    e.preventDefault();
+    const newJobStatus = {
+      jobId: this.state.jobid,
+      status: this.state.status
+    };
+    const update = { jobid: "", status: "" };
+    this.postNewData(
+      newJobStatus,
+      "change-status",
+      "Job Status Changed",
+      update
+    );
   };
 
   confirmOrder = e => {
     e.preventDefault();
-    const confirm = {
-      enquiryId: this.state.enquiryid,
+    const confirmData = {
+      enquiryId: this.state.enquiryId,
       quote: this.state.quote
     };
-
-    fetch("http://localhost:5000/admin/confirm", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify(confirm)
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        this.setState({
-          test: !this.state.test
-        });
-      });
+    const newUpdate = {
+      enquiryId: "",
+      quote: 0
+    };
+    this.postNewData(confirmData, "confirm", "Job Confirmed!", newUpdate);
   };
 
   getPickups = () => {
@@ -72,44 +78,37 @@ export default class ADashboard extends Component {
       .then(data => {
         if (data.length != 0) {
           this.setState({
-            headers: Object.keys(data[0]),
             body: data
           });
         }
       });
   };
   render() {
-    console.log(this.state.body);
     return (
       <div id="a-dash">
         <h1>Dashboard</h1>
         <div className="dash-content">
           <div className="forms">
-            <CSSTransition
-              in={this.state.test}
-              timeout={2000}
-              classNames="test6"
-            >
-              <div className="test5">
-                <h1>Success!</h1>
-              </div>
-            </CSSTransition>
-
             <div className="confirm-form">
               <p>Confirm Job</p>
               <form>
                 <div className="input-box">
-                  <label htmlFor="enquiryid">EnquiryID</label>
+                  <label htmlFor="enquiryId">Enquiry ID</label>
                   <input
                     onChange={this.onChange}
-                    id="enquiryid"
+                    id="enquiryId"
                     type="text"
-                    value={this.state.enquiryid}
+                    value={this.state.enquiryId}
                   />
                 </div>
                 <div className="input-box">
                   <label htmlFor="quote">Quote</label>
-                  <input onChange={this.onChange} type="text" id="quote" />
+                  <input
+                    onChange={this.onChange}
+                    type="text"
+                    id="quote"
+                    value={this.state.quote}
+                  />
                 </div>
                 <button onClick={this.confirmOrder}>SUBMIT</button>
               </form>
@@ -118,7 +117,7 @@ export default class ADashboard extends Component {
               <p>Change Job Status</p>
               <form>
                 <div className="input-box">
-                  <label htmlFor="jobid">JobID</label>
+                  <label htmlFor="jobid">Job ID</label>
                   <input onChange={this.onChange} id="jobid" type="text" />
                 </div>
                 <div className="input-box">
@@ -132,18 +131,8 @@ export default class ADashboard extends Component {
           </div>
           <div className="pickup">
             <h1>Pickups</h1>
-            <div className="all-box">
-              <table className="table">
-                {this.state.headers.map(header => {
-                  return <th>{header}</th>;
-                })}
-                {this.state.body
-                  ? this.state.body.map(e => {
-                      return <JobItem data={e} custID={177} />;
-                    })
-                  : null}
-              </table>
-            </div>
+            <hr className="admin-hr" />
+            <Tables headers={this.state.headers} body={this.state.body} />
           </div>
         </div>
       </div>

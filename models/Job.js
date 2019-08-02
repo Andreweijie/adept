@@ -145,4 +145,5 @@ const JobSchema = new Schema({
     type: Date
   }
 });
+
 module.exports = Job = mongoose.model("jobs", JobSchema);
