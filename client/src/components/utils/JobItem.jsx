@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
-import TimeInput from "react-time-input";
+
 import { message } from "flwww";
 
 export default class JobItem extends Component {
@@ -11,16 +11,19 @@ export default class JobItem extends Component {
     time: ""
   };
 
-  setMessage = () => {
-    message("Success!", "success");
+  setMessage = data => {
+    if (data.message) {
+      message("Success!", "success", 4);
+    } else {
+      message("Failed!", "error", 4);
+    }
   };
 
   setPickupDate = () => {
     const pickUpDate = {
       custID: parseInt(this.props.custID),
       jobid: this.props.data[5],
-      date: this.state.selectedDay,
-      time: this.state.time
+      date: this.state.selectedDay
     };
 
     fetch("/cust/set-pickup", {
@@ -33,7 +36,7 @@ export default class JobItem extends Component {
       .then(response => response.json())
       .then(data => {
         if (data) {
-          this.setMessage();
+          this.setMessage(data);
         }
       });
   };

@@ -94,8 +94,10 @@ class Login extends Component {
                 />
               </div>
               <div />
-              <button type="submit">LOGIN</button>
             </form>
+            <button type="submit" onClick={this.onSubmit}>
+              LOGIN
+            </button>
           </div>
         </div>
       </div>

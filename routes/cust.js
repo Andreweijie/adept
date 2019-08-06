@@ -149,7 +149,6 @@ router.post("/set-pickup", (req, res) => {
   Customer.findOne({ id: req.body.custID }, (err, doc) => {
     const newPickup = {
       date: req.body.date,
-      time: req.body.time,
       custID: req.body.custID,
       jobid: req.body.jobid,
       custAddress: doc.custAddress,
@@ -161,6 +160,7 @@ router.post("/set-pickup", (req, res) => {
     insert.save(err => {
       if (err) {
         console.log(err);
+        res.json({ error: "error" });
       } else {
         res.json({ message: "message" });
       }
