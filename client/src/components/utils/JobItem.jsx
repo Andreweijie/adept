@@ -53,12 +53,6 @@ export default class JobItem extends Component {
             {this.state.show ? (
               <div className="date-time-div">
                 <DayPickerInput onDayChange={this.handleDayChange} />{" "}
-                <TimeInput
-                  initTime="12:00"
-                  className="form-control"
-                  mountFocus="true"
-                  onTimeChange={this.handleTimeChange}
-                />{" "}
                 <button className="confirm-date" onClick={this.setPickupDate}>
                   Confirm
                 </button>

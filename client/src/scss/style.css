@@ -19,8 +19,10 @@
 
 .App #admin .all-jobs {
   max-height: 95vh;
-  width: 80%;
+  width: 85vw;
   margin: auto;
+  -webkit-transition: all 2s;
+  transition: all 2s;
 }
 
 .App #admin #admin-side {
@@ -55,6 +57,7 @@
 .App #admin #admin-side #profile h1 {
   color: white;
   text-align: center;
+  font-weight: 100;
 }
 
 .App #admin #admin-side #profile .avatar {
@@ -85,6 +88,7 @@
           align-items: flex-start;
   width: 100%;
   margin-top: 3em;
+  padding: 8px;
 }
 
 .App #admin #admin-side .nav a,
@@ -273,6 +277,7 @@
 .App .login-page,
 .App .register-page,
 .App .alogin-page {
+  background-image: url("https://i.imgur.com/NiAzsgC.png");
   height: 100vh;
   width: 100vw;
   display: -webkit-box;
@@ -307,6 +312,12 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.App .login-page #back-box img,
+.App .register-page #back-box img,
+.App .alogin-page #back-box img {
+  height: 100px;
 }
 
 .App .login-page #back-box #reg-text,
@@ -382,7 +393,7 @@
 .App .login-page #back-box #login-box .form-box,
 .App .register-page #back-box #login-box .form-box,
 .App .alogin-page #back-box #login-box .form-box {
-  margin-top: 2em;
+  margin-top: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -438,9 +449,7 @@
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  padding-top: 2em;
-  padding-right: 3em;
-  padding-left: 3em;
+  padding: 1em;
 }
 
 .App .login-page #back-box #register-box h4,
@@ -484,10 +493,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  height: 90%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  height: 100%;
   width: 100%;
 }
 
@@ -533,9 +541,19 @@
 }
 
 .App #cust .side-bar {
-  background: linear-gradient(45deg, #4625ca 0%, #4a14ff);
+  background-color: #3218d4;
   height: 100%;
   width: 15vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .App #cust .side-bar #profile {
@@ -554,6 +572,8 @@
 .App #cust .side-bar #profile h1 {
   color: white;
   text-align: center;
+  font-weight: 100;
+  padding: 8px;
 }
 
 .App #cust .side-bar #profile .avatar {
@@ -654,7 +674,7 @@
 .App #cust .dashboard .dash-content .pending-jobs,
 .App #cust .dashboard .dash-content .active-jobs {
   width: 80vw;
-  border-radius: 0.5em;
+  border-radius: 0.2em;
   padding: 16px;
 }
 
@@ -793,7 +813,7 @@
   }
 }
 
-#ord-history {
+#ord-hist {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -816,12 +836,10 @@
           flex-direction: column;
   padding: 16px;
   max-height: 100vh;
-  max-width: 85vw;
   background-color: white;
   -webkit-box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.3);
           box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.3);
   width: 100%;
-  border-radius: 0.3em;
 }
 
 .containers h1 {
@@ -1151,5 +1169,11 @@ hr {
 
 .admin-hr {
   border: 1px solid #ff3366;
+}
+
+img {
+  height: 64px;
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
 /*# sourceMappingURL=style.css.map */

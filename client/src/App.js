@@ -8,6 +8,7 @@ import Register from "./components/auth/Register";
 import Reset from "./components/auth/Reset";
 import Admin from "./components/admin/Admin";
 import Cust from "./components/customers/Cust";
+import NavBar from "./components/utils/NavBar";
 import decode from "jwt-decode";
 import "./scss/style.css";
 

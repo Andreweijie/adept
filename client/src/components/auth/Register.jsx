@@ -52,10 +52,11 @@ class Register extends Component {
     return (
       <div className="register-page">
         <div id="back-box">
+          <img src="https://i.imgur.com/UANNif7.png" />
+          <h4>
+            <b>Register</b> Below
+          </h4>
           <div id="register-box">
-            <h4>
-              <b>Register Below</b>
-            </h4>
             <form className="form-box" noValidate onSubmit={this.onSubmit}>
               <div class="cols">
                 <div className="input-field">

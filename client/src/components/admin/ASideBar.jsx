@@ -11,11 +11,9 @@ class ASideBar extends Component {
   render() {
     return (
       <div id="admin-side">
+        <img src="https://i.imgur.com/Fl6Pre9.png" />
         <div id="profile">
-          <h1>
-            <b>Admin</b> Panel
-          </h1>
-          <div className="avatar" />
+          <h1>Admin Panel</h1>
           <span className="role">
             <span>
               Jonathan | <b>Sales</b>

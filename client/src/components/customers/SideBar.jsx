@@ -11,10 +11,9 @@ class SideBar extends Component {
   render() {
     return (
       <div className="side-bar">
+        <img src="https://i.imgur.com/UANNif7.png" />
         <div id="profile">
-          <h1>
-            <b>Account</b> Panel
-          </h1>
+          <h1>Account Panel</h1>
 
           <span className="role">
             <span>

@@ -4,6 +4,7 @@
   font-weight: 200;
   height: 100vh;
   width: 100vw;
+
   /* Admin Page CSS */
   #admin {
     background: linear-gradient(
@@ -28,8 +29,9 @@
     width: 100%;
     .all-jobs {
       max-height: 95vh;
-      width: 80%;
+      width: 85vw;
       margin: auto;
+      transition: all 2s;
     }
     #admin-side {
       width: 15vw;
@@ -45,6 +47,7 @@
         h1 {
           color: white;
           text-align: center;
+          font-weight: 100;
         }
         .avatar {
           height: 100px;
@@ -65,6 +68,7 @@
         align-items: flex-start;
         width: 100%;
         margin-top: 3em;
+        padding: 8px;
         a,
         .logout {
           color: white;
@@ -196,6 +200,7 @@
   .login-page,
   .register-page,
   .alogin-page {
+    background-image: url("https://i.imgur.com/NiAzsgC.png");
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -212,6 +217,9 @@
       flex-direction: column;
       justify-content: space-around;
       align-items: center;
+      img {
+        height: 100px;
+      }
       #reg-text {
         font-size: 2em;
       }
@@ -252,7 +260,7 @@
         }
 
         .form-box {
-          margin-top: 2em;
+          margin-top: 0;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -283,10 +291,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-        padding-top: 2em;
-        padding-right: 3em;
-        padding-left: 3em;
-
+        padding: 1em;
         h4 {
           font-size: 3.3em;
         }
@@ -310,12 +315,13 @@
           margin-top: 1em;
           display: flex;
           flex-direction: row;
-          justify-content: space-between;
-          height: 90%;
+          justify-content: space-around;
+          height: 100%;
           width: 100%;
           .cols {
             display: flex;
             flex-direction: column;
+
             input {
               border: none;
               background-color: #f2f2f2;
@@ -352,13 +358,18 @@
       rgb(140, 106, 227) 75%,
       rgb(140, 106, 227) 100%
     );
+
     height: 100%;
     width: 100%;
     display: flex;
     .side-bar {
-      background: linear-gradient(45deg, #4625ca 0%, #4a14ff);
+      //background: linear-gradient(45deg, #4625ca 0%, #4a14ff);
+      background-color: rgb(50, 24, 212);
       height: 100%;
       width: 15vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       #profile {
         display: flex;
         flex-direction: column;
@@ -366,6 +377,8 @@
         h1 {
           color: white;
           text-align: center;
+          font-weight: 100;
+          padding: 8px;
         }
         .avatar {
           height: 100px;
@@ -433,7 +446,7 @@
         .pending-jobs,
         .active-jobs {
           width: 80vw;
-          border-radius: 0.5em;
+          border-radius: 0.2em;
           padding: 16px;
           h1 {
             font-size: 32px;
@@ -540,7 +553,7 @@
   }
 }
 
-#ord-history {
+#ord-hist {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -552,11 +565,11 @@
   flex-direction: column;
   padding: 16px;
   max-height: 100vh;
-  max-width: 85vw;
+
   background-color: white;
   box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.3);
   width: 100%;
-  border-radius: 0.3em;
+
   h1 {
     font-weight: bold;
   }
@@ -784,4 +797,10 @@ hr {
 
 .admin-hr {
   border: 1px solid #ff3366;
+}
+
+img {
+  height: 64px;
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
