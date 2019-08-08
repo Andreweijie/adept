@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import DayPickerInput from "react-day-picker/DayPickerInput";
+import DatePicker from "react-datepicker";
 import "react-day-picker/lib/style.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 import { message } from "flwww";
 
 export default class JobItem extends Component {
   state = {
     show: false,
-    selectedDay: undefined,
+    selectedDay: new Date(),
     time: ""
   };
 
@@ -55,7 +57,13 @@ export default class JobItem extends Component {
           <td id="set-time">
             {this.state.show ? (
               <div className="date-time-div">
-                <DayPickerInput onDayChange={this.handleDayChange} />{" "}
+                <DatePicker
+                  selected={this.state.selectedDay}
+                  onChange={this.handleDayChange}
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  dateFormat="MMMM d, yyyy h:mm aa"
+                />{" "}
                 <button className="confirm-date" onClick={this.setPickupDate}>
                   Confirm
                 </button>

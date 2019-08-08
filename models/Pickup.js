@@ -29,6 +29,11 @@ const UserSchema = new Schema({
   custTel: {
     type: Number,
     required: true
+  },
+  confirmed: {
+    type: Boolean,
+    required: true,
+    default: false
   }
 });
 module.exports = Pickup = mongoose.model("pickups", UserSchema);

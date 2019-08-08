@@ -22,8 +22,7 @@
     "react-dropzone": "^10.1.5",
     "react-loader-spinner": "^2.3.0",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "1.0.17",
-    "react-time-input": "0.0.19"
+    "react-scripts": "1.0.17"
   },
   "scripts": {
     "start": "react-scripts start",

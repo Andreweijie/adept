@@ -532,8 +532,8 @@
 }
 
 .App #cust {
-  background: -webkit-gradient(linear, left top, right top, from(#3218d4), color-stop(28%, #3218d4), color-stop(28%, #4428d7), color-stop(33%, #4428d7), color-stop(33%, #5639da), color-stop(48%, #5639da), color-stop(48%, #6849dd), color-stop(55%, #6849dd), color-stop(55%, #7a5ae0), color-stop(75%, #7a5ae0), color-stop(75%, #8c6ae3), to(#8c6ae3));
-  background: linear-gradient(90deg, #3218d4 0%, #3218d4 28%, #4428d7 28%, #4428d7 33%, #5639da 33%, #5639da 48%, #6849dd 48%, #6849dd 55%, #7a5ae0 55%, #7a5ae0 75%, #8c6ae3 75%, #8c6ae3 100%);
+  background: -webkit-gradient(linear, left top, right top, from(#3218d4), color-stop(28%, #3218d4), color-stop(28%, #4428d7), color-stop(33%, #4428d7), color-stop(33%, #5639da), color-stop(48%, #5639da), color-stop(48%, #6849dd), color-stop(55%, #6849dd), color-stop(55%, #3218d4), color-stop(75%, #3218d4), color-stop(75%, #4a14ff), to(#4a14ff));
+  background: linear-gradient(90deg, #3218d4 0%, #3218d4 28%, #4428d7 28%, #4428d7 33%, #5639da 33%, #5639da 48%, #6849dd 48%, #6849dd 55%, #3218d4 55%, #3218d4 75%, #4a14ff 75%, #4a14ff 100%);
   height: 100%;
   width: 100%;
   display: -webkit-box;

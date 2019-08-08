@@ -103,7 +103,8 @@ router.get("/pickups", (req, res) => {
         weekday: "long",
         year: "numeric",
         month: "long",
-        day: "numeric"
+        day: "numeric",
+        hour: "numeric"
       };
       let newDocs = docs.map(e => {
         let newObj = e.toObject();
@@ -113,7 +114,7 @@ router.get("/pickups", (req, res) => {
       });
       res.json(newDocs);
     }
-  }).select("-__v -_id");
+  }).select("-__v -_id -confirmed");
 });
 
 router.get("/customers", (req, res) => {

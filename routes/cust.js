@@ -147,6 +147,30 @@ router.get("/active-jobs", (req, res) => {
 //set pickup date
 router.post("/set-pickup", (req, res) => {
   Customer.findOne({ id: req.body.custID }, (err, doc) => {
+    let options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric"
+    };
+    let dateObj = new Date(req.body.date);
+    let dateToSend = dateObj.toLocaleString("en-US", options);
+    console.log(req.body);
+    const test2 = `<h1>Please confirm pick up for ${
+      req.body.jobid
+    } on</h1><h2>${dateToSend}</h2>`;
+
+    const mailOptions = {
+      from: "andregoh1996@gmail.com",
+      to: "andreweijie@outlook.com",
+      subject: "Confirm Pick Up",
+      html: test2
+    };
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) console.log(err);
+      else console.log("success!");
+    });
     const newPickup = {
       date: req.body.date,
       custID: req.body.custID,
