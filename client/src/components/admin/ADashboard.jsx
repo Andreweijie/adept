@@ -4,6 +4,8 @@ import Tables from "../utils/Tables";
 
 export default class ADashboard extends Component {
   state = {
+    custID: 0,
+    email: "",
     enquiryId: "",
     quote: 0,
     jobid: "",
@@ -40,10 +42,20 @@ export default class ADashboard extends Component {
       .then(res => res.json())
       .then(data => {
         message(msg, "success");
+        console.log(data);
         this.setState(update);
       });
   };
 
+  linkCustomer = e => {
+    e.preventDefault();
+    const newLink = {
+      email: this.state.email,
+      custID: this.state.custID
+    };
+    const update = { email: "", custID: 0 };
+    this.postNewData(newLink, "link-customer", "Account Linked!", update);
+  };
   changeStatus = e => {
     e.preventDefault();
     const newJobStatus = {
@@ -118,20 +130,54 @@ export default class ADashboard extends Component {
               <form>
                 <div className="input-box">
                   <label htmlFor="jobid">Job ID</label>
-                  <input onChange={this.onChange} id="jobid" type="text" />
+                  <input
+                    onChange={this.onChange}
+                    id="jobid"
+                    type="text"
+                    value={this.state.jobid}
+                  />
                 </div>
                 <div className="input-box">
                   <label htmlFor="status">Job Status</label>
-                  <input onChange={this.onChange} type="text" id="status" />
+                  <input
+                    onChange={this.onChange}
+                    type="text"
+                    id="status"
+                    value={this.state.status}
+                  />
                 </div>
 
                 <button onClick={this.changeStatus}>SUBMIT</button>
               </form>
             </div>
+            <div className="link-form">
+              <p>Link Customer ID</p>
+              <form>
+                <div className="input-box">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    onChange={this.onChange}
+                    id="email"
+                    type="text"
+                    value={this.state.email}
+                  />
+                </div>
+                <div className="input-box">
+                  <label htmlFor="status">Customer ID</label>
+                  <input
+                    onChange={this.onChange}
+                    type="text"
+                    id="custID"
+                    value={this.state.custID}
+                  />
+                </div>
+
+                <button onClick={this.linkCustomer}>SUBMIT</button>
+              </form>
+            </div>
           </div>
           <div className="pickup">
             <h1>Pickups</h1>
-            <hr className="admin-hr" />
             <Tables headers={this.state.headers} body={this.state.body} />
           </div>
         </div>

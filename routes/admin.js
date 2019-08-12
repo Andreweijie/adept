@@ -62,6 +62,20 @@ router.post("/confirm", (req, res) => {
 
 //route for updating job status
 router.post("/change-status", (req, res) => {
+  const textToSend = `<h3>Job ${req.body.jobId} is now: ${
+    req.body.status
+  }</h3>`;
+  const mailOptions = {
+    from: "andregoh1996@gmail.com",
+    to: "andreweijie@outlook.com",
+    subject: `[UPDATE] Job ${req.body.jobId}`,
+    html: textToSend
+  };
+  transporter.sendMail(mailOptions, (err, info) => {
+    if (err) console.log(err);
+    else console.log("sent");
+  });
+
   jobId = req.body.jobId;
   newStatus = req.body.status;
 
@@ -72,12 +86,30 @@ router.post("/change-status", (req, res) => {
       if (err) {
         console.log(err);
       }
+
       res.json({ message: "updated" });
       console.log(doc);
     }
   );
 });
 
+//link customer ID to user account
+router.post("/link-customer", (req, res) => {
+  console.log(req.body.custID);
+  User.findOneAndUpdate(
+    { email: req.body.email },
+    { custID: req.body.custID },
+    { new: true },
+    (err, doc) => {
+      console.log(doc);
+      if (err) {
+        console.log(err);
+      } else {
+        res.json(doc);
+      }
+    }
+  );
+});
 //get all jobs
 router.get("/all-jobs", (req, res) => {
   Job.find(
@@ -93,7 +125,7 @@ router.get("/all-jobs", (req, res) => {
     "-_id -id -jobName -freightTerm -orderNo -adviceNoticeNo -partID -partQty -goaheaddate -repBy -finalOutBy -engReport -previousjobid -isjobwarranty -quoteCost -quoteHour"
   );
 });
-
+//get pickups
 router.get("/pickups", (req, res) => {
   Pickup.find({}, (err, docs) => {
     if (err) {
@@ -109,14 +141,13 @@ router.get("/pickups", (req, res) => {
       let newDocs = docs.map(e => {
         let newObj = e.toObject();
         newObj.date = newObj.date.toLocaleString("en-US", options);
-        console.log(newObj.date);
         return newObj;
       });
       res.json(newDocs);
     }
   }).select("-__v -_id -confirmed");
 });
-
+//get all customers
 router.get("/customers", (req, res) => {
   Customer.find({}, (err, docs) => {
     if (err) {

@@ -10,7 +10,24 @@
 }
 
 .App #admin {
-  background: linear-gradient(45deg, #ef0781 0%, #ef0781 6%, #d00a70 6%, #d00a70 25%, #b10d60 25%, #b10d60 40%, #93104f 40%, #93104f 45%, #74133e 45%, #74133e 53%, #55162e 53%, #55162e 66%, #36191d 66%, #36191d 100%);
+  /*background: linear-gradient(
+      45deg,
+      rgb(239, 7, 129) 0%,
+      rgb(239, 7, 129) 6%,
+      rgb(208, 10, 112) 6%,
+      rgb(208, 10, 112) 25%,
+      rgb(177, 13, 96) 25%,
+      rgb(177, 13, 96) 40%,
+      rgb(147, 16, 79) 40%,
+      rgb(147, 16, 79) 45%,
+      rgb(116, 19, 62) 45%,
+      rgb(116, 19, 62) 53%,
+      rgb(85, 22, 46) 53%,
+      rgb(85, 22, 46) 66%,
+      rgb(54, 25, 29) 66%,
+      rgb(54, 25, 29) 100%
+    );*/
+  background-color: #f1f3f7;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -38,7 +55,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background: linear-gradient(45deg, #2e3548 0%, #1e222f);
+  background-color: #1c222d;
   height: 100%;
 }
 
@@ -126,12 +143,12 @@
       -ms-flex-pack: start;
           justify-content: flex-start;
   padding: 16px;
-  padding-left: 50px;
-  width: 85%;
+  padding-left: 48px;
+  width: 100%;
 }
 
 .App #admin #a-dash h1 {
-  color: #f2f2f2;
+  color: #1c222d;
   font-size: 4em;
   font-weight: bold;
   background-blend-mode: difference;
@@ -163,14 +180,13 @@
 }
 
 .App #admin #a-dash .dash-content .forms .confirm-form,
-.App #admin #a-dash .dash-content .forms .change-form {
+.App #admin #a-dash .dash-content .forms .change-form,
+.App #admin #a-dash .dash-content .forms .link-form {
   padding: 20px;
   background-color: white;
-  -webkit-box-shadow: 0rem 0.35rem 1.2rem 0 rgba(250, 97, 97, 0.1);
-          box-shadow: 0rem 0.35rem 1.2rem 0 rgba(250, 97, 97, 0.1);
   height: 20vh;
   width: 45%;
-  border-radius: 0.5em;
+  border-radius: 0.3em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -183,14 +199,16 @@
 }
 
 .App #admin #a-dash .dash-content .forms .confirm-form p,
-.App #admin #a-dash .dash-content .forms .change-form p {
+.App #admin #a-dash .dash-content .forms .change-form p,
+.App #admin #a-dash .dash-content .forms .link-form p {
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 0.5em;
 }
 
 .App #admin #a-dash .dash-content .forms .confirm-form form,
-.App #admin #a-dash .dash-content .forms .change-form form {
+.App #admin #a-dash .dash-content .forms .change-form form,
+.App #admin #a-dash .dash-content .forms .link-form form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -200,9 +218,10 @@
 }
 
 .App #admin #a-dash .dash-content .forms .confirm-form form .input-box input,
-.App #admin #a-dash .dash-content .forms .change-form form .input-box input {
+.App #admin #a-dash .dash-content .forms .change-form form .input-box input,
+.App #admin #a-dash .dash-content .forms .link-form form .input-box input {
   border: none;
-  background-color: #f2f2f2;
+  background-color: #f1f3f7;
   border-radius: 0.2em;
   height: 2.5em;
   padding: 0.5em;
@@ -210,12 +229,14 @@
 }
 
 .App #admin #a-dash .dash-content .forms .confirm-form form .input-box label,
-.App #admin #a-dash .dash-content .forms .change-form form .input-box label {
+.App #admin #a-dash .dash-content .forms .change-form form .input-box label,
+.App #admin #a-dash .dash-content .forms .link-form form .input-box label {
   font-weight: bold;
 }
 
 .App #admin #a-dash .dash-content .forms .confirm-form form button,
-.App #admin #a-dash .dash-content .forms .change-form form button {
+.App #admin #a-dash .dash-content .forms .change-form form button,
+.App #admin #a-dash .dash-content .forms .link-form form button {
   -ms-flex-item-align: end;
       align-self: flex-end;
   font-weight: bold;
@@ -224,7 +245,7 @@
   height: 2.5em;
   background-color: #ff3366;
   color: white;
-  border-radius: 0.3em;
+  border-radius: 0.2em;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   -webkit-box-shadow: 0rem 0.55rem 1rem 0 rgba(255, 51, 102, 0.4);
@@ -232,7 +253,8 @@
 }
 
 .App #admin #a-dash .dash-content .forms .confirm-form form button:hover,
-.App #admin #a-dash .dash-content .forms .change-form form button:hover {
+.App #admin #a-dash .dash-content .forms .change-form form button:hover,
+.App #admin #a-dash .dash-content .forms .link-form form button:hover {
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
   -webkit-box-shadow: 0rem 1rem 1rem 0 rgba(255, 51, 102, 0.4);
@@ -240,14 +262,12 @@
 }
 
 .App #admin #a-dash .dash-content .pickup {
-  -webkit-box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
-          box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.1);
   background-color: white;
   height: 70%;
-  width: 87.5%;
+  width: 93%;
   -ms-flex-item-align: start;
       align-self: flex-start;
-  border-radius: 0.5em;
+  border-radius: 0.3em;
   padding: 16px;
   overflow-x: scroll;
 }
@@ -532,8 +552,22 @@
 }
 
 .App #cust {
-  background: -webkit-gradient(linear, left top, right top, from(#3218d4), color-stop(28%, #3218d4), color-stop(28%, #4428d7), color-stop(33%, #4428d7), color-stop(33%, #5639da), color-stop(48%, #5639da), color-stop(48%, #6849dd), color-stop(55%, #6849dd), color-stop(55%, #3218d4), color-stop(75%, #3218d4), color-stop(75%, #4a14ff), to(#4a14ff));
-  background: linear-gradient(90deg, #3218d4 0%, #3218d4 28%, #4428d7 28%, #4428d7 33%, #5639da 33%, #5639da 48%, #6849dd 48%, #6849dd 55%, #3218d4 55%, #3218d4 75%, #4a14ff 75%, #4a14ff 100%);
+  /*background: linear-gradient(
+      90deg,
+      rgb(50, 24, 212) 0%,
+      rgb(50, 24, 212) 28%,
+      rgb(68, 40, 215) 28%,
+      rgb(68, 40, 215) 33%,
+      rgb(86, 57, 218) 33%,
+      rgb(86, 57, 218) 48%,
+      rgb(104, 73, 221) 48%,
+      rgb(104, 73, 221) 55%,
+      rgb(50, 24, 212) 55%,
+      rgb(50, 24, 212) 75%,
+      #4a14ff 75%,
+      #4a14ff 100%
+    );*/
+  background-color: #f1f3f7;
   height: 100%;
   width: 100%;
   display: -webkit-box;
@@ -647,7 +681,7 @@
   padding-bottom: 8px;
   font-weight: bold;
   font-size: 4em;
-  color: white;
+  color: #1e222f;
 }
 
 .App #cust .dashboard .dash-content {
@@ -686,6 +720,7 @@
 }
 
 .change-page {
+  background-image: url("https://i.imgur.com/NiAzsgC.png");
   height: 100vh;
   width: 100vw;
   display: -webkit-box;
@@ -837,8 +872,6 @@
   padding: 16px;
   max-height: 100vh;
   background-color: white;
-  -webkit-box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.3);
-          box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.3);
   width: 100%;
 }
 
@@ -947,6 +980,7 @@ input {
 }
 
 .all-box::-webkit-scrollbar,
+.pick-up::-webkit-scrollbar,
 .active-jobs::-webkit-scrollbar {
   width: 0px;
   /* Remove scrollbar space */
@@ -956,6 +990,7 @@ input {
 }
 
 .all-box::-webkit-scrollbar-thumb,
+.pick-up::-webkit-scrollbar-thumb,
 .active-jobs::-webkit-scrollbar-thumb {
   background: #f2f2f2;
   width: 0px;
@@ -988,6 +1023,7 @@ input {
           align-items: center;
   width: 100%;
   font-weight: bold;
+  background-image: url("https://i.imgur.com/NiAzsgC.png");
 }
 
 .enquiry .enquiry-box {
@@ -1179,7 +1215,7 @@ a {
 
 hr {
   border: 1px solid #4625ca;
-  opacity: 0.7;
+  opacity: 1;
   width: 100%;
   -webkit-margin-before: 0;
           margin-block-start: 0;
@@ -1188,7 +1224,7 @@ hr {
 }
 
 .admin-hr {
-  border: 1px solid #ff3366;
+  border: 1px solid #d00a70;
 }
 
 .logo {

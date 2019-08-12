@@ -171,6 +171,7 @@ router.post("/set-pickup", (req, res) => {
       if (err) console.log(err);
       else console.log("success!");
     });
+
     const newPickup = {
       date: req.body.date,
       custID: req.body.custID,
@@ -180,15 +181,19 @@ router.post("/set-pickup", (req, res) => {
       company: doc.company,
       custTel: doc.custTel
     };
-    let insert = new Pickup(newPickup);
-    insert.save(err => {
-      if (err) {
-        console.log(err);
-        res.json({ error: "error" });
-      } else {
-        res.json({ message: "message" });
+    Pickup.replaceOne(
+      { jobid: req.body.jobid },
+      newPickup,
+      { upsert: true },
+      (err, doc) => {
+        if (err) {
+          console.log(err);
+          res.json({ error: "Failed" });
+        } else {
+          res.json({ message: "Success" });
+        }
       }
-    });
+    );
   });
 });
 module.exports = router;

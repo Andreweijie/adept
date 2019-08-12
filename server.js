@@ -23,7 +23,7 @@ app.use("/admin", adminRoutes);
 mongoose
   .connect(
     "mongodb+srv://andreweijie:1234@users-aeexa.mongodb.net/test?retryWrites=true",
-    { useNewUrlParser: true }
+    { useNewUrlParser: true, useFindAndModify: false }
   )
   .then(() => console.log("MongoDB successfully connected"))
   .catch(err => console.log(err));

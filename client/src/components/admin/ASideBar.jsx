@@ -13,7 +13,7 @@ class ASideBar extends Component {
       <div id="admin-side">
         <img className="logo" src="https://i.imgur.com/Fl6Pre9.png" />
         <div id="profile">
-          <h1>Admin Panel</h1>
+          <h1>Admin Account</h1>
           <span className="role">
             <span>
               Jonathan | <b>Sales</b>
@@ -24,7 +24,6 @@ class ASideBar extends Component {
           <Link to={`${this.props.match.url}/dashboard`}>Dashboard</Link>
           <Link to="/admin/all-jobs">All Jobs</Link>
           <Link to="/admin/customers">Customers</Link>
-          <Link to="/admin/create">Create Admin Account</Link>
           <button className="logout" onClick={this.logOut}>
             Logout
           </button>
