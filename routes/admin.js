@@ -159,4 +159,18 @@ router.get("/customers", (req, res) => {
     "-_id custName company jobTitle custAddress custPostCode custCountry custTel custFax"
   );
 });
+
+router.get("/confirm-pickup", (req, res) => {
+  Pickup.updateOne(
+    { jobid: req.query.jobid },
+    { confirmed: true },
+    (err, doc) => {
+      if (err) {
+        console.log(err);
+        res.json(err);
+      }
+      res.json({ message: success });
+    }
+  );
+});
 module.exports = router;

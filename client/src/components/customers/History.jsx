@@ -40,7 +40,7 @@ export default class History extends Component {
             })}
             {this.state.body
               ? this.state.body.map(e => {
-                  return <JobItem data={e} />;
+                  return <JobItem data={Object.values(e)} />;
                 })
               : null}
           </table>

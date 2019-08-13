@@ -40,7 +40,7 @@ export default class Dashboard extends Component {
         if (data.length != 0) {
           console.log(data);
           this.setState({
-            pendingBody: data
+            pendingBody: this.formatPending(data)
           });
         }
       });
@@ -55,7 +55,27 @@ export default class Dashboard extends Component {
         }
       });
   }
-
+  formatPending = data => {
+    let options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric"
+    };
+    let pendingData = data.map(e => {
+      return Object.values(e);
+    });
+    let pendingFinal = pendingData.map(e => {
+      let ele = e.pop();
+      e.unshift(ele);
+      e[e.length - 1] = new Date(e[e.length - 1]);
+      e[e.length - 1] = e[e.length - 1].toLocaleString("en-US", options);
+      return e;
+    });
+    console.log(pendingFinal);
+    return pendingFinal;
+  };
   render() {
     return (
       <div className="dashboard">
@@ -71,7 +91,7 @@ export default class Dashboard extends Component {
                 })}
                 {true
                   ? this.state.pendingBody.map(e => {
-                      return <JobItem data={e} />;
+                      return <JobItem data={Object.values(e)} />;
                     })
                   : null}
               </table>

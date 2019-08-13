@@ -79,7 +79,7 @@ export default class JobItem extends Component {
         ) : null}
 
         {this.props.data.map((fields, index) => {
-          if (index == 7) {
+          if (index == 7 && this.props.active) {
             return (
               <td>
                 <span className="tableData">${fields}</span>

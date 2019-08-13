@@ -149,7 +149,7 @@
 
 .App #admin #a-dash h1 {
   color: #1c222d;
-  font-size: 4em;
+  font-size: 3em;
   font-weight: bold;
   background-blend-mode: difference;
 }
@@ -680,7 +680,7 @@
 .App #cust .dashboard h1 {
   padding-bottom: 8px;
   font-weight: bold;
-  font-size: 4em;
+  font-size: 3em;
   color: #1e222f;
 }
 

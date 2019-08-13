@@ -58,7 +58,7 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
   const newTempJob = new Temp({
     custID: req.query.custID,
     manufacturer: req.body.brand,
-    modelNo: req.body.brand,
+    modelNo: req.body.model,
     serialNo: req.body.serialNo,
     faultDesc: req.body.faultDesc,
     itemDesc: req.body.itemDesc,
@@ -68,6 +68,33 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
 });
 
 //route for getting order history
+
+router.get("/history2", (req, res) => {
+  Job.find(
+    {
+      $and: [
+        {
+          $or: [{ jobStatus: "Complete" }, { jobStatus: "Return Not Repair" }]
+        },
+        { custID: parseInt(req.query.custID) }
+      ]
+    },
+    (err, docs) => {
+      if (err) {
+        console.log(err);
+      } else {
+        let dataToShoot = [];
+        docs.map(e => {
+          dataToShoot.push(Object.values(e.toObject()));
+        });
+
+        res.json(dataToShoot);
+      }
+    }
+  ).select(
+    "custId manufacturer modelNo serialNo itemDesc jobStatus jobid -_id"
+  );
+});
 
 router.get("/history", (req, res) => {
   Job.find(
@@ -83,12 +110,7 @@ router.get("/history", (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        let dataToSend = [];
-        docs.map(e => {
-          dataToSend.push(Object.values(e.toObject()));
-        });
-
-        res.json(dataToSend);
+        res.json(docs);
       }
     }
   ).select(
@@ -97,21 +119,46 @@ router.get("/history", (req, res) => {
 });
 
 //get pending jobs
-router.get("/pending-jobs", (req, res) => {
+router.get("/pending-jobs2", (req, res) => {
   Temp.find({}, (err, docs) => {
     if (err) {
       console.log(err);
     } else {
       let dataToSend = [];
+      let options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric"
+      };
       docs.map(e => {
-        dataToSend.push(Object.values(e.toObject()));
+        let newObj = e.toObject();
+        newObj.dateOfEnquiry = newObj.dateOfEnquiry.toLocaleString(
+          "en-US",
+          options
+        );
+        dataToSend.push(Object.values(newObj));
       });
-      dataToSend = dataToSend.map(e => {
+      let dataToSend2 = dataToSend.map(e => {
         let ele = e.pop();
         e.unshift(ele);
         return e;
       });
-      res.json(dataToSend);
+      res.json(dataToSend2);
+    }
+  }).select(
+    "enquiryId manufacturer modelNo serialNo faultDesc itemDesc jobClass dateOfEnquiry -_id"
+  );
+});
+
+router.get("/pending-jobs", (req, res) => {
+  Temp.find({}, (err, docs) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(docs);
+      res.json(docs);
     }
   }).select(
     "enquiryId manufacturer modelNo serialNo faultDesc itemDesc jobClass dateOfEnquiry -_id"
@@ -163,7 +210,7 @@ router.post("/set-pickup", (req, res) => {
 
     const mailOptions = {
       from: "andregoh1996@gmail.com",
-      to: "andreweijie@outlook.com",
+      to: "andregoh1996@gmail.com",
       subject: "Confirm Pick Up",
       html: test2
     };

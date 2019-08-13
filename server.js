@@ -15,7 +15,9 @@ app.use(
     extended: false
   })
 );
-
+app.get("/app2/fuck", (req, res) => {
+  res.send("WORKS");
+});
 app.use("/api", authRoutes);
 app.use("/cust", custRoutes);
 app.use("/admin", adminRoutes);
@@ -28,4 +30,4 @@ mongoose
   .then(() => console.log("MongoDB successfully connected"))
   .catch(err => console.log(err));
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(port, "localhost");
