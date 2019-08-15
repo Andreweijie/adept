@@ -27,7 +27,7 @@ class Register extends Component {
   onSubmit = e => {
     e.preventDefault();
     let dataToSubmit = new FormData(this.formRef.current);
-    fetch("/cust/enquiry?custID=" + this.state.custID, {
+    fetch("/backend/cust/enquiry?custID=" + this.state.custID, {
       method: "POST",
       body: dataToSubmit
     })

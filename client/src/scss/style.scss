@@ -260,7 +260,6 @@
           padding-right: 0.8em;
           margin-bottom: 1em;
         }
-
         .form-box {
           margin-top: 0;
           display: flex;
@@ -633,8 +632,8 @@ table {
   }
 }
 
-#set-date {
-  align-self: flex-end;
+#set-date,
+.cfm {
   font-weight: bold;
   padding: 8px;
   border: none;
@@ -644,6 +643,10 @@ table {
   border-radius: 0.3em;
   transition: 0.5s;
   width: 100px;
+}
+
+.cfm {
+  background-color: #34eb89;
 }
 .form-control {
   margin-top: 8px;

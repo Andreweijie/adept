@@ -18,9 +18,9 @@ app.use(
 app.get("/app2/fuck", (req, res) => {
   res.send("WORKS");
 });
-app.use("/api", authRoutes);
-app.use("/cust", custRoutes);
-app.use("/admin", adminRoutes);
+app.use("/backend/api", authRoutes);
+app.use("/backend/cust", custRoutes);
+app.use("/backend/admin", adminRoutes);
 
 mongoose
   .connect(

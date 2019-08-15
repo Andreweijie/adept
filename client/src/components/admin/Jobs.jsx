@@ -8,7 +8,7 @@ export default class Jobs extends Component {
     loading: true
   };
   componentDidMount() {
-    fetch("/admin/all-jobs")
+    fetch("/backend/admin/all-jobs")
       .then(res => res.json())
       .then(data => {
         this.setState({

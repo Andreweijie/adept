@@ -31,7 +31,7 @@ export default class ADashboard extends Component {
   };
 
   postNewData = (newData, endpoint, msg, update) => {
-    fetch(`http://localhost:5000/admin/${endpoint}`, {
+    fetch(`http://localhost:5000/backend/admin/${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +85,7 @@ export default class ADashboard extends Component {
   };
 
   getPickups = () => {
-    fetch("/admin/pickups")
+    fetch("/backend/admin/pickups")
       .then(res => res.json())
       .then(data => {
         if (data.length != 0) {

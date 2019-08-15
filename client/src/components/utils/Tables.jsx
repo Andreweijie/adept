@@ -5,13 +5,18 @@ const Tables = props => {
   return (
     <div className="all-box">
       <table className="table">
+        <th>Confirm</th>
         {props.headers.map(header => {
           return <th>{header}</th>;
         })}
         {props.body
           ? props.body.map(item => {
               return (
-                <JobItem data={Object.values(item)} custID={props.custID} />
+                <JobItem
+                  pickups={true}
+                  data={Object.values(item)}
+                  custID={props.custID}
+                />
               );
             })
           : null}

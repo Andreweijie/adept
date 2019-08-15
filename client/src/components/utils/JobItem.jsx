@@ -27,7 +27,7 @@ export default class JobItem extends Component {
       date: this.state.selectedDay
     };
 
-    fetch("/cust/set-pickup", {
+    fetch("/backend/cust/set-pickup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -75,6 +75,10 @@ export default class JobItem extends Component {
                 Set Pickup
               </button>
             )}
+          </td>
+        ) : this.props.pickups ? (
+          <td>
+            <button className="cfm">CONFIRM</button>
           </td>
         ) : null}
 

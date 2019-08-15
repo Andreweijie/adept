@@ -29,7 +29,7 @@ class Login extends Component {
       password: this.state.password,
       accountType: "customer"
     };
-    fetch("http://localhost:5000/api/login", {
+    fetch("http://localhost:5000/backend/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
