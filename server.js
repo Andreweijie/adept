@@ -15,9 +15,7 @@ app.use(
     extended: false
   })
 );
-app.get("/app2/fuck", (req, res) => {
-  res.send("WORKS");
-});
+
 app.use("/backend/api", authRoutes);
 app.use("/backend/cust", custRoutes);
 app.use("/backend/admin", adminRoutes);

@@ -15,9 +15,9 @@ export default class Admin extends Component {
           path={`${this.props.match.url}/dashboard`}
           component={ADashboard}
         />
-        <Route path="/admin/all-jobs" component={Jobs} />
-        <Route path="/admin/create" component={Create} />
-        <Route path="/admin/customers" component={Customers} />
+        <Route exact path="/admin/all-jobs" component={Jobs} />
+        <Route exact path="/admin/create" component={Create} />
+        <Route exact path="/admin/customers" component={Customers} />
       </div>
     );
   }

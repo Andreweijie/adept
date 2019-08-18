@@ -22,7 +22,7 @@ class ALogin extends Component {
       password: this.state.password,
       accountType: "admin"
     };
-    fetch("http://localhost:5000/api/login", {
+    fetch("https://andreweijie.tech/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

@@ -3,7 +3,7 @@ import decode from "jwt-decode";
 import AuthUtils from "./AuthUtils";
 
 export default function withAuth(AuthComponent) {
-  const Auth = new AuthUtils("http://localhost:5000");
+  const Auth = new AuthUtils();
   return class AuthWrapped extends Component {
     constructor() {
       super();

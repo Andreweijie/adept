@@ -33,7 +33,7 @@ class ChangePassword extends Component {
     } else {
       newPassword.otp = this.state.otp;
     }
-    fetch("http://localhost:5000/backend/api/change-password", {
+    fetch("https://andreweijie.tech/backend/api/change-password", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

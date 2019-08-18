@@ -17,7 +17,7 @@ class Reset extends Component {
     const userData = {
       email: this.state.email
     };
-    fetch("http://localhost:5000/backend/api/forget?email=" + userData.email)
+    fetch("https://andreweijie.tech/backend/api/forget?email=" + userData.email)
       .then(response => response.json())
       .then(data => {
         console.log(data);

@@ -7,7 +7,7 @@ export default class Customers extends Component {
     body: []
   };
   componentDidMount() {
-    fetch("/backend/admin/customers")
+    fetch("https://andreweijie.tech/backend/admin/customers")
       .then(res => res.json())
       .then(data => {
         if (data.length != 0) {
