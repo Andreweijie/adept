@@ -34,7 +34,7 @@ export default class Dashboard extends Component {
   }
 
   componentDidMount() {
-    fetch("https://andreweijie.tech/backend/cust/pending-jobs")
+    fetch("/backend/cust/pending-jobs")
       .then(res => res.json())
       .then(data => {
         if (data.length != 0) {
@@ -45,10 +45,7 @@ export default class Dashboard extends Component {
         }
       });
 
-    fetch(
-      "https://andreweijie.tech/backend/cust/active-jobs?custID=" +
-        this.state.custID
-    )
+    fetch("/backend/cust/active-jobs?custID=" + this.state.custID)
       .then(res => res.json())
       .then(data => {
         if (data.length != 0) {

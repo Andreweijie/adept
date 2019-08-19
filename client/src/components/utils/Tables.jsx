@@ -5,7 +5,6 @@ const Tables = props => {
   return (
     <div className="all-box">
       <table className="table">
-        <th>Confirm</th>
         {props.headers.map(header => {
           return <th>{header}</th>;
         })}

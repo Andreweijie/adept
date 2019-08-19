@@ -20,7 +20,7 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: "andregoh1996@gmail.com",
-    pass: "chaostar123"
+    pass: "Chaostar@1"
   }
 });
 
@@ -206,11 +206,13 @@ router.post("/set-pickup", (req, res) => {
     console.log(req.body);
     const test2 = `<h1>Please confirm pick up for ${
       req.body.jobid
-    } on</h1><h2>${dateToSend}</h2>`;
+    } on</h1><h2>${dateToSend}</h2><h5>http://localhost:5000/backend/admin/confirm-pickup?jobid=${
+      req.body.jobid
+    }`;
 
     const mailOptions = {
       from: "andregoh1996@gmail.com",
-      to: "andregoh1996@gmail.com",
+      to: "andreweijie@outlook.com",
       subject: "Confirm Pick Up",
       html: test2
     };

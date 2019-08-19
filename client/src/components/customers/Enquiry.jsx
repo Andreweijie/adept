@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import decode from "jwt-decode";
-import { Button } from "@material-ui/core";
 
 class Register extends Component {
   constructor() {
@@ -27,14 +26,10 @@ class Register extends Component {
   onSubmit = e => {
     e.preventDefault();
     let dataToSubmit = new FormData(this.formRef.current);
-    fetch(
-      "https://andreweijie.tech/backend/cust/enquiry?custID=" +
-        this.state.custID,
-      {
-        method: "POST",
-        body: dataToSubmit
-      }
-    )
+    fetch("/backend/cust/enquiry?custID=" + this.state.custID, {
+      method: "POST",
+      body: dataToSubmit
+    })
       .then(res => res.json())
       .then(data => console.log(data));
   };
@@ -107,10 +102,8 @@ class Register extends Component {
                 type="file"
                 name="productImage"
               />
-              <label htmlFor="raised-button-file">
-                <Button variant="raised" component="span">
-                  Upload Images
-                </Button>
+              <label id="upload-text" htmlFor="raised-button-file">
+                UPLOAD
               </label>
               <div className="urgency">
                 <input

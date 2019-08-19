@@ -76,10 +76,6 @@ export default class JobItem extends Component {
               </button>
             )}
           </td>
-        ) : this.props.pickups ? (
-          <td>
-            <button className="cfm">CONFIRM</button>
-          </td>
         ) : null}
 
         {this.props.data.map((fields, index) => {

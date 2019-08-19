@@ -16,10 +16,7 @@ export default class History extends Component {
     custID: decode(localStorage.getItem("adeptcust_token")).user.custID
   };
   componentDidMount() {
-    fetch(
-      "https://andreweijie.tech/backend/cust/history?custID=" +
-        this.state.custID
-    )
+    fetch("/backend/cust/history?custID=" + this.state.custID)
       .then(res => res.json())
       .then(data => {
         if (data.length != 0) {

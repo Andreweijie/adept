@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: "andregoh1996@gmail.com",
-    pass: "chaostar123"
+    pass: "Chaostar@1"
   }
 });
 
@@ -180,16 +180,29 @@ router.get("/customers", (req, res) => {
 });
 
 router.get("/confirm-pickup", (req, res) => {
-  Pickup.updateOne(
+  Pickup.findOneAndUpdate(
     { jobid: req.query.jobid },
     { confirmed: true },
+    { new: true },
     (err, doc) => {
       if (err) {
         console.log(err);
         res.json(err);
+      } else {
+        const mailOptions = {
+          from: "andregoh1996@gmail.com",
+          to: "andreweijie@outlook.com",
+          subject: `[UPDATE] Job ${req.query.jobid}`,
+          html: "<h1>Pickup Confirmed</h1>"
+        };
+        transporter.sendMail(mailOptions, (err, info) => {
+          if (err) console.log(err);
+          else console.log("sent");
+        });
+        res.json(doc);
       }
-      res.json({ message: success });
     }
   );
 });
+
 module.exports = router;
