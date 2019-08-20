@@ -32,7 +32,7 @@
     "eject": "react-scripts eject",
     "scss": "node-sass --watch src/scss -o src/css"
   },
-  "proxy": "http://127.0.0.1:5000",
+  "proxy": "http://localhost:5000",
   "browserslist": [
     ">0.2%",
     "not dead",

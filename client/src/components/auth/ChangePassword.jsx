@@ -5,6 +5,7 @@ class ChangePassword extends Component {
   constructor() {
     super();
     this.state = {
+      email: "",
       otp: "",
       password: "",
       password2: "",
@@ -22,24 +23,33 @@ class ChangePassword extends Component {
   };
   onSubmit = e => {
     e.preventDefault();
-    const newPassword = {
+    let newPassword = {
+      email: this.state.email,
       password: this.state.password,
-      password2: this.state.password2
+      password2: this.state.password2,
+      custID: undefined
     };
     if (this.state.custOrNot) {
-      newPassword.custID = decode(
-        localStorage.getItem("adeptcust_token").user.custID
-      );
+      newPassword.custID = true;
     } else {
       newPassword.otp = this.state.otp;
     }
-    fetch("https://andreweijie.tech/backend/api/change-password", {
+    fetch("http://localhost:5000/backend/api/change-password", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(newPassword)
-    }).then(response => console.log(response));
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (this.state.custOrNot) {
+          localStorage.removeItem("adeptcust_token");
+          this.props.history.replace("/customer/login");
+        } else {
+          this.props.history.replace("/customer/login");
+        }
+      });
   };
 
   render() {

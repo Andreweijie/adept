@@ -13,10 +13,6 @@ module.exports = ValidatePasswordInput = userInput => {
     ? userInput.password2
     : "";
 
-  //check otp
-  if (Validator.isEmpty(userInput.otp)) {
-    errors.otp = "otp field is required";
-  }
   //check email
   if (Validator.isEmpty(userInput.email)) {
     errors.email = "Email field is required";

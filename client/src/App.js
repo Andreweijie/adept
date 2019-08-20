@@ -18,7 +18,7 @@ class App extends Component {
     loggedIn: auth.loggedIn()
   };
   componentDidMount() {
-    //console.log(decode(localStorage.getItem("adeptcust_token")));
+    //console.log(decode(localStorage.getItem("adeptcust_token")).user.custID);
   }
   handleStatus = trueOrFalse => {
     console.log("changing");

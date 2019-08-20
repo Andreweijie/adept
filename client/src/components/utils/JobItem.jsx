@@ -27,7 +27,7 @@ export default class JobItem extends Component {
       date: this.state.selectedDay
     };
 
-    fetch("/backend/cust/set-pickup", {
+    fetch("https://andreweijie.tech/backend/cust/set-pickup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
