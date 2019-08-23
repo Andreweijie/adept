@@ -3,16 +3,34 @@ import JobItem from "../utils/JobItem";
 
 export default class Jobs extends Component {
   state = {
-    headers: [],
+    headers: [
+      "Manufacturer",
+      "Model No",
+      "Serial No",
+      "Fault Desc",
+      "Job Status",
+      "Job ID",
+      "Entry Date",
+      "Job Class",
+      "Job Type",
+      "Item Desc",
+      "Closed Date",
+      "Quote Amt",
+      "Finished By",
+      "Quote By",
+      "Location",
+      "Profit",
+      "Salesperson",
+      "Customer ID"
+    ],
     body: [],
     loading: true
   };
   componentDidMount() {
-    fetch("https://andreweijie.tech/backend/admin/all-jobs")
+    fetch("http://localhost:5000/backend/admin/all-jobs")
       .then(res => res.json())
       .then(data => {
         this.setState({
-          headers: Object.keys(data[0]),
           body: data.splice(1)
         });
       });

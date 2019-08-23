@@ -1,0 +1,46 @@
+<mjml>
+  <mj-head>
+    <mj-title>MJTEST</mj-title>
+  </mj-head>
+  <mj-body>
+    <mj-section>
+
+    </mj-section>
+    <mj-section>
+
+    </mj-section>
+    <mj-section background-color="#f1f3f7">
+      <mj-column width="300px">
+        <mj-image src="https://i.imgur.com/w5Fv9z2.png" alt="adept_logo" width="180px" />
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#fff">
+      <mj-column width="600px">
+        <mj-text align="left" font-size="20px" font-weight="bold">
+          NEW ENQUIRY:
+        </mj-text>
+        <mj-text align="left" font-size="20px">
+          To reset your account's password please provide the OTP below on the change password page.
+        </mj-text>
+        <mj-text align="left" font-size="20px">
+          Click on the link below the OTP to change your password.
+        </mj-text>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#4a14ff">
+      <mj-column width="300px">
+        <mj-text font-size="36px" color="#f1f3f7" align="center" font-weight="bold">
+          OTP TOKEN
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#f1f3f7">
+      <mj-column width="300px">
+        <mj-button font-size="24px" background-color="#4a14ff" href="https://app.andreweijie.tech/change-password">
+          RESET
+        </mj-button>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

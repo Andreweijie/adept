@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: "andregoh1996@gmail.com",
-    pass: "chaostar123"
+    pass: "Chaostar@1"
   }
 });
 //Register Route
@@ -170,7 +170,13 @@ router.post("/login", (req, res) => {
       if (!user) {
         return res.status(404).json({
           errors: {
-            email: "E-mail not found."
+            message: "E-mail not found."
+          }
+        });
+      } else if (!user.isVerified) {
+        return res.status(404).json({
+          errors: {
+            message: "Account not verified"
           }
         });
       }

@@ -26,14 +26,10 @@ class Register extends Component {
   onSubmit = e => {
     e.preventDefault();
     let dataToSubmit = new FormData(this.formRef.current);
-    fetch(
-      "https://andreweijie.tech/backend/cust/enquiry?custID=" +
-        this.state.custID,
-      {
-        method: "POST",
-        body: dataToSubmit
-      }
-    )
+    fetch("/backend/cust/enquiry?custID=" + this.state.custID, {
+      method: "POST",
+      body: dataToSubmit
+    })
       .then(res => res.json())
       .then(data => console.log(data));
   };

@@ -3,7 +3,15 @@ import JobItem from "../utils/JobItem";
 
 export default class Customers extends Component {
   state = {
-    headers: [],
+    headers: [
+      "Name",
+      "Company",
+      "Address",
+      "Mobile Number",
+      "Country",
+      "Tel Number",
+      "Fax Number"
+    ],
     body: []
   };
   componentDidMount() {
@@ -13,7 +21,6 @@ export default class Customers extends Component {
         if (data.length != 0) {
           console.log(data);
           this.setState({
-            headers: Object.keys(data[0]),
             body: data.splice(1)
           });
         }

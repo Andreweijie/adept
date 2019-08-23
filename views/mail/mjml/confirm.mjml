@@ -1,0 +1,38 @@
+<mjml>
+  <mj-head>
+    <mj-title>MJTEST</mj-title>
+  </mj-head>
+  <mj-body>
+    <mj-section>
+
+    </mj-section>
+    <mj-section>
+
+    </mj-section>
+    <mj-section background-color="#f1f3f7">
+      <mj-column width="300px">
+        <mj-image src="https://i.imgur.com/w5Fv9z2.png" alt="adept_logo" width="180px" padding-right="10px" />
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#fff">
+      <mj-column width="600px">
+        <mj-text align="left" font-size="20px">
+          Dear Customer,
+        </mj-text>
+        <mj-text align="left" font-size="20px">
+          Thank you for registering with Adept Electronics.
+        </mj-text>
+        <mj-text align="left" font-size="20px">
+          Please click on the button below to confirm and activate your account.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#f1f3f7">
+      <mj-column width="300px">
+        <mj-button font-size="24px" background-color="#4a14ff">
+          CONFIRM
+        </mj-button>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

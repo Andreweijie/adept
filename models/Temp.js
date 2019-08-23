@@ -37,10 +37,6 @@ const TempSchema = new Schema({
     type: String,
     default: ""
   },
-  id: {
-    type: String,
-    default: ""
-  },
   jobName: {
     type: String,
     default: ""

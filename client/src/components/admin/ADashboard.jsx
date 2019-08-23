@@ -31,7 +31,7 @@ export default class ADashboard extends Component {
   };
 
   postNewData = (newData, endpoint, msg, update) => {
-    fetch(`https://andreweijie.tech/backend/admin/${endpoint}`, {
+    fetch(`http://localhost:5000/backend/admin/${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

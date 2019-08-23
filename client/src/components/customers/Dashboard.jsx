@@ -13,8 +13,8 @@ export default class Dashboard extends Component {
         "Model No",
         "Serial No",
         "Fault Symptoms",
-        "Item Description",
         "Job Class",
+        "Item Desc",
         "Date Of Enquiry"
       ],
       pendingBody: [],
@@ -22,10 +22,10 @@ export default class Dashboard extends Component {
         "Manufacturer",
         "Model No",
         "Serial No",
-        "Fault Description",
+        "Fault Desc",
         "Job Status",
         "Job ID",
-        "Item Description",
+        "Item Desc",
         "Quote Amt"
       ],
       activeBody: [],
@@ -105,7 +105,7 @@ export default class Dashboard extends Component {
             <hr />
             <div className="all-box">
               <table className="table">
-                <th>Pickup Date</th>
+                <th>Pickup</th>
                 {this.state.activeHeaders.map(header => {
                   return <th>{header}</th>;
                 })}

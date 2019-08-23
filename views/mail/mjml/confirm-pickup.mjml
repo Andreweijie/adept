@@ -1,0 +1,58 @@
+<mjml>
+  <mj-head>
+    <mj-title>MJTEST</mj-title>
+  </mj-head>
+  <mj-body>
+    <mj-section>
+
+    </mj-section>
+    <mj-section>
+
+    </mj-section>
+    <mj-section background-color="#f1f3f7">
+      <mj-column width="300px">
+        <mj-image src="https://i.imgur.com/w5Fv9z2.png" alt="adept_logo" width="180px" />
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#fff">
+      <mj-column width="600px">
+        <mj-text align="left" font-size="20px" font-weight="bold">
+          Dear Sales,
+        </mj-text>
+        <mj-text align="left" font-size="20px">
+          Please confirm pickup:
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#fff">
+      <mj-column width="300px">
+        <mj-text align="center" font-size="20px">
+          JOB ID
+        </mj-text>
+        <mj-text align="center" font-size="20px">
+          DATE
+        </mj-text>
+      </mj-column>
+      <mj-column width="300px">
+        <mj-text align="center" font-size="20px" font-weight="bold">
+          J20019
+        </mj-text>
+        <mj-text align="center" font-size="20px" font-weight="bold">
+          17/09/2019
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#f1f3f7">
+      <mj-column width="300px">
+        <mj-button font-size="24px" background-color="#3ed782" href="https://app.andreweijie.tech/change-password">
+          CONFIRM
+        </mj-button>
+      </mj-column>
+      <mj-column width="300px">
+        <mj-button font-size="24px" background-color="#f52a57" href="https://app.andreweijie.tech/change-password">
+          REJECT
+        </mj-button>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

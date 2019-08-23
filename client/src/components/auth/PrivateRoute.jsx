@@ -1,6 +1,8 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { isLogin } from "../utils";
+import AuthUtils from "./AuthUtils";
+
+const Auth = new AuthUtils();
 
 const PrivateRoute = ({ component: Component, accountType, ...rest }) => {
   return (
@@ -9,7 +11,7 @@ const PrivateRoute = ({ component: Component, accountType, ...rest }) => {
     <Route
       {...rest}
       render={props =>
-        isLogin() ? (
+        Auth.loggedIn() ? (
           <Component {...props} />
         ) : accountType == "admin" ? (
           <Redirect to="/admin/login" />

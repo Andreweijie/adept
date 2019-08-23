@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import ASideBar from "./ASideBar";
 import ADashboard from "./ADashboard";
 import Jobs from "./Jobs";
@@ -14,6 +14,13 @@ export default class Admin extends Component {
         <Route
           path={`${this.props.match.url}/dashboard`}
           component={ADashboard}
+        />
+        <Route
+          exact
+          path="/admin"
+          render={() => {
+            return <Redirect to="/admin/dashboard" />;
+          }}
         />
         <Route exact path="/admin/all-jobs" component={Jobs} />
         <Route exact path="/admin/create" component={Create} />

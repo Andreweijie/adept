@@ -156,7 +156,7 @@
                 padding: 8px;
                 border: none;
                 height: 2.5em;
-                background-color: #ff3366;
+                background-color: #f52a57;
                 color: white;
                 border-radius: 0.2em;
                 transition: 0.5s;
@@ -271,7 +271,7 @@
           width: 100%;
           input {
             border: none;
-            background-color: #f2f2f2;
+            background-color: #f1f3f7;
             border-radius: 0.2em;
             width: 100%;
             height: 2.5em;
@@ -327,7 +327,7 @@
 
             input {
               border: none;
-              background-color: #f2f2f2;
+              background-color: #f1f3f7;
               border-radius: 0.2em;
               width: 100%;
               height: 2.5em;
@@ -507,7 +507,7 @@
       width: 100%;
       input {
         border: none;
-        background-color: #f2f2f2;
+        background-color: #f1f3f7;
         border-radius: 0.2em;
         width: 100%;
         height: 2.5em;
@@ -601,6 +601,7 @@ th {
   z-index: 10;
   background-color: white;
   border-top: none !important;
+  font-size: 1.3em;
 }
 table {
   margin-top: 10px;
@@ -658,7 +659,7 @@ table {
 input {
   border: none;
   border-radius: 0.3em;
-  background-color: #f2f2f2;
+  background-color: #f1f3f7;
 }
 
 .all-box::-webkit-scrollbar,
@@ -749,7 +750,7 @@ input {
         textarea {
           height: 6em;
           border: none;
-          background-color: #f2f2f2;
+          background-color: #f1f3f7;
           border-radius: 0.3em;
         }
       }
