@@ -280,12 +280,8 @@ router.post("/change-status", (req, res) => {
 <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 15px; padding-top: 20px; padding-bottom: 0px; font-family: Tahoma, Verdana, sans-serif"><![endif]-->
 <div style="color:#FFFFFF;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;line-height:150%;padding-top:20px;padding-right:10px;padding-bottom:0px;padding-left:15px;">
 <div style="font-size: 12px; line-height: 18px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; color: #FFFFFF;">
-<p style="font-size: 14px; line-height: 75px; text-align: center; margin: 0;"><span style="font-size: 50px;"><strong><span style="line-height: 75px; font-size: 50px;"><span style="font-size: 38px; line-height: 57px;">${
-    req.body.jobId
-  }</span></span></strong></span></p>
-<p style="font-size: 14px; line-height: 51px; text-align: center; margin: 0;"><span style="font-size: 34px; color: #ffffff;"><strong><span style="line-height: 51px; font-size: 34px;"><span style="line-height: 51px; font-size: 34px;">${
-    req.body.status
-  }</span></span></strong></span></p>
+<p style="font-size: 14px; line-height: 75px; text-align: center; margin: 0;"><span style="font-size: 50px;"><strong><span style="line-height: 75px; font-size: 50px;"><span style="font-size: 38px; line-height: 57px;">${req.body.jobId}</span></span></strong></span></p>
+<p style="font-size: 14px; line-height: 51px; text-align: center; margin: 0;"><span style="font-size: 34px; color: #ffffff;"><strong><span style="line-height: 51px; font-size: 34px;"><span style="line-height: 51px; font-size: 34px;">${req.body.status}</span></span></strong></span></p>
 </div>
 </div>
 <!--[if mso]></td></tr></table><![endif]-->
@@ -441,7 +437,7 @@ router.get("/all-jobs", (req, res) => {
 });
 //get pickups
 router.get("/pickups", (req, res) => {
-  Pickup.find({}, (err, docs) => {
+  Pickup.find({ confirmed: true }, (err, docs) => {
     if (err) {
       console.log(err);
     } else {
@@ -498,6 +494,27 @@ router.get("/confirm-pickup", (req, res) => {
       }
     }
   );
+});
+
+router.delete("/reject-pickup", (req, res) => {
+  Pickup.findOneAndDelete({ jobid: req.query.jobid }, (err, doc) => {
+    if (err) {
+      console.log(err);
+      res.json(err);
+    } else {
+      const mailOptions = {
+        from: "andregoh1996@gmail.com",
+        to: "andreweijie@outlook.com",
+        subject: `[UPDATE] Job ${req.query.jobid}`,
+        html: "<h1>Pickup Rejected</h1>"
+      };
+      transporter.sendMail(mailOptions, (err, info) => {
+        if (err) console.log(err);
+        else console.log("sent");
+      });
+      res.json(doc);
+    }
+  });
 });
 
 module.exports = router;

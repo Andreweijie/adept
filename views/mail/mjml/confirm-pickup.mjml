@@ -6,9 +6,6 @@
     <mj-section>
 
     </mj-section>
-    <mj-section>
-
-    </mj-section>
     <mj-section background-color="#f1f3f7">
       <mj-column width="300px">
         <mj-image src="https://i.imgur.com/w5Fv9z2.png" alt="adept_logo" width="180px" />
@@ -52,6 +49,18 @@
         <mj-button font-size="24px" background-color="#f52a57" href="https://app.andreweijie.tech/change-password">
           REJECT
         </mj-button>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#f1f3f7">
+      <mj-column width="300px">
+        <mj-text font-size="16px" color="#1C222D" align="center">
+          Adept Electronics
+        </mj-text>
+        <mj-text font-size="16px" color="#1C222D" align="center">
+          Block 1 Kaki Bukit Avenue 3
+          #10-06
+          Singapore 416087
+        </mj-text>
       </mj-column>
     </mj-section>
   </mj-body>

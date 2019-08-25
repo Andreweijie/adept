@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
+import decode from "jwt-decode";
 import AuthUtils from "../auth/AuthUtils";
 
 class SideBar extends Component {
+  state = {
+    name: decode(localStorage.getItem("adeptcust_token")).user.name
+  };
   auth = new AuthUtils();
   logOut = () => {
     this.auth.logout();
@@ -17,7 +21,7 @@ class SideBar extends Component {
 
           <span className="role">
             <span>
-              Jonathan | <b>Sales</b>
+              <b>{this.state.name}</b>
             </span>
           </span>
         </div>

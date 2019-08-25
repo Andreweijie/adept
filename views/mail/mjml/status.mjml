@@ -28,10 +28,22 @@
         </mj-text>
       </mj-column>
     </mj-section>
+    <mj-section background-color="#4a14ff">
+      <mj-column width="300px">
+        <mj-text font-size="36px" color="#FFF" align="center" font-weight="bold">
+          AWAITING
+        </mj-text>
+      </mj-column>
+    </mj-section>
     <mj-section background-color="#f1f3f7">
       <mj-column width="300px">
-        <mj-text font-size="36px" color="#4a14ff" align="center" font-weight="bold">
-          AWAITING
+        <mj-text font-size="16px" color="#1C222D" align="center">
+          Adept Electronics
+        </mj-text>
+        <mj-text font-size="16px" color="#1C222D" align="center">
+          Block 1 Kaki Bukit Avenue 3
+          #10-06
+          Singapore 416087
         </mj-text>
       </mj-column>
     </mj-section>

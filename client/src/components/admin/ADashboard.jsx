@@ -85,7 +85,7 @@ export default class ADashboard extends Component {
   };
 
   getPickups = () => {
-    fetch("https://andreweijie.tech/backend/admin/pickups")
+    fetch("/backend/admin/pickups")
       .then(res => res.json())
       .then(data => {
         if (data.length != 0) {
