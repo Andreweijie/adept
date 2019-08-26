@@ -17,7 +17,7 @@ export default class History extends Component {
   };
   componentDidMount() {
     fetch(
-      "https://andreweijie.tech/backend/cust/history2?custID=" +
+      "https://andreweijie.tech/backend/cust/history?custID=" +
         this.state.custID
     )
       .then(res => res.json())

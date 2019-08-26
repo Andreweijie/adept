@@ -15,52 +15,58 @@
     <mj-section background-color="#fff">
       <mj-column width="600px">
         <mj-text align="left" font-size="20px" font-weight="bold">
-          NEW ENQUIRY:
+          Dear Customer,
         </mj-text>
-        <mj-text align="left" font-size="20px" font-weight="bold">
-          By : test@123.com
+        <mj-text align="left" font-size="20px">
+          The following job has been confirmed:
         </mj-text>
       </mj-column>
     </mj-section>
     <mj-section background-color="#fff">
       <mj-column width="300px">
-        <mj-text align="center" font-size="20px">
-          Enquiry ID
+        <mj-text padding-left="64px" align="left" font-size="20px">
+          Job ID
         </mj-text>
-        <mj-text align="center" font-size="20px">
+        <mj-text padding-left="64px" align="left" font-size="20px">
           Item Description
         </mj-text>
-        <mj-text align="center" font-size="20px">
+        <mj-text padding-left="64px" align="left" font-size="20px">
           Manufacturer
         </mj-text>
-        <mj-text align="center" font-size="20px">
+        <mj-text padding-left="64px" align="left" font-size="20px">
           Model Number
         </mj-text>
-        <mj-text align="center" font-size="20px">
+        <mj-text padding-left="64px" align="left" font-size="20px">
           Serial Number
         </mj-text>
-        <mj-text align="center" font-size="20px">
+        <mj-text padding-left="64px" align="left" font-size="20px">
           Fault Description
+        </mj-text>
+        <mj-text padding-left="64px" align="left" font-size="20px">
+          Quotation
         </mj-text>
       </mj-column>
       <mj-column width="300px">
-        <mj-text align="center" font-size="20px" font-weight="bold">
+        <mj-text padding-left="64px" align="left" font-size="20px" font-weight="bold">
           J20019
         </mj-text>
-        <mj-text align="center" font-size="20px" font-weight="bold">
+        <mj-text padding-left="64px" align="left" font-size="20px" font-weight="bold">
           17/09/2019
         </mj-text>
-        <mj-text align="center" font-size="20px" font-weight="bold">
+        <mj-text padding-left="64px" align="left" font-size="20px" font-weight="bold">
           17/09/2019
         </mj-text>
-        <mj-text align="center" font-size="20px" font-weight="bold">
+        <mj-text padding-left="64px" align="left" font-size="20px" font-weight="bold">
           17/09/2019
         </mj-text>
-        <mj-text align="center" font-size="20px" font-weight="bold">
+        <mj-text padding-left="64px" align="left" font-size="20px" font-weight="bold">
           17/09/2019
         </mj-text>
-        <mj-text align="center" font-size="20px" font-weight="bold">
+        <mj-text padding-left="64px" align="left" font-size="20px" font-weight="bold">
           17/09/2019
+        </mj-text>
+        <mj-text padding-left="64px" align="left" font-size="20px" font-weight="bold">
+          $1000
         </mj-text>
       </mj-column>
     </mj-section>

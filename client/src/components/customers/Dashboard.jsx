@@ -34,7 +34,7 @@ export default class Dashboard extends Component {
   }
 
   componentDidMount() {
-    fetch("https://andreweijie.tech/backend/cust/pending2-jobs")
+    fetch("https://andreweijie.tech/backend/cust/pending-jobs")
       .then(res => res.json())
       .then(data => {
         if (data.length != 0) {

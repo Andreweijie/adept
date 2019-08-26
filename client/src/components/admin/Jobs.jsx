@@ -27,7 +27,7 @@ export default class Jobs extends Component {
     loading: true
   };
   componentDidMount() {
-    fetch("http://localhost:5000/backend/admin/all-jobs")
+    fetch("https://andreweijie.tech/backend/admin/all-jobs")
       .then(res => res.json())
       .then(data => {
         this.setState({
