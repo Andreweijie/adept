@@ -707,11 +707,11 @@
 }
 
 .App #cust .dashboard .dash-content .pending-jobs {
-  height: 30%;
+  height: 35%;
 }
 
 .App #cust .dashboard .dash-content .active-jobs {
-  height: 65%;
+  height: 60%;
 }
 
 .App #cust .dashboard .dash-content .pending-jobs,
