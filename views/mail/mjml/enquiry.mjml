@@ -17,12 +17,23 @@
         <mj-text align="left" font-size="20px" font-weight="bold">
           NEW ENQUIRY:
         </mj-text>
-        <mj-text align="left" font-size="20px">
-          To reset your account's password please provide the OTP below on the change password page.
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#fff">
+      <mj-column width="300px">
+        <mj-text align="center" font-size="20px">
+          JOB ID
         </mj-text>
-        <mj-text align="left" font-size="20px">
-          Click on the link below the OTP to change your password.
+        <mj-text align="center" font-size="20px">
+          DATE
         </mj-text>
+      </mj-column>
+      <mj-column width="300px">
+        <mj-text align="center" font-size="20px" font-weight="bold">
+          J20019
+        </mj-text>
+        <mj-text align="center" font-size="20px" font-weight="bold">
+          17/09/2019
         </mj-text>
       </mj-column>
     </mj-section>

@@ -17,7 +17,7 @@
           Dear Sales,
         </mj-text>
         <mj-text align="left" font-size="20px">
-          Please confirm pickup:
+          Customer has requested pickup, please confirm:
         </mj-text>
       </mj-column>
     </mj-section>
