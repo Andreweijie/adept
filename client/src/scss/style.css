@@ -923,7 +923,7 @@ th {
   z-index: 10;
   background-color: white;
   border-top: none !important;
-  font-size: 1.3em;
+  font-size: 1.25em;
 }
 
 table {
@@ -1247,5 +1247,10 @@ hr {
   height: 64px;
   margin-top: 36px;
   margin-bottom: 24px;
+}
+
+.error {
+  color: #d00a0a;
+  margin-left: 8px;
 }
 /*# sourceMappingURL=style.css.map */

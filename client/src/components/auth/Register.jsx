@@ -44,15 +44,15 @@ class Register extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        console.log("loggedin");
         console.log(data);
+        this.props.history.replace("/customer/login");
       });
   };
   render() {
     return (
       <div className="register-page">
         <div id="back-box">
-          <img src="https://i.imgur.com/UANNif7.png" />
+          <img className="logo" src="https://i.imgur.com/UANNif7.png" />
           <h4>
             <b>Register</b> Below
           </h4>

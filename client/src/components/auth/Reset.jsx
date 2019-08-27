@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { message } from "flwww";
 class Reset extends Component {
   constructor() {
     super();
     this.state = {
-      email: "",
-      errors: {}
+      email: ""
     };
   }
 
@@ -14,66 +13,48 @@ class Reset extends Component {
   };
   onSubmit = e => {
     e.preventDefault();
-    const userData = {
-      email: this.state.email
-    };
-    fetch("https://andreweijie.tech/backend/api/forget?email=" + userData.email)
+    fetch(
+      "https://andreweijie.tech/backend/api/forget?email=" + this.state.email
+    )
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        if (data) {
+          message(
+            "An e-mail has been sent with the instructions to reset your password",
+            "success",
+            6
+          );
+        }
       });
   };
   render() {
-    const { errors } = this.state;
     return (
-      <div className="container">
-        <div style={{ marginTop: "4rem" }} className="row">
-          <div className="col s8 offset-s2">
-            <Link to="/" className="btn-flat waves-effect">
-              <i className="material-icons left">keyboard_backspace</i> Back to
-              home
-            </Link>
-            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-              <h4>
-                <b>Reset</b> below
-              </h4>
-              <p className="grey-text text-darken-1">
-                Don't have an account? <Link to="/register">Register</Link>
-              </p>
-            </div>
-            <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field col s12">
+      <div className="login-page">
+        <div id="back-box">
+          <img className="logo" src="https://i.imgur.com/UANNif7.png" />
+          <p id="welcome">
+            Reset your Adept Account <b>password</b>
+          </p>
+          <div id="login-box">
+            <h4>
+              <b>Reset Below</b>
+            </h4>
+            <form className="form-box" onSubmit={this.onSubmit}>
+              <div className="input-field">
+                <label htmlFor="email">Email</label>
                 <input
+                  required
                   onChange={this.onChange}
                   value={this.state.email}
-                  error={errors.email}
                   id="email"
                   type="email"
                 />
-                <label htmlFor="email">Email</label>
               </div>
-
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <button
-                  style={{
-                    width: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem"
-                  }}
-                  type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
-                  Reset
-                </button>
-              </div>
+              <div />
             </form>
-            <div>
-              <h3>
-                An E-Mail has been sent with the link and code to reset your
-                password!
-              </h3>
-            </div>
+            <button type="submit" onClick={this.onSubmit}>
+              RESET
+            </button>
           </div>
         </div>
       </div>

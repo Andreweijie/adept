@@ -70,7 +70,9 @@ class Login extends Component {
               <div className="input-field">
                 <label htmlFor="email">Email</label>
                 {this.state.errors.email ? (
-                  <label htmlFor="email">E-mail Does not Exist</label>
+                  <label className="error" htmlFor="email">
+                    E-mail Does not Exist
+                  </label>
                 ) : null}
                 <input
                   required
@@ -83,7 +85,9 @@ class Login extends Component {
               <div className="input-field">
                 <label htmlFor="password">Password</label>
                 {this.state.errors.password ? (
-                  <label htmlFor="password">{this.state.errors.password}</label>
+                  <label className="error" htmlFor="password">
+                    {this.state.errors.password}
+                  </label>
                 ) : null}
                 <input
                   required
