@@ -822,6 +822,13 @@
 
 @media only screen and (max-width: 500px) {
   /* For mobile phones: */
+  .change-page #change-box {
+    width: 100%;
+    height: 100%;
+  }
+  .App {
+    height: 100%;
+  }
   .App .login-page #back-box {
     width: 100%;
     margin-top: 0;
@@ -853,6 +860,125 @@
         -ms-flex-align: center;
             align-items: center;
     font-size: 1.5em;
+  }
+  .App #cust {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .App #cust .dashboard {
+    padding: 16px;
+  }
+  .App #cust .dashboard .dash-content .pending-jobs,
+  .App #cust .dashboard .dash-content .active-jobs {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 16px;
+  }
+  .App #cust .side-bar {
+    width: 100%;
+  }
+  .App #cust .side-bar .nav {
+    margin: 0;
+  }
+  .App #admin {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .App #admin #admin-side {
+    width: 100%;
+  }
+  .App #admin #admin-side .nav {
+    margin: 8px;
+  }
+  .App #admin #a-dash {
+    padding: 16px;
+    background-color: #f1f3f7;
+  }
+  .App #admin #a-dash .dash-content .forms {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .App #admin #a-dash .dash-content .forms .confirm-form,
+  .App #admin #a-dash .dash-content .forms .change-form,
+  .App #admin #a-dash .dash-content .forms .link-form {
+    padding: 12px;
+    background-color: white;
+    height: 20vh;
+    width: 100%;
+    border-radius: 0.3em;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-right: 0em;
+    z-index: 1;
+    margin-bottom: 16px;
+  }
+  .App #admin #a-dash .dash-content .forms .confirm-form p,
+  .App #admin #a-dash .dash-content .forms .change-form p,
+  .App #admin #a-dash .dash-content .forms .link-form p {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+  .App #admin #a-dash .dash-content .forms .confirm-form form,
+  .App #admin #a-dash .dash-content .forms .change-form form,
+  .App #admin #a-dash .dash-content .forms .link-form form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+  }
+  .App #admin #a-dash .dash-content .forms .confirm-form form .input-box input,
+  .App #admin #a-dash .dash-content .forms .change-form form .input-box input,
+  .App #admin #a-dash .dash-content .forms .link-form form .input-box input {
+    border: none;
+    background-color: #f1f3f7;
+    border-radius: 0.2em;
+    height: 2.5em;
+    padding: 0.5em;
+    width: 90%;
+  }
+  .App #admin #a-dash .dash-content .forms .confirm-form form .input-box label,
+  .App #admin #a-dash .dash-content .forms .change-form form .input-box label,
+  .App #admin #a-dash .dash-content .forms .link-form form .input-box label {
+    font-weight: bold;
+  }
+  .App #admin #a-dash .dash-content .forms .confirm-form form button,
+  .App #admin #a-dash .dash-content .forms .change-form form button,
+  .App #admin #a-dash .dash-content .forms .link-form form button {
+    -ms-flex-item-align: end;
+        align-self: flex-end;
+    font-weight: bold;
+    padding: 8px;
+    border: none;
+    height: 2.5em;
+    background-color: #f52a57;
+    color: white;
+    border-radius: 0.2em;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    -webkit-box-shadow: 0rem 0.55rem 1rem 0 rgba(255, 51, 102, 0.4);
+            box-shadow: 0rem 0.55rem 1rem 0 rgba(255, 51, 102, 0.4);
+  }
+  .App #admin #a-dash .dash-content .forms .confirm-form form button:hover,
+  .App #admin #a-dash .dash-content .forms .change-form form button:hover,
+  .App #admin #a-dash .dash-content .forms .link-form form button:hover {
+    -webkit-transform: scale(1.05);
+            transform: scale(1.05);
+    -webkit-box-shadow: 0rem 1rem 1rem 0 rgba(255, 51, 102, 0.4);
+            box-shadow: 0rem 1rem 1rem 0 rgba(255, 51, 102, 0.4);
   }
 }
 

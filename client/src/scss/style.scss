@@ -522,7 +522,14 @@
 
 @media only screen and (max-width: 500px) {
   /* For mobile phones: */
+  .change-page {
+    #change-box {
+      width: 100%;
+      height: 100%;
+    }
+  }
   .App {
+    height: 100%;
     .login-page {
       #back-box {
         width: 100%;
@@ -549,6 +556,97 @@
             display: inline-flex;
             align-items: center;
             font-size: 1.5em;
+          }
+        }
+      }
+    }
+    #cust {
+      flex-direction: column;
+      .dashboard {
+        padding: 16px;
+        .dash-content {
+          .pending-jobs,
+          .active-jobs {
+            width: 100%;
+            height: 100%;
+            margin-bottom: 16px;
+          }
+        }
+      }
+      .side-bar {
+        width: 100%;
+        .nav {
+          margin: 0;
+        }
+      }
+    }
+    #admin {
+      flex-direction: column;
+      #admin-side {
+        width: 100%;
+        .nav {
+          margin: 8px;
+        }
+      }
+      #a-dash {
+        padding: 16px;
+        background-color: #f1f3f7;
+        .dash-content {
+          .forms {
+            flex-direction: column;
+            .confirm-form,
+            .change-form,
+            .link-form {
+              padding: 12px;
+              background-color: white;
+              height: 20vh;
+              width: 100%;
+              border-radius: 0.3em;
+              display: flex;
+              flex-direction: column;
+              margin-right: 0em;
+              z-index: 1;
+              margin-bottom: 16px;
+              p {
+                font-size: 32px;
+                font-weight: bold;
+                margin-bottom: 0.5em;
+              }
+              form {
+                display: flex;
+                justify-content: flex-start;
+
+                .input-box {
+                  input {
+                    border: none;
+                    background-color: #f1f3f7;
+                    border-radius: 0.2em;
+                    height: 2.5em;
+                    padding: 0.5em;
+                    width: 90%;
+                  }
+                  label {
+                    font-weight: bold;
+                  }
+                }
+                button {
+                  align-self: flex-end;
+                  font-weight: bold;
+                  padding: 8px;
+                  border: none;
+                  height: 2.5em;
+                  background-color: #f52a57;
+                  color: white;
+                  border-radius: 0.2em;
+                  transition: 0.5s;
+                  box-shadow: 0rem 0.55rem 1rem 0 rgba(255, 51, 102, 0.4);
+                  &:hover {
+                    transform: scale(1.05);
+                    box-shadow: 0rem 1rem 1rem 0 rgba(255, 51, 102, 0.4);
+                  }
+                }
+              }
+            }
           }
         }
       }
