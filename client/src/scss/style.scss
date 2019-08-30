@@ -582,6 +582,7 @@
     }
     #admin {
       flex-direction: column;
+      width: 100%;
       #admin-side {
         width: 100%;
         .nav {
@@ -589,11 +590,17 @@
         }
       }
       #a-dash {
+        width: 100%;
         padding: 16px;
         background-color: #f1f3f7;
         .dash-content {
+          width: 100%;
+          .pickup {
+            width: 100%;
+          }
           .forms {
             flex-direction: column;
+            width: 100%;
             .confirm-form,
             .change-form,
             .link-form {

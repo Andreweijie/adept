@@ -887,6 +887,7 @@
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+    width: 100%;
   }
   .App #admin #admin-side {
     width: 100%;
@@ -895,14 +896,22 @@
     margin: 8px;
   }
   .App #admin #a-dash {
+    width: 100%;
     padding: 16px;
     background-color: #f1f3f7;
+  }
+  .App #admin #a-dash .dash-content {
+    width: 100%;
+  }
+  .App #admin #a-dash .dash-content .pickup {
+    width: 100%;
   }
   .App #admin #a-dash .dash-content .forms {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+    width: 100%;
   }
   .App #admin #a-dash .dash-content .forms .confirm-form,
   .App #admin #a-dash .dash-content .forms .change-form,
