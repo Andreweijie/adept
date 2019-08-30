@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import JobItem from "../utils/JobItem";
 import AuthUtils from "../auth/AuthUtils";
+import config from "../../config";
 import decode from "jwt-decode";
 
 export default class Dashboard extends Component {
@@ -34,7 +35,7 @@ export default class Dashboard extends Component {
   }
 
   componentDidMount() {
-    fetch("https://andreweijie.tech/backend/cust/pending-jobs")
+    fetch(`${config.serverHost}/backend/cust/pending-jobs`)
       .then(res => res.json())
       .then(data => {
         if (data.length != 0) {
@@ -46,8 +47,7 @@ export default class Dashboard extends Component {
       });
 
     fetch(
-      "https://andreweijie.tech/backend/cust/active-jobs?custID=" +
-        this.state.custID
+      `${config.serverHost}/backend/cust/active-jobs?custID=${this.state.custID}`
     )
       .then(res => res.json())
       .then(data => {

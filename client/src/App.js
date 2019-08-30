@@ -9,6 +9,7 @@ import Reset from "./components/auth/Reset";
 import Admin from "./components/admin/Admin";
 import Cust from "./components/customers/Cust";
 import decode from "jwt-decode";
+import config from "./config";
 import "./scss/style.css";
 import PrivateRoute from "./components/auth/PrivateRoute";
 
@@ -19,6 +20,7 @@ class App extends Component {
   };
   componentDidMount() {
     //console.log(decode(localStorage.getItem("adeptcust_token")).user.custID);
+    console.log(config.serverHost);
   }
   handleStatus = trueOrFalse => {
     console.log("changing");

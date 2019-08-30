@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import config from "../../config";
 
 class Register extends Component {
   constructor() {
@@ -35,7 +36,7 @@ class Register extends Component {
       password: this.state.password,
       password2: this.state.password2
     };
-    fetch("https://andreweijie.tech/backend/api/register", {
+    fetch(`${config.serverHost}/backend/api/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

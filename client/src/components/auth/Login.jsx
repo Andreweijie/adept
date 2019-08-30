@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import AuthUtils from "./AuthUtils";
+import config from "../../config";
 
 class Login extends Component {
   constructor() {
@@ -29,7 +30,7 @@ class Login extends Component {
       password: this.state.password,
       accountType: "customer"
     };
-    fetch("https://andreweijie.tech/backend/api/login", {
+    fetch(`${config.serverHost}/backend/api/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

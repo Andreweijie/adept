@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import JobItem from "../utils/JobItem";
 import decode from "jwt-decode";
+import config from "../../config";
 
 export default class History extends Component {
   state = {
@@ -17,8 +18,7 @@ export default class History extends Component {
   };
   componentDidMount() {
     fetch(
-      "https://andreweijie.tech/backend/cust/history?custID=" +
-        this.state.custID
+      `${config.serverHost}/backend/cust/history?custID=${this.state.custID}`
     )
       .then(res => res.json())
       .then(data => {

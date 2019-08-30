@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import config from "../../config";
 import decode from "jwt-decode";
 
 class ChangePassword extends Component {
@@ -34,7 +35,7 @@ class ChangePassword extends Component {
     } else {
       newPassword.otp = this.state.otp;
     }
-    fetch("https://andreweijie.tech/backend/api/change-password", {
+    fetch(`${config.serverHost}/backend/api/change-password`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

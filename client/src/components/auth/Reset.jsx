@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import config from "../../config";
 import { message } from "flwww";
 class Reset extends Component {
   constructor() {
@@ -13,9 +14,7 @@ class Reset extends Component {
   };
   onSubmit = e => {
     e.preventDefault();
-    fetch(
-      "https://andreweijie.tech/backend/api/forget?email=" + this.state.email
-    )
+    fetch(`${config.serverHost}/backend/api/forget?email=${this.state.email}`)
       .then(response => response.json())
       .then(data => {
         if (data) {

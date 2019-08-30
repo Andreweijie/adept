@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import JobItem from "../utils/JobItem";
+import config from "../../config";
 
 export default class Jobs extends Component {
   state = {
@@ -27,7 +28,7 @@ export default class Jobs extends Component {
     loading: true
   };
   componentDidMount() {
-    fetch("https://andreweijie.tech/backend/admin/all-jobs")
+    fetch(`${config.serverHost}/backend/admin/all-jobs`)
       .then(res => res.json())
       .then(data => {
         this.setState({

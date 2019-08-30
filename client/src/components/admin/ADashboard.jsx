@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { message } from "flwww";
 import Tables from "../utils/Tables";
+import config from "../../config";
 
 export default class ADashboard extends Component {
   state = {
@@ -31,7 +32,7 @@ export default class ADashboard extends Component {
   };
 
   postNewData = (newData, endpoint, msg, update) => {
-    fetch(`https://andreweijie.tech/backend/admin/${endpoint}`, {
+    fetch(`${config.serverHost}/backend/admin/${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +86,7 @@ export default class ADashboard extends Component {
   };
 
   getPickups = () => {
-    fetch("https://andreweijie.tech/backend/admin/pickups")
+    fetch(`${config.serverHost}/backend/admin/pickups`)
       .then(res => res.json())
       .then(data => {
         if (data.length != 0) {

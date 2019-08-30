@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import config from "../../config";
 import decode from "jwt-decode";
 
 class Register extends Component {
@@ -28,10 +29,7 @@ class Register extends Component {
     e.preventDefault();
     let dataToSubmit = new FormData(this.formRef.current);
     fetch(
-      "https://andreweijie.tech/backend/cust/enquiry?custID=" +
-        this.state.custID +
-        "&email=" +
-        this.state.email,
+      `${config.serverHost}/backend/cust/enquiry?custID=${this.state.custID}&email=${this.state.email}`,
       {
         method: "POST",
         body: dataToSubmit

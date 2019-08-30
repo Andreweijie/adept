@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import config from "../../config";
 import JobItem from "../utils/JobItem";
 
 export default class Customers extends Component {
@@ -15,7 +16,7 @@ export default class Customers extends Component {
     body: []
   };
   componentDidMount() {
-    fetch("https://andreweijie.tech/backend/admin/customers")
+    fetch(`${config.serverHost}/backend/admin/customers`)
       .then(res => res.json())
       .then(data => {
         if (data.length != 0) {
