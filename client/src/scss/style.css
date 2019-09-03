@@ -822,6 +822,32 @@
 
 @media only screen and (max-width: 500px) {
   /* For mobile phones: */
+  .reg-link {
+    font-size: 16px;
+  }
+  .register-page #back-box {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .register-page #back-box #register-box {
+    width: 100% !important;
+    height: 100vh !important;
+    -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+  }
+  .register-page #back-box #register-box .form-box {
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: column !important;
+            flex-direction: column !important;
+  }
+  .register-page #back-box #register-box .form-box button {
+    margin: 0;
+    margin-bottom: 0.5em;
+  }
+  .logout {
+    text-align: center !important;
+  }
   .change-page #change-box {
     width: 100%;
     height: 100%;
@@ -876,11 +902,39 @@
     height: 100%;
     margin-bottom: 16px;
   }
+  .App #cust .enquiry .enquiry-box {
+    padding: 1.5em;
+  }
+  .App #cust .enquiry .enquiry-box form .last-row {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .App #cust .enquiry .enquiry-box form .last-row button {
+    font-size: 1.5em;
+    border-radius: 0.2em;
+    width: 100%;
+    padding: 8px;
+    display: block;
+  }
+  .App #cust .enquiry .enquiry-box form .brand-model {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    height: 22vh;
+  }
+  .App #cust .enquiry .enquiry-box form .brand-model input {
+    width: 100%;
+  }
   .App #cust .side-bar {
     width: 100%;
+    font-size: 0.9em;
   }
   .App #cust .side-bar .nav {
     margin: 0;
+    text-align: center;
   }
   .App #admin {
     -webkit-box-orient: vertical;
@@ -890,10 +944,12 @@
     width: 100%;
   }
   .App #admin #admin-side {
+    font-size: 0.9em;
     width: 100%;
   }
   .App #admin #admin-side .nav {
     margin: 8px;
+    text-align: center;
   }
   .App #admin #a-dash {
     width: 100%;
@@ -916,9 +972,9 @@
   .App #admin #a-dash .dash-content .forms .confirm-form,
   .App #admin #a-dash .dash-content .forms .change-form,
   .App #admin #a-dash .dash-content .forms .link-form {
-    padding: 12px;
+    padding: 16px;
     background-color: white;
-    height: 20vh;
+    height: 35vh;
     width: 100%;
     border-radius: 0.3em;
     display: -webkit-box;
@@ -937,7 +993,7 @@
   .App #admin #a-dash .dash-content .forms .link-form p {
     font-size: 32px;
     font-weight: bold;
-    margin-bottom: 0.5em;
+    margin-bottom: 20px;
   }
   .App #admin #a-dash .dash-content .forms .confirm-form form,
   .App #admin #a-dash .dash-content .forms .change-form form,
@@ -948,6 +1004,10 @@
     -webkit-box-pack: start;
         -ms-flex-pack: start;
             justify-content: flex-start;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
   }
   .App #admin #a-dash .dash-content .forms .confirm-form form .input-box input,
   .App #admin #a-dash .dash-content .forms .change-form form .input-box input,
@@ -957,20 +1017,24 @@
     border-radius: 0.2em;
     height: 2.5em;
     padding: 0.5em;
-    width: 90%;
+    width: 100%;
   }
   .App #admin #a-dash .dash-content .forms .confirm-form form .input-box label,
   .App #admin #a-dash .dash-content .forms .change-form form .input-box label,
   .App #admin #a-dash .dash-content .forms .link-form form .input-box label {
     font-weight: bold;
+    margin-bottom: 4px;
   }
   .App #admin #a-dash .dash-content .forms .confirm-form form button,
   .App #admin #a-dash .dash-content .forms .change-form form button,
   .App #admin #a-dash .dash-content .forms .link-form form button {
-    -ms-flex-item-align: end;
-        align-self: flex-end;
+    margin-top: 20px;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
     font-weight: bold;
     padding: 8px;
+    width: 100%;
     border: none;
     height: 2.5em;
     background-color: #f52a57;
@@ -978,8 +1042,8 @@
     border-radius: 0.2em;
     -webkit-transition: 0.5s;
     transition: 0.5s;
-    -webkit-box-shadow: 0rem 0.55rem 1rem 0 rgba(255, 51, 102, 0.4);
-            box-shadow: 0rem 0.55rem 1rem 0 rgba(255, 51, 102, 0.4);
+    -webkit-box-shadow: none;
+            box-shadow: none;
   }
   .App #admin #a-dash .dash-content .forms .confirm-form form button:hover,
   .App #admin #a-dash .dash-content .forms .change-form form button:hover,

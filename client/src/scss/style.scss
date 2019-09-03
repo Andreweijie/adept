@@ -522,6 +522,30 @@
 
 @media only screen and (max-width: 500px) {
   /* For mobile phones: */
+  .reg-link {
+    font-size: 16px;
+  }
+  .register-page {
+    #back-box {
+      width: 100% !important;
+      height: 100% !important;
+      #register-box {
+        width: 100% !important;
+        height: 100vh !important;
+        box-shadow: none !important;
+        .form-box {
+          button {
+            margin: 0;
+            margin-bottom: 0.5em;
+          }
+          flex-direction: column !important;
+        }
+      }
+    }
+  }
+  .logout {
+    text-align: center !important;
+  }
   .change-page {
     #change-box {
       width: 100%;
@@ -573,10 +597,36 @@
           }
         }
       }
+      .enquiry {
+        .enquiry-box {
+          padding: 1.5em;
+          form {
+            .last-row {
+              flex-direction: column;
+              button {
+                font-size: 1.5em;
+                border-radius: 0.2em;
+                width: 100%;
+                padding: 8px;
+                display: block;
+              }
+            }
+            .brand-model {
+              flex-direction: column;
+              height: 22vh;
+              input {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
       .side-bar {
         width: 100%;
+        font-size: 0.9em;
         .nav {
           margin: 0;
+          text-align: center;
         }
       }
     }
@@ -584,9 +634,11 @@
       flex-direction: column;
       width: 100%;
       #admin-side {
+        font-size: 0.9em;
         width: 100%;
         .nav {
           margin: 8px;
+          text-align: center;
         }
       }
       #a-dash {
@@ -604,9 +656,9 @@
             .confirm-form,
             .change-form,
             .link-form {
-              padding: 12px;
+              padding: 16px;
               background-color: white;
-              height: 20vh;
+              height: 35vh;
               width: 100%;
               border-radius: 0.3em;
               display: flex;
@@ -617,12 +669,12 @@
               p {
                 font-size: 32px;
                 font-weight: bold;
-                margin-bottom: 0.5em;
+                margin-bottom: 20px;
               }
               form {
                 display: flex;
                 justify-content: flex-start;
-
+                flex-direction: column;
                 .input-box {
                   input {
                     border: none;
@@ -630,23 +682,26 @@
                     border-radius: 0.2em;
                     height: 2.5em;
                     padding: 0.5em;
-                    width: 90%;
+                    width: 100%;
                   }
                   label {
                     font-weight: bold;
+                    margin-bottom: 4px;
                   }
                 }
                 button {
-                  align-self: flex-end;
+                  margin-top: 20px;
+                  align-self: center;
                   font-weight: bold;
                   padding: 8px;
+                  width: 100%;
                   border: none;
                   height: 2.5em;
                   background-color: #f52a57;
                   color: white;
                   border-radius: 0.2em;
                   transition: 0.5s;
-                  box-shadow: 0rem 0.55rem 1rem 0 rgba(255, 51, 102, 0.4);
+                  box-shadow: none;
                   &:hover {
                     transform: scale(1.05);
                     box-shadow: 0rem 1rem 1rem 0 rgba(255, 51, 102, 0.4);
