@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import "react-day-picker/lib/style.css";
 import "react-datepicker/dist/react-datepicker.css";
+import config from "../../config";
 
-import { message } from "flwww";
+import { message, Modal } from "flwww";
 
 export default class JobItem extends Component {
   state = {
@@ -27,7 +28,7 @@ export default class JobItem extends Component {
       date: this.state.selectedDay
     };
 
-    fetch("https://andreweijie.tech/backend/cust/set-pickup", {
+    fetch(`${config.serverHost}/backend/cust/set-pickup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -38,6 +39,9 @@ export default class JobItem extends Component {
       .then(data => {
         if (data) {
           this.setMessage(data);
+          this.setState({
+            show: false
+          });
         }
       });
   };
