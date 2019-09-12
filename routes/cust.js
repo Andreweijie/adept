@@ -46,7 +46,7 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
   }
 
   const newTempJob = new Temp({
-    custID: req.query.custID,
+    email: req.query.email,
     manufacturer: req.body.brand,
     modelNo: req.body.model,
     serialNo: req.body.serialNo,
@@ -168,7 +168,7 @@ router.get("/pending-jobs2", (req, res) => {
 });
 
 router.get("/pending-jobs", (req, res) => {
-  Temp.find({}, (err, docs) => {
+  Temp.find({ email: req.query.email }, (err, docs) => {
     if (err) {
       console.log(err);
     } else {

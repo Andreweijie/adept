@@ -30,12 +30,14 @@ export default class Dashboard extends Component {
         "Quote Amt"
       ],
       activeBody: [],
-      custID: decode(localStorage.getItem("adeptcust_token")).user.custID
+      user: decode(localStorage.getItem("adeptcust_token")).user
     };
   }
 
   componentDidMount() {
-    fetch(`${config.serverHost}/backend/cust/pending-jobs`)
+    fetch(
+      `${config.serverHost}/backend/cust/pending-jobs?email=${this.state.user.email}`
+    )
       .then(res => res.json())
       .then(data => {
         if (data.length != 0) {
@@ -47,7 +49,7 @@ export default class Dashboard extends Component {
       });
 
     fetch(
-      `${config.serverHost}/backend/cust/active-jobs?custID=${this.state.custID}`
+      `${config.serverHost}/backend/cust/active-jobs?custID=${this.state.user.custID}`
     )
       .then(res => res.json())
       .then(data => {

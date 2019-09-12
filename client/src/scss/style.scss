@@ -840,7 +840,7 @@ input {
 }
 
 .all-box::-webkit-scrollbar,
-.pick-up::-webkit-scrollbar,
+.dash-box::-webkit-scrollbar,
 .active-jobs::-webkit-scrollbar {
   width: 0px; /* Remove scrollbar space */
   height: 0px;
@@ -848,7 +848,7 @@ input {
 }
 
 .all-box::-webkit-scrollbar-thumb,
-.pick-up::-webkit-scrollbar-thumb,
+.dash-box::-webkit-scrollbar-thumb,
 .active-jobs::-webkit-scrollbar-thumb {
   background: #f2f2f2;
   width: 0px; /* Remove scrollbar space */
@@ -1015,6 +1015,7 @@ hr {
 
 .dash-item {
   width: 100%;
+  height: 100%;
   text-align: center;
   .dash-headers,
   .dash-body-items {
@@ -1036,4 +1037,9 @@ hr {
       word-break: break-all;
     }
   }
+}
+
+.dash-box {
+  overflow: scroll;
+  height: 90%;
 }

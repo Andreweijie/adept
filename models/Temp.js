@@ -17,6 +17,10 @@ const TempSchema = new Schema({
     type: Number,
     default: 0
   },
+  email: {
+    type: String,
+    required: true
+  },
   manufacturer: {
     type: String,
     default: ""

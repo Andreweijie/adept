@@ -10,10 +10,11 @@ export default class DashItem extends Component {
             return <span className="dash-header">{header}</span>;
           })}
         </div>
-
-        {this.props.body.map(item => {
-          return <DashBodyItem data={Object.values(item)}></DashBodyItem>;
-        })}
+        <div className="dash-box">
+          {this.props.body.map(item => {
+            return <DashBodyItem data={Object.values(item)}></DashBodyItem>;
+          })}
+        </div>
       </div>
     );
   }
