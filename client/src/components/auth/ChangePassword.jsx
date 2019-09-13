@@ -24,8 +24,14 @@ class ChangePassword extends Component {
   };
   onSubmit = e => {
     e.preventDefault();
+    let emailToSend;
+    if (this.state.custOrNot) {
+      emailToSend = decode(localStorage.getItem("adeptcust_token").user.email);
+    } else {
+      emailToSend = this.state.email;
+    }
     let newPassword = {
-      email: this.state.email,
+      email: emailToSend,
       password: this.state.password,
       password2: this.state.password2,
       custID: undefined
@@ -70,17 +76,18 @@ class ChangePassword extends Component {
                   id="otp"
                   type="text"
                 />
+                <div className="input-field">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    onChange={this.onChange}
+                    value={this.state.email}
+                    id="email"
+                    type="email"
+                  />
+                </div>
               </div>
             ) : null}
-            <div className="input-field">
-              <label htmlFor="email">Email</label>
-              <input
-                onChange={this.onChange}
-                value={this.state.email}
-                id="email"
-                type="email"
-              />
-            </div>
+
             <div className="input-field">
               <label htmlFor="password">Password</label>
               <input

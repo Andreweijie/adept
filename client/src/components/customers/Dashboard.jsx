@@ -45,6 +45,8 @@ export default class Dashboard extends Component {
           this.setState({
             pendingBody: this.formatPending(data)
           });
+        } else {
+          console.log(data);
         }
       });
 

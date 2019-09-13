@@ -13,10 +13,6 @@ const TempSchema = new Schema({
     type: String,
     default: ""
   },
-  custID: {
-    type: Number,
-    default: 0
-  },
   email: {
     type: String,
     required: true

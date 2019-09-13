@@ -25,6 +25,14 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+checkEmpty = inputValue => {
+  if (!inputValue) {
+    return "NIL";
+  } else {
+    return inputValue;
+  }
+};
+
 //route for submitting enquiry form
 router.post("/enquiry", upload.single("productImage"), (req, res) => {
   console.log(req.file);
@@ -62,11 +70,11 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
     let textToSend = config.html.enquiry(
       req.query.email,
       doc.enquiryId,
-      doc.itemDesc,
-      doc.manufacturer,
-      doc.modelNo,
-      doc.serialNo,
-      doc.faultDesc
+      checkEmpty(doc.itemDesc),
+      checkEmpty(doc.manufacturer),
+      checkEmpty(doc.modelNo),
+      checkEmpty(doc.serialNo),
+      checkEmpty(doc.faultDesc)
     );
     const mailOptions = {
       from: "andregoh1996@gmail.com",
@@ -79,6 +87,7 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
       if (err) console.log(err);
       else console.log("success!");
     });
+    res.json({ message: "success" });
   });
 });
 

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { message } from "flwww";
 import config from "../../config";
 import decode from "jwt-decode";
 
@@ -31,7 +32,6 @@ class Register extends Component {
     fetch(
       config.serverHost +
         "/backend/cust/enquiry?custID=" +
-        this.state.custID +
         "&email=" +
         this.state.email,
       {
@@ -40,7 +40,21 @@ class Register extends Component {
       }
     )
       .then(res => res.json())
-      .then(data => console.log(data));
+      .then(data => {
+        if (!data) {
+          message("Sorry, Please try again later", "error");
+        }
+        message("Enquiry has been submitted!", "success");
+        this.setState({
+          itemDesc: "",
+          brand: "",
+          model: "",
+          serialNo: "",
+          urgent: false,
+          faultDesc: "",
+          files: null
+        });
+      });
   };
 
   render() {
