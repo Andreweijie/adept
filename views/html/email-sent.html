@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <script src="https://kit.fontawesome.com/fe09c45db3.js"></script>
+  <style>
+    .container {
+      margin-top: 24px;
+    }
+
+    .logo {
+      padding: 2em;
+    }
+
+    .message-box {
+      background-color: #4a14ff !important;
+      height: 600px !important;
+      width: 500px;
+      padding: 2em !important;
+    }
+
+    .message {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      background-color: white;
+      border-radius: 0.3em;
+      padding: 2em;
+      height: 60%;
+    }
+
+    .message-main {
+      display: flex;
+      justify-content: space-between;
+      align-content: center;
+    }
+
+    .login {
+      background-color: #4a14ff !important;
+      border: none !important;
+
+    }
+
+    a {
+      color: white !important;
+      text-decoration: none !important;
+      font-weight: bold;
+      font-size: 1.4em;
+    }
+
+    .login:hover {
+      background-color: #3404d1 !important;
+    }
+
+    .tick {
+      margin: auto auto;
+      width: 20%;
+      justify-self: center;
+      color: #52fa7c;
+    }
+
+    h1 {
+      flex: 1;
+      font-size: 1.5em !important;
+    }
+
+    @media only screen and (max-width: 500px) {
+      .message-main {
+        flex-direction: column;
+      }
+
+      .message {
+        height: 70%;
+      }
+    }
+  </style>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+  <title>Hello, world!</title>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Content here -->
+
+    <div class="row justify-content-center">
+
+      <div class=" message-box jumbotron">
+        <div class="row justify-content-center">
+          <div class="col">
+            <img class="logo img-fluid" src="https://i.imgur.com/UANNif7.png" />
+          </div>
+        </div>
+        <div class="message">
+          <div class="message-main">
+            <i class="far fa-check-circle fa-4x tick"></i>
+            <h1>An E-Mail has been sent with instructions to activate your account.</h1>
+          </div>
+          <h5>
+            After activation, you can log in with your email and password by clicking the
+            link below.
+            </h2>
+            <button type="button" class="btn btn-primary login"><a href="http://app.andreweijie.tech/customer/login">LOG
+                IN</a></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
