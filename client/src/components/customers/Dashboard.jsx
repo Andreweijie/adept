@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import JobItem from "../utils/JobItem";
-import DashBodyItem from "../utils/DashBodyItem";
+import DashItem from "../utils/DashItem";
 import AuthUtils from "../auth/AuthUtils";
 import config from "../../config";
 import decode from "jwt-decode";
@@ -91,42 +91,19 @@ export default class Dashboard extends Component {
         <div className="dash-content">
           <div className="pending-jobs containers">
             <h1>Pending Jobs</h1>
-            <hr />
-            <div className="all-box">
-              <table className="table">
-                {this.state.pendingHeaders.map(header => {
-                  return <th>{header}</th>;
-                })}
-                {true
-                  ? this.state.pendingBody.map(e => {
-                      return <JobItem data={Object.values(e)} />;
-                    })
-                  : null}
-              </table>
-            </div>
+            <DashItem
+              headers={this.state.pendingHeaders}
+              body={this.state.pendingBody}
+              custID={this.state.custID}
+            />
           </div>
           <div className="active-jobs containers">
             <h1>Active Jobs</h1>
-            <hr />
-            <div className="all-box">
-              <table className="table">
-                <th>Pickup</th>
-                {this.state.activeHeaders.map(header => {
-                  return <th>{header}</th>;
-                })}
-                {this.state.activeBody
-                  ? this.state.activeBody.map(e => {
-                      return (
-                        <JobItem
-                          active={true}
-                          data={Object.values(e)}
-                          custID={this.state.custID}
-                        />
-                      );
-                    })
-                  : null}
-              </table>
-            </div>
+            <DashItem
+              headers={this.state.activeHeaders}
+              body={this.state.activeBody}
+              custID={this.state.custID}
+            />
           </div>
         </div>
       </div>

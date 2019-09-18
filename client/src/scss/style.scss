@@ -430,6 +430,7 @@
       padding-left: 48px;
       h1 {
         padding-bottom: 8px;
+        margin-bottom: 0;
         font-weight: bold;
         font-size: 3em;
         color: #1e222f;
@@ -745,7 +746,6 @@
   flex-direction: column;
   padding: 16px;
   max-height: 100vh;
-  background-color: white;
   //box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.15);
   width: 100%;
 
@@ -1020,11 +1020,14 @@ hr {
   .dash-headers,
   .dash-body-items {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(8, 1fr);
     grid-template-rows: auto;
     grid-column-gap: 10px;
     margin-bottom: 10px;
     padding: 16px;
+    span.dash-header {
+      font-weight: 600;
+    }
   }
   .dash-body-items {
     background-color: white;
