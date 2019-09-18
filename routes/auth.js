@@ -56,26 +56,21 @@ router.post("/register", (req, res) => {
         else console.log("sent");
       });
 
-      const newCust = new Cust({
-        custName: req.body.name,
-        email: req.body.email,
-        company: req.body.company,
-        jobTitle: req.body.jobTitle,
-        custAddress: req.body.address,
-        custPostCode: req.body.mobileNo,
-        custTel: req.body.officeNo,
-        custFax: req.body.faxNo
-      });
-
       const newUser = new User({
         custID: 0,
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
+        company: req.body.company,
+        jobTitle: req.body.jobTitle,
+        custAddress: req.body.address,
+        custPostCode: req.body.mobileNo,
+        custTel: req.body.officeNo,
+        custFax: req.body.faxNo,
         verToken: verificationToken,
         isVerified: false
       });
-      newCust.save();
+
       //hash password before saving user in DB
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {

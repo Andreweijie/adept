@@ -25,62 +25,83 @@ getNextJobID = jobid => {
 //route for confirming a temporary order
 router.post("/confirm", (req, res) => {
   let enquiryId = req.body.enquiryId;
-  Temp.findOne({ enquiryId: enquiryId }, (err, doc) => {
+  Temp.findOne({ enquiryId: enquiryId }, (err, temp) => {
     if (err) {
       console.log(err);
       res.json({ error: "job not found" });
     }
-    Job.findOne({ id: { $ne: "id" } })
-      .sort("-id")
-      .exec((err, doc2) => {
-        if (err) {
-          console.log(err);
-        }
-        console.log(doc2);
-        let newTask = doc.toObject();
-        console.log(newTask);
-        newTask.jobid = getNextJobID(doc2.toObject().jobid);
-        newTask.id = doc2.toObject().id + 1;
-        newTask.jobStatus = "Awaiting Pickup";
-        newTask.quote = parseInt(req.body.quote);
+    User.findOne({ email: temp.email }, (err, user) => {
+      if (err) {
+        console.log(err);
+      }
+      if (!user.custID) {
+        const newCustData = {
+          custName: user.name,
+          company: user.company,
+          jobTitle: user.jobTitle,
+          custAddress: user.custAddress,
+          custPostCode: user.custPostCode,
+          custTel: user.custTel,
+          custFax: user.custFax,
+          email: user.email
+        };
+        const newCust = new Customer(newCustData);
+        newCust.save((err, customer) => {
+          Job.findOne({ id: { $ne: "id" } })
+            .sort("-id")
+            .exec((err, doc2) => {
+              if (err) {
+                console.log(err);
+              }
+              console.log(doc2);
+              let newTask = temp.toObject();
+              console.log(newTask);
+              newTask.jobid = getNextJobID(doc2.toObject().jobid);
+              newTask.id = doc2.toObject().id + 1;
+              newTask.jobStatus = "Awaiting Pickup";
+              newTask.quote = parseInt(req.body.quote);
+              newTask.custID = customer.id;
 
-        const newJob = new Job(newTask);
-        newJob.save(err => {
-          if (err) {
-            console.log(err);
-          }
+              const newJob = new Job(newTask);
+              newJob.save(err => {
+                if (err) {
+                  console.log(err);
+                }
 
-          let textToSend = config.html.confirmJob(
-            newTask.jobid,
-            newTask.itemDesc,
-            newTask.manufacturer,
-            newTask.modelNo,
-            newTask.serialNo,
-            newTask.faultDesc,
-            req.body.quote
-          );
+                let textToSend = config.html.confirmJob(
+                  newTask.jobid,
+                  newTask.itemDesc,
+                  newTask.manufacturer,
+                  newTask.modelNo,
+                  newTask.serialNo,
+                  newTask.faultDesc,
+                  req.body.quote
+                );
 
-          const mailOptions = {
-            from: "andregoh1996@gmail.com",
-            to: "adepttest19@gmail.com",
-            subject: `[UPDATE] Job Confirmed`,
-            html: textToSend
-          };
-          transporter.sendMail(mailOptions, (err, info) => {
-            if (err) console.log(err);
-            else console.log("sent");
-          });
+                const mailOptions = {
+                  from: "andregoh1996@gmail.com",
+                  to: "adepttest19@gmail.com",
+                  subject: `[UPDATE] Job Confirmed`,
+                  html: textToSend
+                };
+                transporter.sendMail(mailOptions, (err, info) => {
+                  if (err) console.log(err);
+                  else console.log("sent");
+                });
 
-          //remove temporary job from database
-          Temp.deleteOne({ enquiryId: enquiryId }, err => {
-            if (err) {
-              console.log(err);
-            } else {
-              res.json({ message: "success" });
-            }
-          });
+                //remove temporary job from database
+                Temp.deleteOne({ enquiryId: enquiryId }, err => {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    res.json({ message: "success" });
+                  }
+                });
+              });
+            });
         });
-      });
+      }
+    });
   });
 });
 

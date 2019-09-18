@@ -34,7 +34,8 @@ const CustSchema = new Schema({
     required: true
   },
   custCountry: {
-    type: String
+    type: String,
+    default: "Singapore"
   },
   custTel: {
     type: String,

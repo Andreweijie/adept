@@ -19,6 +19,30 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  company: {
+    type: String,
+    required: true
+  },
+  jobTitle: {
+    type: String,
+    required: true
+  },
+  custAddress: {
+    type: String,
+    required: true
+  },
+  custPostCode: {
+    type: Number,
+    required: true
+  },
+  custTel: {
+    type: Number,
+    required: true
+  },
+  custFax: {
+    type: Number,
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now
