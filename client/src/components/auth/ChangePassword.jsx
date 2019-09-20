@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { message } from "flwww";
 import config from "../../config";
 import decode from "jwt-decode";
 
@@ -24,11 +25,9 @@ class ChangePassword extends Component {
   };
   onSubmit = e => {
     e.preventDefault();
-    let emailToSend;
+    let emailToSend = this.state.email;
     if (this.state.custOrNot) {
-      emailToSend = decode(localStorage.getItem("adeptcust_token").user.email);
-    } else {
-      emailToSend = this.state.email;
+      emailToSend = decode(localStorage.getItem("adeptcust_token")).user.email;
     }
     let newPassword = {
       email: emailToSend,
@@ -50,7 +49,9 @@ class ChangePassword extends Component {
     })
       .then(response => response.json())
       .then(data => {
+        console.log(data);
         if (this.state.custOrNot) {
+          message("Your password has successfully been changed!", "success", 5);
           localStorage.removeItem("adeptcust_token");
           this.props.history.replace("/customer/login");
         } else {
@@ -60,6 +61,7 @@ class ChangePassword extends Component {
   };
 
   render() {
+    console.log(decode(localStorage.getItem("adeptcust_token")).user.email);
     return (
       <div className="change-page">
         <div id="change-box">
