@@ -820,6 +820,31 @@
   font-weight: bold;
 }
 
+.modal-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-weight: bold;
+}
+
+.modal-item .modal-row {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.modal-item .modal-row span {
+  padding: 8px;
+}
+
 @media only screen and (max-width: 500px) {
   /* For mobile phones: */
   .modal-item {

@@ -521,6 +521,20 @@
   }
 }
 
+.modal-item {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  .modal-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    span {
+      padding: 8px;
+    }
+  }
+}
+
 @media only screen and (max-width: 500px) {
   /* For mobile phones: */
   .modal-item {

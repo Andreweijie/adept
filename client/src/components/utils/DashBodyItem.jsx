@@ -1,9 +1,57 @@
 import React, { Component } from "react";
-import { Modal, Button } from "flwww";
+import { Modal, Button, message } from "flwww";
+import DatePicker from "react-datepicker";
+import "react-day-picker/lib/style.css";
+import "react-datepicker/dist/react-datepicker.css";
+import config from "../../config";
 
 export default class DashBodyItem extends Component {
   state = {
-    modalIsVisible: false
+    modalIsVisible: false,
+    show: false,
+    selectedDay: new Date(),
+    time: ""
+  };
+
+  setMessage = data => {
+    if (data.message) {
+      message("Success!", "success", 4);
+    } else {
+      message("Failed!", "error", 4);
+    }
+  };
+
+  setPickupDate = () => {
+    const pickUpDate = {
+      custID: parseInt(this.props.custID),
+      jobid: this.props.data[5],
+      date: this.state.selectedDay
+    };
+
+    fetch(`${config.serverHost}/backend/cust/set-pickup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(pickUpDate)
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data) {
+          this.setMessage(data);
+          this.setState({
+            show: false
+          });
+        }
+      });
+  };
+  handleDayChange = day => {
+    this.setState({ selectedDay: day });
+  };
+  handleTimeChange = time => {
+    this.setState({ time }, () => {
+      console.log(this.state.time);
+    });
   };
   toggleModal = () => {
     this.setState({
@@ -20,9 +68,29 @@ export default class DashBodyItem extends Component {
           toggleModal={this.toggleModal}
         >
           <div className="modal-item">
-            {this.props.data.map(header => {
-              return <span>{header}</span>;
+            {this.props.data.map((header, index) => {
+              return (
+                <div className="modal-row">
+                  <span>{this.props.headers[index]}</span>
+                  <span>{header}</span>
+                </div>
+              );
             })}
+            {this.props.active && this.props.data[4] == "Awaiting Pickup" ? (
+              <div className="date-time-div">
+                <span style={{ padding: 8 }}>Pickup Date</span>
+                <DatePicker
+                  selected={this.state.selectedDay}
+                  onChange={this.handleDayChange}
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  dateFormat="MMMM d, yyyy h:mm aa"
+                />{" "}
+                <button className="confirm-date" onClick={this.setPickupDate}>
+                  Confirm
+                </button>
+              </div>
+            ) : null}
           </div>
         </Modal>
         {this.props.data.map((header, index) => {

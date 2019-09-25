@@ -11,10 +11,7 @@ export default class Admin extends Component {
     return (
       <div id="admin">
         <ASideBar />
-        <Route
-          path={`${this.props.match.url}/dashboard`}
-          component={ADashboard}
-        />
+        <Route exact path="/admin/dashboard" component={ADashboard} />
         <Route
           exact
           path="/admin"

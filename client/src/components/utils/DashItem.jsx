@@ -12,7 +12,13 @@ export default class DashItem extends Component {
         </div>
         <div className="dash-box">
           {this.props.body.map(item => {
-            return <DashBodyItem data={Object.values(item)}></DashBodyItem>;
+            return (
+              <DashBodyItem
+                active={this.props.active}
+                headers={this.props.headers}
+                data={Object.values(item)}
+              ></DashBodyItem>
+            );
           })}
         </div>
       </div>

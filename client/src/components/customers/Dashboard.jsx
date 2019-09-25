@@ -103,6 +103,7 @@ export default class Dashboard extends Component {
               headers={this.state.activeHeaders}
               body={this.state.activeBody}
               custID={this.state.custID}
+              active={true}
             />
           </div>
         </div>
