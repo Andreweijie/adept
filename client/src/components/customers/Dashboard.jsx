@@ -67,7 +67,7 @@ export default class Dashboard extends Component {
     let options = {
       weekday: "long",
       year: "numeric",
-      month: "long",
+      month: "numeric",
       day: "numeric",
       hour: "numeric"
     };
