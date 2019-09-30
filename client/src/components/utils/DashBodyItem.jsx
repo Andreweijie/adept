@@ -71,7 +71,9 @@ export default class DashBodyItem extends Component {
             {this.props.data.map((header, index) => {
               return (
                 <div className="modal-row">
-                  <span>{this.props.headers[index]}</span>
+                  <span className="modal-head">
+                    {this.props.headers[index]}
+                  </span>
                   <span>{header}</span>
                 </div>
               );
