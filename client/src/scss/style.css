@@ -459,7 +459,7 @@
   color: #333;
   background-color: white;
   width: 45%;
-  height: 120%;
+  height: 100%;
   border-radius: 0.5em;
   margin-bottom: -12em;
   -webkit-box-shadow: 0rem 0.35rem 1.2rem 0 rgba(0, 0, 0, 0.2);
@@ -480,10 +480,36 @@
   padding: 1em;
 }
 
+.App .login-page #back-box #register-box #cust-type,
+.App .register-page #back-box #register-box #cust-type,
+.App .alogin-page #back-box #register-box #cust-type {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.App .login-page #back-box #register-box #cust-type span.Switch_slider__oNE9r,
+.App .register-page #back-box #register-box #cust-type span.Switch_slider__oNE9r,
+.App .alogin-page #back-box #register-box #cust-type span.Switch_slider__oNE9r {
+  background-color: #4a14ff !important;
+}
+
+.App .login-page #back-box #register-box #cust-type a,
+.App .register-page #back-box #register-box #cust-type a,
+.App .alogin-page #back-box #register-box #cust-type a {
+  padding-right: 8px;
+  font-weight: bold;
+  color: #4a14ff;
+}
+
 .App .login-page #back-box #register-box h4,
 .App .register-page #back-box #register-box h4,
 .App .alogin-page #back-box #register-box h4 {
-  font-size: 3.3em;
+  font-size: 2em;
 }
 
 .App .login-page #back-box #register-box button,
