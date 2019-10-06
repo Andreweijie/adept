@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch } from "flwww";
+import { Switch, message } from "flwww";
 import config from "../../config";
 
 class Register extends Component {
@@ -49,6 +49,11 @@ class Register extends Component {
       .then(response => response.json())
       .then(data => {
         console.log(data);
+        message(
+          "Success! Please check your email to confirm your account!",
+          "success",
+          5
+        );
         this.props.history.replace("/customer/login");
       });
   };

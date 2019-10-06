@@ -57,11 +57,25 @@ router.post("/register", (req, res) => {
       });
 
       let custID = 0;
+      let newUser;
 
       if (!req.body.newCust) {
         Cust.findOne({ email: req.body.email }, (err, doc) => {
           if (doc) {
-            custID = doc.id;
+            newUser = new User({
+              custID: doc.id,
+              name: doc.name,
+              email: doc.email,
+              password: req.body.password,
+              company: doc.company,
+              jobTitle: doc.jobTitle,
+              custAddress: doc.custAddress,
+              custPostCode: doc.custPostCode,
+              custTel: doc.custTel,
+              custFax: doc.custFax,
+              verToken: verificationToken,
+              isVerified: false
+            });
           }
           const newUser = new User({
             custID: custID,
@@ -146,7 +160,7 @@ router.post("/login", (req, res) => {
       if (!user) {
         return res.status(404).json({
           errors: {
-            email: "E-mail not found."
+            message: "E-mail not found."
           }
         });
       }
@@ -166,9 +180,11 @@ router.post("/login", (req, res) => {
             res.json({ success: true, adeptadmin_token: token });
           });
         } else {
-          return res
-            .status(400)
-            .json({ passwordIncorrect: "Password is incorrect" });
+          return res.status(400).json({
+            errors: {
+              message: "Password is incorrect."
+            }
+          });
         }
       });
     });
@@ -178,13 +194,13 @@ router.post("/login", (req, res) => {
       if (!user) {
         return res.status(404).json({
           errors: {
-            message: "e-mail not found."
+            message: "E-mail not found."
           }
         });
       } else if (!user.isVerified) {
         return res.status(404).json({
           errors: {
-            message: "account not verified"
+            message: "Account not verified."
           }
         });
       }

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import AuthUtils from "./AuthUtils";
 import config from "../../config";
+import { message } from "flwww";
 
 class Login extends Component {
   constructor() {
@@ -40,9 +41,10 @@ class Login extends Component {
       .then(response => response.json())
       .then(data => {
         if (data.errors) {
-          this.setState({ errors: data.errors }, () =>
-            console.log(this.state.errors)
-          );
+          this.setState({ errors: data.errors }, () => {
+            console.log(this.state.errors);
+            message(this.state.errors.message, "error", 5);
+          });
         } else {
           console.log("loggedin");
           this.auth.setToken(data.adeptcust_token, "adeptcust_token");
@@ -85,11 +87,6 @@ class Login extends Component {
               </div>
               <div className="input-field">
                 <label htmlFor="password">Password</label>
-                {this.state.errors.password ? (
-                  <label className="error" htmlFor="password">
-                    {this.state.errors.password}
-                  </label>
-                ) : null}
                 <input
                   required
                   onChange={this.onChange}

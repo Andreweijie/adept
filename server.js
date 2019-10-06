@@ -22,7 +22,8 @@ app.use("/backend/cust", custRoutes);
 app.use("/backend/admin", adminRoutes);
 
 app.get("/test", (req, res) => {
-  res.sendFile(path.join(__dirname + "/views/html/account-confirmed.html"));
+  //res.sendFile(path.join(__dirname + "/views/html/account-confirmed.html"));
+  res.redirect("https://google.com");
 });
 mongoose
   .connect(
