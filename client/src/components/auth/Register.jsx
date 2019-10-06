@@ -70,7 +70,7 @@ class Register extends Component {
           </h4>
           <div id="register-box">
             <div id="cust-type">
-              <a>New Customer</a>
+              <a>{this.state.newCust ? "New" : "Existing"} Customer</a>
               <Switch
                 name="newCust"
                 checked={this.state.newCust}

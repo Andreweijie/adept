@@ -89,14 +89,16 @@ export default class Dashboard extends Component {
       <div className="dashboard">
         <h1>Dashboard</h1>
         <div className="dash-content">
-          <div className="pending-jobs containers">
-            <h1>Pending Jobs</h1>
-            <DashItem
-              headers={this.state.pendingHeaders}
-              body={this.state.pendingBody}
-              custID={this.state.custID}
-            />
-          </div>
+          {this.state.pendingBody.length != 0 ? (
+            <div className="pending-jobs containers">
+              <h1>Pending Jobs</h1>
+              <DashItem
+                headers={this.state.pendingHeaders}
+                body={this.state.pendingBody}
+                custID={this.state.custID}
+              />
+            </div>
+          ) : null}
           <div className="active-jobs containers">
             <h1>Active Jobs</h1>
             <DashItem
