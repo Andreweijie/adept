@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Switch } from "flwww";
 import config from "../../config";
 
 class Register extends Component {
@@ -15,6 +16,7 @@ class Register extends Component {
       email: "",
       password: "",
       password2: "",
+      newCust: true,
       errors: {}
     };
   }
@@ -34,7 +36,8 @@ class Register extends Component {
       faxNo: this.state.faxNo,
       email: this.state.email,
       password: this.state.password,
-      password2: this.state.password2
+      password2: this.state.password2,
+      newCust: this.state.newCust
     };
     fetch(`${config.serverHost}/backend/api/register`, {
       method: "POST",
@@ -49,6 +52,14 @@ class Register extends Component {
         this.props.history.replace("/customer/login");
       });
   };
+  changeToExisting = e => {
+    this.setState({ [e.target.name]: e.target.checked });
+  };
+  changeToNew = () => {
+    this.setState({
+      newCust: true
+    });
+  };
   render() {
     return (
       <div className="register-page">
@@ -58,72 +69,82 @@ class Register extends Component {
             <b>Register</b> Below
           </h4>
           <div id="register-box">
+            <div id="cust-type">
+              <a>{this.state.newCust ? "New" : "Existing"} Customer</a>
+              <Switch
+                name="newCust"
+                checked={this.state.newCust}
+                onChange={this.changeToExisting}
+              />
+            </div>
             <form className="form-box" noValidate onSubmit={this.onSubmit}>
-              <div class="cols">
-                <div className="input-field">
-                  <label htmlFor="name">Name</label>
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.name}
-                    id="name"
-                    type="text"
-                  />
+              {this.state.newCust ? (
+                <div class="cols">
+                  <div className="input-field">
+                    <label htmlFor="name">Name</label>
+                    <input
+                      onChange={this.onChange}
+                      value={this.state.name}
+                      id="name"
+                      type="text"
+                    />
+                  </div>
+                  <div className="input-field">
+                    <label htmlFor="company">Company</label>
+                    <input
+                      onChange={this.onChange}
+                      value={this.state.company}
+                      id="company"
+                      type="text"
+                    />
+                  </div>
+                  <div className="input-field">
+                    <label htmlFor="jobTitle">Job Title</label>
+                    <input
+                      onChange={this.onChange}
+                      value={this.state.jobTitle}
+                      id="jobTitle"
+                      type="text"
+                    />
+                  </div>
+                  <div className="input-field">
+                    <label htmlFor="address">address</label>
+                    <input
+                      onChange={this.onChange}
+                      value={this.state.address}
+                      id="address"
+                      type="text"
+                    />
+                  </div>
+                  <div className="input-field">
+                    <label htmlFor="mobileNo">Mobile Number</label>
+                    <input
+                      onChange={this.onChange}
+                      value={this.state.mobileNo}
+                      id="mobileNo"
+                      type="text"
+                    />
+                  </div>
+                  <div className="input-field">
+                    <label htmlFor="officeNo">Office Number</label>
+                    <input
+                      onChange={this.onChange}
+                      value={this.state.officeNo}
+                      id="officeNo"
+                      type="text"
+                    />
+                  </div>
+                  <div className="input-field">
+                    <label htmlFor="faxNo">Fax Number</label>
+                    <input
+                      onChange={this.onChange}
+                      value={this.state.faxNo}
+                      id="faxNo"
+                      type="text"
+                    />
+                  </div>
                 </div>
-                <div className="input-field">
-                  <label htmlFor="company">Company</label>
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.company}
-                    id="company"
-                    type="text"
-                  />
-                </div>
-                <div className="input-field">
-                  <label htmlFor="jobTitle">Job Title</label>
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.jobTitle}
-                    id="jobTitle"
-                    type="text"
-                  />
-                </div>
-                <div className="input-field">
-                  <label htmlFor="address">address</label>
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.address}
-                    id="address"
-                    type="text"
-                  />
-                </div>
-                <div className="input-field">
-                  <label htmlFor="mobileNo">Mobile Number</label>
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.mobileNo}
-                    id="mobileNo"
-                    type="text"
-                  />
-                </div>
-                <div className="input-field">
-                  <label htmlFor="officeNo">Office Number</label>
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.officeNo}
-                    id="officeNo"
-                    type="text"
-                  />
-                </div>
-                <div className="input-field">
-                  <label htmlFor="faxNo">Fax Number</label>
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.faxNo}
-                    id="faxNo"
-                    type="text"
-                  />
-                </div>
-              </div>
+              ) : null}
               <div class="cols">
                 <div className="input-field">
                   <label htmlFor="email">Email</label>

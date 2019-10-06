@@ -56,33 +56,42 @@ router.post("/register", (req, res) => {
         else console.log("sent");
       });
 
-      const newUser = new User({
-        custID: 0,
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        company: req.body.company,
-        jobTitle: req.body.jobTitle,
-        custAddress: req.body.address,
-        custPostCode: req.body.mobileNo,
-        custTel: req.body.officeNo,
-        custFax: req.body.faxNo,
-        verToken: verificationToken,
-        isVerified: false
-      });
+      let custID = 0;
 
-      //hash password before saving user in DB
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if (err) throw err;
+      if (!req.body.newCust) {
+        Cust.findOne({ email: req.body.email }, (err, doc) => {
+          if (doc) {
+            custID = doc.id;
+          }
+          const newUser = new User({
+            custID: custID,
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
+            company: req.body.company,
+            jobTitle: req.body.jobTitle,
+            custAddress: req.body.address,
+            custPostCode: req.body.mobileNo,
+            custTel: req.body.officeNo,
+            custFax: req.body.faxNo,
+            verToken: verificationToken,
+            isVerified: false
+          });
 
-          newUser.password = hash;
-          newUser
-            .save()
-            .then(user => res.json(user))
-            .catch(err => console.log(err));
+          //hash password before saving user in DB
+          bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+              if (err) throw err;
+
+              newUser.password = hash;
+              newUser
+                .save()
+                .then(user => res.json(user))
+                .catch(err => console.log(err));
+            });
+          });
         });
-      });
+      }
     }
   });
 });
