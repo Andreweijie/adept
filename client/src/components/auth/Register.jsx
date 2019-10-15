@@ -84,7 +84,7 @@ class Register extends Component {
             </div>
             <form className="form-box" noValidate onSubmit={this.onSubmit}>
               {this.state.newCust ? (
-                <div class="cols">
+                <div className="cols">
                   <div className="input-field">
                     <label htmlFor="name">Name</label>
                     <input

@@ -9,6 +9,7 @@ const express = require("express"),
   nodemailer = require("nodemailer"),
   User = require("../models/User"),
   Cust = require("../models/Customer"),
+  path = require("path"),
   { totp } = require("node-otp");
 
 let config = require("../config");
@@ -25,7 +26,6 @@ const transporter = nodemailer.createTransport({
 router.post("/register", (req, res) => {
   //validate userinput and get errors if any
   const { errors, isValid } = validateRegisterInput(req.body);
-
   //if invalid, return with error 400 and error messages
   if (!isValid) {
     return res.status(400).json(errors);
@@ -35,12 +35,17 @@ router.post("/register", (req, res) => {
     if (user) {
       return res.status(400).json({ email: "Email already exists" }); //check DB for existing email and return error message if exists
     } else {
+      let custID = 0;
+      let newUser;
       //send verification email
+      console.log(req.body.email);
       const payload = {
         email: req.body.email
       };
 
-      let verificationToken = jwt.sign(payload, "secret", { expiresIn: 30000 });
+      let verificationToken = jwt.sign(payload, "secret", {
+        expiresIn: 30000
+      });
       const textToSend = config.html.confirmAccount(
         verificationToken,
         req.body.email
@@ -56,28 +61,26 @@ router.post("/register", (req, res) => {
         else console.log("sent");
       });
 
-      let custID = 0;
-      let newUser;
-
-      if (!req.body.newCust) {
-        Cust.findOne({ email: req.body.email }, (err, doc) => {
-          if (doc) {
-            newUser = new User({
-              custID: doc.id,
-              name: doc.name,
-              email: doc.email,
-              password: req.body.password,
-              company: doc.company,
-              jobTitle: doc.jobTitle,
-              custAddress: doc.custAddress,
-              custPostCode: doc.custPostCode,
-              custTel: doc.custTel,
-              custFax: doc.custFax,
-              verToken: verificationToken,
-              isVerified: false
-            });
-          }
-          const newUser = new User({
+      Cust.findOne({ email: req.body.email }, (err, doc) => {
+        if (doc) {
+          console.log(doc);
+          newUser = new User({
+            custID: doc.id,
+            name: doc.name,
+            email: doc.email,
+            password: req.body.password,
+            company: doc.company,
+            jobTitle: doc.jobTitle,
+            custAddress: doc.custAddress,
+            custPostCode: doc.custPostCode,
+            custTel: doc.custTel,
+            custFax: doc.custFax,
+            verToken: verificationToken,
+            isVerified: false
+          });
+        } else {
+          console.log("haha");
+          newUser = new User({
             custID: custID,
             name: req.body.name,
             email: req.body.email,
@@ -91,21 +94,21 @@ router.post("/register", (req, res) => {
             verToken: verificationToken,
             isVerified: false
           });
+        }
 
-          //hash password before saving user in DB
-          bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(newUser.password, salt, (err, hash) => {
-              if (err) throw err;
+        //hash password before saving user in DB
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (err) throw err;
 
-              newUser.password = hash;
-              newUser
-                .save()
-                .then(user => res.json(user))
-                .catch(err => console.log(err));
-            });
+            newUser.password = hash;
+            newUser
+              .save()
+              .then(user => res.json(user))
+              .catch(err => console.log(err));
           });
         });
-      }
+      });
     }
   });
 });
@@ -237,7 +240,13 @@ router.get("/verification", (req, res) => {
     console.log(user);
     if (user.verToken == req.query.token) {
       user.isVerified = true;
-      user.save().then(user => res.send("verified!"));
+      user
+        .save()
+        .then(user =>
+          res.sendFile(
+            path.join(__dirname, "../views/html/account-confirmed.html")
+          )
+        );
     }
   });
 });
