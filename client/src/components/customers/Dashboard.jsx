@@ -65,7 +65,6 @@ export default class Dashboard extends Component {
   }
   formatPending = data => {
     let options = {
-      weekday: "long",
       year: "numeric",
       month: "numeric",
       day: "numeric",
@@ -78,7 +77,7 @@ export default class Dashboard extends Component {
       let ele = e.pop();
       e.unshift(ele);
       e[e.length - 1] = new Date(e[e.length - 1]);
-      e[e.length - 1] = e[e.length - 1].toLocaleString("en-US", options);
+      e[e.length - 1] = e[e.length - 1].toLocaleString("en-SG", options);
       return e;
     });
     console.log(pendingFinal);
