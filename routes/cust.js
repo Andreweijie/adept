@@ -78,7 +78,7 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
     );
     const mailOptions = {
       from: "andregoh1996@gmail.com",
-      to: "adepttest19@gmail.com",
+      to: "andreweijie@outlook.com",
       subject: itemDesc,
       html: textToSend,
       attachments: attach

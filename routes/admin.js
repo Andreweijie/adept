@@ -34,7 +34,7 @@ router.post("/confirm", (req, res) => {
       if (err) {
         console.log(err);
       }
-      if (!user.custID) {
+      if (!user.custID || user.custID == 0) {
         const newCustData = {
           custName: user.name,
           company: user.company,
@@ -80,7 +80,7 @@ router.post("/confirm", (req, res) => {
 
                 const mailOptions = {
                   from: "andregoh1996@gmail.com",
-                  to: "adepttest19@gmail.com",
+                  to: "andreweijie@outlook.com",
                   subject: `[UPDATE] Job Confirmed`,
                   html: textToSend
                 };
@@ -100,6 +100,59 @@ router.post("/confirm", (req, res) => {
               });
             });
         });
+      } else {
+        Job.findOne({ id: { $ne: "id" } })
+          .sort("-id")
+          .exec((err, doc2) => {
+            if (err) {
+              console.log(err);
+            }
+            console.log(doc2);
+            let newTask = temp.toObject();
+            console.log(newTask);
+            newTask.jobid = getNextJobID(doc2.toObject().jobid);
+            newTask.id = doc2.toObject().id + 1;
+            newTask.jobStatus = "Awaiting Pickup";
+            newTask.quote = parseInt(req.body.quote);
+            newTask.custID = user.custID;
+
+            const newJob = new Job(newTask);
+            newJob.save(err => {
+              if (err) {
+                console.log(err);
+              }
+
+              let textToSend = config.html.confirmJob(
+                newTask.jobid,
+                newTask.itemDesc,
+                newTask.manufacturer,
+                newTask.modelNo,
+                newTask.serialNo,
+                newTask.faultDesc,
+                req.body.quote
+              );
+
+              const mailOptions = {
+                from: "andregoh1996@gmail.com",
+                to: "andreweijie@outlook.com",
+                subject: `[UPDATE] Job Confirmed`,
+                html: textToSend
+              };
+              transporter.sendMail(mailOptions, (err, info) => {
+                if (err) console.log(err);
+                else console.log("sent");
+              });
+
+              //remove temporary job from database
+              Temp.deleteOne({ enquiryId: enquiryId }, err => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  res.json({ message: "success" });
+                }
+              });
+            });
+          });
       }
     });
   });
