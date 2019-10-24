@@ -20,7 +20,7 @@ module.exports = ValidateRegisterInput = userInput => {
     : "";
 
   //check name
-  if (Validator.isEmpty(userInput.name)) {
+  /*if (Validator.isEmpty(userInput.name)) {
     errors.name = "Name field is required";
   }
   //check company
@@ -34,7 +34,7 @@ module.exports = ValidateRegisterInput = userInput => {
   //check address
   if (Validator.isEmpty(userInput.address)) {
     errors.address = "address field is required";
-  }
+  }*/
 
   //check email
   if (Validator.isEmpty(userInput.email)) {
