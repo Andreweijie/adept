@@ -94,7 +94,6 @@ export default class Dashboard extends Component {
               <DashItem
                 headers={this.state.pendingHeaders}
                 body={this.state.pendingBody}
-                custID={this.state.custID}
               />
             </div>
           ) : null}
@@ -103,7 +102,6 @@ export default class Dashboard extends Component {
             <DashItem
               headers={this.state.activeHeaders}
               body={this.state.activeBody}
-              custID={this.state.custID}
               active={true}
             />
           </div>

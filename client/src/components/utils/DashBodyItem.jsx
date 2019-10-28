@@ -4,13 +4,14 @@ import DatePicker from "react-datepicker";
 import "react-day-picker/lib/style.css";
 import "react-datepicker/dist/react-datepicker.css";
 import config from "../../config";
-
+import decode from "jwt-decode";
 export default class DashBodyItem extends Component {
   state = {
     modalIsVisible: false,
     show: false,
     selectedDay: new Date(),
-    time: ""
+    time: "",
+    custID: decode(localStorage.getItem("adeptcust_token")).user.custID
   };
 
   setMessage = data => {
@@ -23,7 +24,7 @@ export default class DashBodyItem extends Component {
 
   setPickupDate = () => {
     const pickUpDate = {
-      custID: parseInt(this.props.custID),
+      custID: parseInt(this.state.custID),
       jobid: this.props.data[5],
       date: this.state.selectedDay
     };
@@ -61,7 +62,7 @@ export default class DashBodyItem extends Component {
   render() {
     const { modalIsVisible } = this.state;
     return (
-      <div className="dash-body-items" onClick={this.toggleModal}>
+      <div className="dash-body-items">
         <Modal
           title="PICKUP"
           isVisible={modalIsVisible}
@@ -102,6 +103,11 @@ export default class DashBodyItem extends Component {
             return <span className="dash-header child">{header}</span>;
           }
         })}
+        <span className="dash-header child">
+          <button className="open" onClick={this.toggleModal}>
+            MORE
+          </button>
+        </span>
       </div>
     );
   }
