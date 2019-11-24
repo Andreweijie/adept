@@ -10,6 +10,7 @@ const express = require("express"),
   User = require("../models/User"),
   Cust = require("../models/Customer"),
   path = require("path"),
+  Admin = require("../models/Admin"),
   { totp } = require("node-otp");
 
 let config = require("../config");
@@ -126,7 +127,6 @@ router.post("/admin-register", (req, res) => {
       return res.status(400).json({ email: "Email already exists" }); //check DB for existing email and return error message if exists
     } else {
       const newUser = new Admin(req.body);
-      newUser.save();
       //hash password before saving user in DB
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {

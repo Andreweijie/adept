@@ -61,7 +61,7 @@ class ChangePassword extends Component {
   };
 
   render() {
-    console.log(decode(localStorage.getItem("adeptcust_token")).user.email);
+    //console.log(decode(localStorage.getItem("adeptcust_token")).user.email);
     return (
       <div className="change-page">
         <div id="change-box">
