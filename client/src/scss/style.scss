@@ -543,6 +543,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    border-bottom: 2px solid #f2f2f2;
     .modal-head {
       color: #4a14ff;
     }
@@ -556,6 +557,12 @@
 
 @media only screen and (max-width: 500px) {
   /* For mobile phones: */
+  .date-time-div {
+    flex-direction: column;
+    .confirm-date {
+      margin-top: 8px;
+    }
+  }
   .modal-item {
     display: flex;
     flex-direction: column;
@@ -837,8 +844,12 @@ table {
 }
 
 .date-time-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   input {
     padding: 4px;
+    width: 240px;
   }
   #set-time {
     display: flex;
@@ -875,16 +886,16 @@ input {
 .all-box::-webkit-scrollbar,
 .dash-box::-webkit-scrollbar,
 .active-jobs::-webkit-scrollbar {
-  width: 0px; /* Remove scrollbar space */
+  width: 0px;
   height: 0px;
-  background: transparent; /* Optional: just make scrollbar invisible */
+  background: transparent;
 }
 
 .all-box::-webkit-scrollbar-thumb,
 .dash-box::-webkit-scrollbar-thumb,
 .active-jobs::-webkit-scrollbar-thumb {
   background: #f2f2f2;
-  width: 0px; /* Remove scrollbar space */
+  width: 0px;
   height: 0px;
   background: transparent;
 }
@@ -897,7 +908,6 @@ input {
   color: #4a14ff;
   border-radius: 0.3em;
   transition: 0.5s;
-  margin-top: 8px;
 }
 
 .enquiry {
@@ -1060,6 +1070,7 @@ hr {
     padding: 16px;
     span.dash-header {
       font-weight: 600;
+      font-size: 18px;
     }
   }
   .dash-body-items {

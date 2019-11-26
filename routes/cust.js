@@ -78,7 +78,7 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
     );
     const mailOptions = {
       from: "andregoh1996@gmail.com",
-      to: "andreweijie@outlook.com",
+      to: "adepttest19@gmail.com",
       subject: itemDesc,
       html: textToSend,
       attachments: attach
@@ -232,7 +232,7 @@ router.post("/set-pickup", (req, res) => {
 
     const mailOptions = {
       from: "andregoh1996@gmail.com",
-      to: "andreweijie@outlook.com",
+      to: "adepttest19@gmail.com",
       subject: "Confirm Pick Up",
       html: textToSend
     };

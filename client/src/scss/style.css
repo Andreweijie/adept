@@ -865,6 +865,7 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  border-bottom: 2px solid #f2f2f2;
 }
 
 .modal-item .modal-row .modal-head {
@@ -879,6 +880,15 @@
 
 @media only screen and (max-width: 500px) {
   /* For mobile phones: */
+  .date-time-div {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .date-time-div .confirm-date {
+    margin-top: 8px;
+  }
   .modal-item {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1233,8 +1243,21 @@ table tr td span {
   font-size: 15px;
 }
 
+.date-time-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .date-time-div input {
   padding: 4px;
+  width: 240px;
 }
 
 .date-time-div #set-time {
@@ -1277,10 +1300,8 @@ input {
 .dash-box::-webkit-scrollbar,
 .active-jobs::-webkit-scrollbar {
   width: 0px;
-  /* Remove scrollbar space */
   height: 0px;
   background: transparent;
-  /* Optional: just make scrollbar invisible */
 }
 
 .all-box::-webkit-scrollbar-thumb,
@@ -1288,7 +1309,6 @@ input {
 .active-jobs::-webkit-scrollbar-thumb {
   background: #f2f2f2;
   width: 0px;
-  /* Remove scrollbar space */
   height: 0px;
   background: transparent;
 }
@@ -1302,7 +1322,6 @@ input {
   border-radius: 0.3em;
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  margin-top: 8px;
 }
 
 .enquiry {
@@ -1558,6 +1577,7 @@ hr {
 .dash-item .dash-headers span.dash-header,
 .dash-item .dash-body-items span.dash-header {
   font-weight: 600;
+  font-size: 18px;
 }
 
 .dash-item .dash-body-items {

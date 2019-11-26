@@ -98,7 +98,11 @@ export default class DashBodyItem extends Component {
         </Modal>
         {this.props.data.map((header, index) => {
           if (index == 4 || index == 5) {
-            return <span className="dash-header">{header}</span>;
+            return (
+              <span onClick={this.toggleModal} className="dash-header">
+                {header}
+              </span>
+            );
           } else {
             return <span className="dash-header child">{header}</span>;
           }

@@ -80,7 +80,7 @@ router.post("/confirm", (req, res) => {
 
                 const mailOptions = {
                   from: "andregoh1996@gmail.com",
-                  to: "andreweijie@outlook.com",
+                  to: "adepttest19@gmail.com",
                   subject: `[UPDATE] Job Confirmed`,
                   html: textToSend
                 };
@@ -134,7 +134,7 @@ router.post("/confirm", (req, res) => {
 
               const mailOptions = {
                 from: "andregoh1996@gmail.com",
-                to: "andreweijie@outlook.com",
+                to: "adepttest19@gmail.com",
                 subject: `[UPDATE] Job Confirmed`,
                 html: textToSend
               };
@@ -277,7 +277,7 @@ router.get("/confirm-pickup", (req, res) => {
           if (err) console.log(err);
           else console.log("sent");
         });
-        res.json(doc);
+        res.redirect("app.adeptelectronics.com.sg");
       }
     }
   );
@@ -300,7 +300,7 @@ router.delete("/reject-pickup", (req, res) => {
         if (err) console.log(err);
         else console.log("sent");
       });
-      res.json(doc);
+      res.redirect("app.adeptelectronics.com.sg");
     }
   });
 });

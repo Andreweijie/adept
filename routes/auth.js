@@ -243,9 +243,7 @@ router.get("/verification", (req, res) => {
       user
         .save()
         .then(user =>
-          res.sendFile(
-            path.join(__dirname, "../views/html/account-confirmed.html")
-          )
+          res.redirect("http://adeptelectronics.com.sg/account-confirmed.html")
         );
     }
   });
