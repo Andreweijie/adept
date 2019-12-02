@@ -18,9 +18,37 @@ class App extends Component {
   state = {
     loggedIn: auth.loggedIn()
   };
+  auth = new AuthUtils();
   componentDidMount() {
     //console.log(decode(localStorage.getItem("adeptcust_token")));
     //console.log(config.serverHost);
+    if (localStorage.getItem("adeptcust_token")) {
+      let user = decode(localStorage.getItem("adeptcust_token")).user;
+      if (!user.custID) {
+        let email = {
+          email: user.email
+        };
+
+        fetch(`${config.serverHost}/backend/api/check-id`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(email)
+        })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
+            if (!data.success) {
+              return;
+            } else {
+              this.auth.setToken(data.adeptcust_token, "adeptcust_token");
+            }
+          });
+      } else {
+        console.log("existing customer");
+      }
+    }
   }
   handleStatus = trueOrFalse => {
     console.log("changing");

@@ -36,7 +36,6 @@ router.post("/register", (req, res) => {
     if (user) {
       return res.status(400).json({ email: "Email already exists" }); //check DB for existing email and return error message if exists
     } else {
-      let custID = 0;
       let newUser;
       //send verification email
       console.log(req.body.email);
@@ -82,7 +81,6 @@ router.post("/register", (req, res) => {
         } else {
           console.log("haha");
           newUser = new User({
-            custID: custID,
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
@@ -212,12 +210,15 @@ router.post("/login", (req, res) => {
       bcrypt.compare(userInput.password, user.password).then(isMatch => {
         if (isMatch) {
           //create user information object
-          console.log(user.custId);
+          let customerId = false;
+          if (user.custID) {
+            customerId = user.custID;
+          }
           const payload = {
             user: {
               name: user.name,
               email: user.email,
-              custID: user.custID
+              custID: customerId
             }
           };
           //create and sign JSON Web Token
@@ -299,6 +300,32 @@ router.post("/change-password", (req, res) => {
           });
         });
       }
+    }
+  });
+});
+
+router.post("/check-id", (req, res) => {
+  const email = req.body.email;
+
+  Customer.findOne({ email: email }, (err, customer) => {
+    if (!customer) {
+      res.json({ success: false });
+    } else {
+      User.findOne({ email: email }, (err, user) => {
+        user.custID = customer.id;
+        user.save();
+        const payload = {
+          user: {
+            name: user.name,
+            email: user.email,
+            custID: customer.id
+          }
+        };
+
+        jwt.sign(payload, "secret", { expiresIn: 300000 }, (err, token) => {
+          res.json({ success: true, adeptcust_token: token });
+        });
+      });
     }
   });
 });
