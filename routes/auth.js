@@ -240,12 +240,15 @@ router.get("/verification", (req, res) => {
   User.findOne({ email: req.query.email }).then(user => {
     console.log(user);
     if (user.verToken == req.query.token) {
+      console.log("object");
       user.isVerified = true;
       user
         .save()
         .then(user =>
           res.redirect("http://adeptelectronics.com.sg/account-confirmed.html")
         );
+    } else {
+      res.send("Sorry the activation link has expired!");
     }
   });
 });

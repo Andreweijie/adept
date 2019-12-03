@@ -86,8 +86,9 @@ class Register extends Component {
               {this.state.newCust ? (
                 <div className="cols">
                   <div className="input-field">
-                    <label htmlFor="name">Name</label>
+                    <label htmlFor="name">Name*</label>
                     <input
+                      required
                       onChange={this.onChange}
                       value={this.state.name}
                       id="name"
@@ -95,8 +96,9 @@ class Register extends Component {
                     />
                   </div>
                   <div className="input-field">
-                    <label htmlFor="company">Company</label>
+                    <label htmlFor="company">Company*</label>
                     <input
+                      required
                       onChange={this.onChange}
                       value={this.state.company}
                       id="company"
@@ -104,8 +106,9 @@ class Register extends Component {
                     />
                   </div>
                   <div className="input-field">
-                    <label htmlFor="jobTitle">Job Title</label>
+                    <label htmlFor="jobTitle">Job Title*</label>
                     <input
+                      required
                       onChange={this.onChange}
                       value={this.state.jobTitle}
                       id="jobTitle"
@@ -113,8 +116,9 @@ class Register extends Component {
                     />
                   </div>
                   <div className="input-field">
-                    <label htmlFor="address">address</label>
+                    <label htmlFor="address">address*</label>
                     <input
+                      required
                       onChange={this.onChange}
                       value={this.state.address}
                       id="address"
@@ -152,8 +156,9 @@ class Register extends Component {
               ) : null}
               <div class="cols">
                 <div className="input-field">
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email">Email*</label>
                   <input
+                    required
                     autocomplete="off"
                     onChange={this.onChange}
                     value={this.state.email}
@@ -162,8 +167,9 @@ class Register extends Component {
                   />
                 </div>
                 <div className="input-field">
-                  <label htmlFor="password">Password</label>
+                  <label htmlFor="password">Password*</label>
                   <input
+                    required
                     autocomplete="new-password"
                     onChange={this.onChange}
                     value={this.state.password}
@@ -172,8 +178,9 @@ class Register extends Component {
                   />
                 </div>
                 <div className="input-field">
-                  <label htmlFor="password2">Confirm Password</label>
+                  <label htmlFor="password2">Confirm Password*</label>
                   <input
+                    required
                     onChange={this.onChange}
                     value={this.state.password2}
                     id="password2"

@@ -30,16 +30,13 @@ const UserSchema = new Schema({
     required: true
   },
   custPostCode: {
-    type: Number,
-    required: true
+    type: Number
   },
   custTel: {
-    type: Number,
-    required: true
+    type: Number
   },
   custFax: {
-    type: Number,
-    required: true
+    type: Number
   },
   date: {
     type: Date,

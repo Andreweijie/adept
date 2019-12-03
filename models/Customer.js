@@ -38,8 +38,7 @@ const CustSchema = new Schema({
     default: "Singapore"
   },
   custTel: {
-    type: String,
-    required: true
+    type: String
   },
   custFax: {
     type: String
