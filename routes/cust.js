@@ -228,6 +228,7 @@ router.post("/set-pickup", (req, res) => {
     let dateObj = new Date(req.body.date);
     dateObj.setHours(dateObj.getHours() + 8);
     let dateToSend = dateObj.toLocaleString("en-US", options);
+    console.log(dateToSend);
     console.log(req.body);
     let textToSend = config.html.confirmPickup(req.body.jobid, dateToSend);
 
@@ -264,6 +265,18 @@ router.post("/set-pickup", (req, res) => {
         }
       }
     );
+  });
+});
+
+router.post("/check-pickup", (req, res) => {
+  Pickup.findOne({ jobid: req.body.jobid }, (err, doc) => {
+    if (err) {
+      console.log(err);
+    } else if (!doc) {
+      res.json({ pickUpSet: false });
+    } else {
+      res.json({ pickUpSet: true });
+    }
   });
 });
 module.exports = router;

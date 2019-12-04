@@ -14,6 +14,12 @@ export default class DashBodyItem extends Component {
     custID: decode(localStorage.getItem("adeptcust_token")).user.custID
   };
 
+  componentDidMount() {
+    if (this.props.active && this.props.data[4] === "Awaiting Pickup") {
+      this.checkPickup();
+    }
+  }
+
   setMessage = data => {
     if (data.message) {
       message("Success!", "success", 4);
@@ -46,6 +52,23 @@ export default class DashBodyItem extends Component {
         }
       });
   };
+
+  checkPickup = () => {
+    const jobId = this.props.data[5];
+    fetch(`${config.serverHost}/backend/cust/check-pickup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ jobid: jobId })
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (!data.pickUpSet) {
+          message(`Please click on MORE and set pickup date for JOB ${jobId}`);
+        }
+      });
+  };
   handleDayChange = day => {
     this.setState({ selectedDay: day });
   };
@@ -61,6 +84,7 @@ export default class DashBodyItem extends Component {
   };
   render() {
     const { modalIsVisible } = this.state;
+    console.log(this.props.data);
     return (
       <div className="dash-body-items">
         <Modal
