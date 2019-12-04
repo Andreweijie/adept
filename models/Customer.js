@@ -30,8 +30,7 @@ const CustSchema = new Schema({
     required: true
   },
   custPostCode: {
-    type: String,
-    required: true
+    type: String
   },
   custCountry: {
     type: String,

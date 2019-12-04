@@ -47,6 +47,9 @@ router.post("/confirm", (req, res) => {
         };
         const newCust = new Customer(newCustData);
         newCust.save((err, customer) => {
+          if (err) {
+            console.log(err);
+          }
           Job.findOne({ id: { $ne: "id" } })
             .sort("-id")
             .exec((err, doc2) => {
@@ -277,7 +280,7 @@ router.get("/confirm-pickup", (req, res) => {
           if (err) console.log(err);
           else console.log("sent");
         });
-        res.redirect("app.adeptelectronics.com.sg");
+        res.redirect("http://admin.adeptelectronics.com.sg");
       }
     }
   );
@@ -300,7 +303,7 @@ router.delete("/reject-pickup", (req, res) => {
         if (err) console.log(err);
         else console.log("sent");
       });
-      res.redirect("app.adeptelectronics.com.sg");
+      res.redirect("http://admin.adeptelectronics.com.sg");
     }
   });
 });
