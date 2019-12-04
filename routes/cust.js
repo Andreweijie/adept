@@ -226,6 +226,7 @@ router.post("/set-pickup", (req, res) => {
       hour: "numeric"
     };
     let dateObj = new Date(req.body.date);
+    dateObj.setHours(dateObj.getHours() + 8);
     let dateToSend = dateObj.toLocaleString("en-US", options);
     console.log(req.body);
     let textToSend = config.html.confirmPickup(req.body.jobid, dateToSend);

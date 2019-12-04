@@ -28,7 +28,8 @@ export default class Dashboard extends Component {
         "Job Status",
         "Job ID",
         "Item Desc",
-        "Quote Amt"
+        "Quote Amt",
+        "Pickup Date"
       ],
       activeBody: [],
       user: decode(localStorage.getItem("adeptcust_token")).user

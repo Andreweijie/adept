@@ -83,7 +83,7 @@ router.post("/confirm", (req, res) => {
 
                 const mailOptions = {
                   from: "andregoh1996@gmail.com",
-                  to: "adepttest19@gmail.com",
+                  to: user.email,
                   subject: `[UPDATE] Job Confirmed`,
                   html: textToSend
                 };
@@ -164,16 +164,6 @@ router.post("/confirm", (req, res) => {
 //route for updating job status
 router.post("/change-status", (req, res) => {
   const textToSend = config.html.changeStatus(req.body.jobId, req.body.status);
-  const mailOptions = {
-    from: "andregoh1996@gmail.com",
-    to: "adepttest19@gmail.com",
-    subject: `[UPDATE] Job ${req.body.jobId}`,
-    html: textToSend
-  };
-  transporter.sendMail(mailOptions, (err, info) => {
-    if (err) console.log(err);
-    else console.log("sent");
-  });
 
   jobId = req.body.jobId;
   newStatus = req.body.status;
@@ -185,9 +175,26 @@ router.post("/change-status", (req, res) => {
       if (err) {
         console.log(err);
       }
-
-      res.json({ message: "updated" });
-      console.log(doc);
+      Pickup.findOneAndUpdate(
+        { jobid: jobId },
+        { picked: true },
+        (err, doc2) => {
+          Customer.findOne({ id: doc.custID }, (err, doc1) => {
+            const mailOptions = {
+              from: "andregoh1996@gmail.com",
+              to: doc1.email,
+              subject: `[UPDATE] Job ${req.body.jobId}`,
+              html: textToSend
+            };
+            transporter.sendMail(mailOptions, (err, info) => {
+              if (err) console.log(err);
+              else console.log("sent");
+            });
+            res.json({ message: "updated" });
+            console.log(doc);
+          });
+        }
+      );
     }
   );
 });
@@ -226,7 +233,7 @@ router.get("/all-jobs", (req, res) => {
 });
 //get pickups
 router.get("/pickups", (req, res) => {
-  Pickup.find({ confirmed: true }, (err, docs) => {
+  Pickup.find({ confirmed: true, picked: false }, (err, docs) => {
     if (err) {
       console.log(err);
     } else {
@@ -239,12 +246,12 @@ router.get("/pickups", (req, res) => {
       };
       let newDocs = docs.map(e => {
         let newObj = e.toObject();
-        newObj.date = newObj.date.toLocaleString("en-US", options);
+        newObj.date = newObj.date.toLocaleString("fa-IR", options);
         return newObj;
       });
       res.json(newDocs);
     }
-  }).select("-__v -_id -confirmed");
+  }).select("-__v -_id -confirmed -picked");
 });
 //get all customers
 router.get("/customers", (req, res) => {
@@ -272,7 +279,7 @@ router.get("/confirm-pickup", (req, res) => {
         let textToSend = config.html.pickupConfirmed(req.query.jobid, doc.date);
         const mailOptions = {
           from: "andregoh1996@gmail.com",
-          to: "adepttest19@gmail.com",
+          to: doc.email,
           subject: `[UPDATE] Job ${req.query.jobid}`,
           html: textToSend
         };
@@ -295,7 +302,7 @@ router.delete("/reject-pickup", (req, res) => {
       let textToSend = config.html.rejectPickup();
       const mailOptions = {
         from: "andregoh1996@gmail.com",
-        to: "adepttest19@gmail.com",
+        to: doc.email,
         subject: `[UPDATE] Job ${req.query.jobid}`,
         html: textToSend
       };

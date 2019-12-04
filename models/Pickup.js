@@ -34,6 +34,11 @@ const UserSchema = new Schema({
     type: Boolean,
     required: true,
     default: false
+  },
+  picked: {
+    type: Boolean,
+    required: true,
+    default: false
   }
 });
 module.exports = Pickup = mongoose.model("pickups", UserSchema);
