@@ -246,7 +246,7 @@ router.get("/pickups", (req, res) => {
       };
       let newDocs = docs.map(e => {
         let newObj = e.toObject();
-        newObj.date = newObj.date.toLocaleString("fa-IR", options);
+        newObj.date = newObj.date.toLocaleString("en-US", options);
         return newObj;
       });
       res.json(newDocs);

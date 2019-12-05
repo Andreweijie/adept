@@ -49,6 +49,7 @@ class Register extends Component {
       .then(response => response.json())
       .then(data => {
         console.log(data);
+        //use data TODO
         message(
           "Success! Please check your email to confirm your account!",
           "success",
