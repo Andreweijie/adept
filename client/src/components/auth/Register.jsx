@@ -49,13 +49,20 @@ class Register extends Component {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        //use data TODO
-        message(
-          "Success! Please check your email to confirm your account!",
-          "success",
-          5
-        );
-        this.props.history.replace("/customer/login");
+        if (data.email) {
+          message(data.email, "error", 4);
+        } else if (data.name) {
+          message(
+            "Success! Please check your email to confirm your account!",
+            "success",
+            5
+          );
+          this.props.history.replace("/customer/login");
+        } else {
+          this.setState({
+            errors: data
+          });
+        }
       });
   };
   changeToExisting = e => {
@@ -157,7 +164,12 @@ class Register extends Component {
               ) : null}
               <div class="cols">
                 <div className="input-field">
-                  <label htmlFor="email">Email*</label>
+                  <label htmlFor="email">
+                    Email*{" "}
+                    {this.state.errors.email ? (
+                      <span>{this.state.errors.email}</span>
+                    ) : null}
+                  </label>
                   <input
                     required
                     autocomplete="off"
@@ -168,7 +180,12 @@ class Register extends Component {
                   />
                 </div>
                 <div className="input-field">
-                  <label htmlFor="password">Password*</label>
+                  <label htmlFor="password">
+                    Password*{" "}
+                    {this.state.errors.password ? (
+                      <span>{this.state.errors.password}</span>
+                    ) : null}
+                  </label>
                   <input
                     required
                     autocomplete="new-password"
@@ -179,7 +196,12 @@ class Register extends Component {
                   />
                 </div>
                 <div className="input-field">
-                  <label htmlFor="password2">Confirm Password*</label>
+                  <label htmlFor="password2">
+                    Confirm Password*{" "}
+                    {this.state.errors.password2 ? (
+                      <span>{this.state.errors.password2}</span>
+                    ) : null}
+                  </label>
                   <input
                     required
                     onChange={this.onChange}

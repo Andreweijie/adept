@@ -22,7 +22,7 @@ export default class DashBodyItem extends Component {
 
   setMessage = data => {
     if (data.message) {
-      message("Success!", "success", 4);
+      message("Success! Pickup Date Set!", "success", 4);
     } else {
       message("Failed!", "error", 4);
     }
@@ -46,9 +46,12 @@ export default class DashBodyItem extends Component {
       .then(data => {
         if (data) {
           this.setMessage(data);
-          this.setState({
-            show: false
-          });
+          this.setState(
+            {
+              show: false
+            },
+            this.toggleModal()
+          );
         }
       });
   };

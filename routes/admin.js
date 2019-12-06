@@ -120,39 +120,45 @@ router.post("/confirm", (req, res) => {
             newTask.custID = user.custID;
 
             const newJob = new Job(newTask);
-            newJob.save(err => {
+
+            Customer.findOne({ id: user.custID }, (err, doc) => {
               if (err) {
                 console.log(err);
               }
-
-              let textToSend = config.html.confirmJob(
-                newTask.jobid,
-                newTask.itemDesc,
-                newTask.manufacturer,
-                newTask.modelNo,
-                newTask.serialNo,
-                newTask.faultDesc,
-                req.body.quote
-              );
-
-              const mailOptions = {
-                from: "andregoh1996@gmail.com",
-                to: "adepttest19@gmail.com",
-                subject: `[UPDATE] Job Confirmed`,
-                html: textToSend
-              };
-              transporter.sendMail(mailOptions, (err, info) => {
-                if (err) console.log(err);
-                else console.log("sent");
-              });
-
-              //remove temporary job from database
-              Temp.deleteOne({ enquiryId: enquiryId }, err => {
+              newJob.save(err => {
                 if (err) {
                   console.log(err);
-                } else {
-                  res.json({ message: "success" });
                 }
+
+                let textToSend = config.html.confirmJob(
+                  newTask.jobid,
+                  newTask.itemDesc,
+                  newTask.manufacturer,
+                  newTask.modelNo,
+                  newTask.serialNo,
+                  newTask.faultDesc,
+                  req.body.quote
+                );
+
+                const mailOptions = {
+                  from: "andregoh1996@gmail.com",
+                  to: doc.email,
+                  subject: `[UPDATE] Job Confirmed`,
+                  html: textToSend
+                };
+                transporter.sendMail(mailOptions, (err, info) => {
+                  if (err) console.log(err);
+                  else console.log("sent");
+                });
+
+                //remove temporary job from database
+                Temp.deleteOne({ enquiryId: enquiryId }, err => {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    res.json({ message: "success" });
+                  }
+                });
               });
             });
           });
@@ -251,7 +257,9 @@ router.get("/pickups", (req, res) => {
       });
       res.json(newDocs);
     }
-  }).select("-__v -_id -confirmed -picked");
+  })
+    .select("-__v -_id -confirmed -picked")
+    .sort("date");
 });
 //get all customers
 router.get("/customers", (req, res) => {

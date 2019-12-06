@@ -338,7 +338,7 @@
           .cols {
             display: flex;
             flex-direction: column;
-
+            width: 40%;
             input {
               border: none;
               background-color: #f1f3f7;
@@ -1102,4 +1102,13 @@ hr {
   font-weight: bold;
   padding-left: 0.8em;
   padding-right: 0.8em;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  span {
+    font-size: 12px;
+    color: #dd032a;
+  }
 }

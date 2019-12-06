@@ -563,6 +563,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  width: 40%;
 }
 
 .App .login-page #back-box #register-box .form-box .cols input,
@@ -1616,5 +1617,20 @@ hr {
   font-weight: bold;
   padding-left: 0.8em;
   padding-right: 0.8em;
+}
+
+label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+label span {
+  font-size: 12px;
+  color: #dd032a;
 }
 /*# sourceMappingURL=style.css.map */
