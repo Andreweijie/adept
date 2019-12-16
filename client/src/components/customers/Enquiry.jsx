@@ -73,7 +73,17 @@ class Register extends Component {
                 type="text"
                 name="itemDesc"
               />
-              <label htmlFor="itemDesc">Item Description</label>
+              <label
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center"
+                }}
+                htmlFor="itemDesc"
+              >
+                Item Description
+                <span style={{ color: "red", fontSize: 20 }}>*</span>
+              </label>
             </div>
             <div className="brand-model">
               <div>
@@ -84,7 +94,16 @@ class Register extends Component {
                   type="text"
                   name="brand"
                 />
-                <label htmlFor="brand">Brand</label>
+                <label
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center"
+                  }}
+                  htmlFor="brand"
+                >
+                  Brand<span style={{ color: "red", fontSize: 20 }}>*</span>
+                </label>
               </div>
               <div>
                 <input
@@ -94,7 +113,16 @@ class Register extends Component {
                   type="text"
                   name="model"
                 />
-                <label htmlFor="model">Model</label>
+                <label
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center"
+                  }}
+                  htmlFor="model"
+                >
+                  Model<span style={{ color: "red", fontSize: 20 }}>*</span>
+                </label>
               </div>
             </div>
             <div className="item-desc">
@@ -105,7 +133,16 @@ class Register extends Component {
                 type="text"
                 name="serialNo"
               />
-              <label htmlFor="subject">Serial No</label>
+              <label
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center"
+                }}
+                htmlFor="subject"
+              >
+                Serial No<span style={{ color: "red", fontSize: 20 }}>*</span>
+              </label>
             </div>
             <div className="fault-desc">
               <textarea
@@ -114,7 +151,16 @@ class Register extends Component {
                 id="faultDesc"
                 name="faultDesc"
               />
-              <label htmlFor="faultDesc">Symptoms</label>
+              <label
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center"
+                }}
+                htmlFor="faultDesc"
+              >
+                Symptoms<span style={{ color: "red", fontSize: 20 }}>*</span>
+              </label>
             </div>
             <div className="last-row">
               <input
