@@ -10,10 +10,12 @@ const multer = require("multer");
 let config = require("../config");
 let upload = multer({ dest: "uploads/" });
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "mail.adeptelectronics.com.sg",
+  port: 465,
+  secure: true,
   auth: {
-    user: "andregoh1996@gmail.com",
-    pass: "Chaostar@1"
+    user: "test@adeptelectronics.com.sg",
+    pass: "#xzlT+%w2fj?"
   }
 });
 getNextJobID = jobid => {
