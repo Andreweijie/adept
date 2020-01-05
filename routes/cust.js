@@ -79,7 +79,7 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
       checkEmpty(doc.faultDesc)
     );
     const mailOptions = {
-      from: "andregoh1996@gmail.com",
+      from: "test@adeptelectronics.com.sg",
       to: "adepttest19@gmail.com",
       subject: itemDesc,
       html: textToSend,
@@ -235,7 +235,7 @@ router.post("/set-pickup", (req, res) => {
     let textToSend = config.html.confirmPickup(req.body.jobid, dateToSend);
 
     const mailOptions = {
-      from: "andregoh1996@gmail.com",
+      from: "test@adeptelectronics.com.sg",
       to: "adepttest19@gmail.com",
       subject: "Confirm Pick Up",
       html: textToSend

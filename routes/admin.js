@@ -84,7 +84,7 @@ router.post("/confirm", (req, res) => {
                 );
 
                 const mailOptions = {
-                  from: "andregoh1996@gmail.com",
+                  from: "test@adeptelectronics.com.sg",
                   to: user.email,
                   subject: `[UPDATE] Job Confirmed`,
                   html: textToSend
@@ -143,7 +143,7 @@ router.post("/confirm", (req, res) => {
                 );
 
                 const mailOptions = {
-                  from: "andregoh1996@gmail.com",
+                  from: "test@adeptelectronics.com.sg",
                   to: doc.email,
                   subject: `[UPDATE] Job Confirmed`,
                   html: textToSend
@@ -189,7 +189,7 @@ router.post("/change-status", (req, res) => {
         (err, doc2) => {
           Customer.findOne({ id: doc.custID }, (err, doc1) => {
             const mailOptions = {
-              from: "andregoh1996@gmail.com",
+              from: "test@adeptelectronics.com.sg",
               to: doc1.email,
               subject: `[UPDATE] Job ${req.body.jobId}`,
               html: textToSend
@@ -254,7 +254,9 @@ router.get("/pickups", (req, res) => {
       };
       let newDocs = docs.map(e => {
         let newObj = e.toObject();
-        newObj.date = newObj.date.toLocaleString("en-US", options);
+        let dateObj = new Date(newObj.date);
+        dateObj.setHours(dateObj.getHours() + 8);
+        newObj.date = dateObj.toLocaleString("en-US", options);
         return newObj;
       });
       res.json(newDocs);
@@ -286,9 +288,19 @@ router.get("/confirm-pickup", (req, res) => {
         console.log(err);
         res.json(err);
       } else {
-        let textToSend = config.html.pickupConfirmed(req.query.jobid, doc.date);
+        let options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "numeric"
+        };
+        let dateObj = new Date(doc.date);
+        dateObj.setHours(dateObj.getHours() + 8);
+        dateObj = dateObj.toLocaleString("en-US", options);
+        let textToSend = config.html.pickupConfirmed(req.query.jobid, dateObj);
         const mailOptions = {
-          from: "andregoh1996@gmail.com",
+          from: "test@adeptelectronics.com.sg",
           to: doc.email,
           subject: `[UPDATE] Job ${req.query.jobid}`,
           html: textToSend
@@ -311,7 +323,7 @@ router.delete("/reject-pickup", (req, res) => {
     } else {
       let textToSend = config.html.rejectPickup();
       const mailOptions = {
-        from: "andregoh1996@gmail.com",
+        from: "test@adeptelectronics.com.sg",
         to: doc.email,
         subject: `[UPDATE] Job ${req.query.jobid}`,
         html: textToSend

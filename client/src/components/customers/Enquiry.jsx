@@ -30,10 +30,7 @@ class Register extends Component {
     e.preventDefault();
     let dataToSubmit = new FormData(this.formRef.current);
     fetch(
-      config.serverHost +
-        "/backend/cust/enquiry?custID=" +
-        "&email=" +
-        this.state.email,
+      config.serverHost + "/backend/cust/enquiry?email=" + this.state.email,
       {
         method: "POST",
         body: dataToSubmit

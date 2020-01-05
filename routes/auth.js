@@ -53,7 +53,7 @@ router.post("/register", (req, res) => {
         req.body.email
       );
       const mailOptions = {
-        from: "andregoh1996@gmail.com",
+        from: "test@adeptelectronics.com.sg",
         to: req.body.email,
         subject: "Verify Your Account",
         html: textToSend
@@ -262,7 +262,7 @@ router.get("/forget", (req, res) => {
 
   const textToSend = config.html.resetPassword(forgetOtp);
   const mailOptions = {
-    from: "andregoh1996@gmail.com",
+    from: "test@adeptelectronics.com.sg",
     to: email,
     subject: "Change your account password",
     html: textToSend
