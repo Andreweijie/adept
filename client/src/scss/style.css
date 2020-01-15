@@ -1633,4 +1633,8 @@ label span {
   font-size: 12px;
   color: #dd032a;
 }
+
+.react-datepicker__day--selected {
+  background-color: #291aa4 !important;
+}
 /*# sourceMappingURL=style.css.map */
