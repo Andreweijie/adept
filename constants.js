@@ -1,7 +1,7 @@
-const DATABASE_NAME = "demo";
-const USERNAME = "root";
-const PASSWORD = "";
-const HOST = "localhost";
+const DATABASE_NAME = "adeptele_web_test";
+const USERNAME = "adeptele_webapp";
+const PASSWORD = "UR#DLG8U$Ej#";
+const HOST = "119.31.235.145";
 const DIALECT = "mysql";
 module.exports = {
   DATABASE_NAME: DATABASE_NAME,

@@ -1,8 +1,16 @@
 const Sequelize = require("sequelize");
-const AuthorModel = require("./models/author");
-const BookModel = require("./models/book");
-const { DATABASE_NAME, ROOT, PASSWORD, HOST, DIALECT } = require("./constants");
-const sequelize = new Sequelize(DATABASE_NAME, ROOT, PASSWORD, {
+const JobModel = require("./sql-models/Job");
+const CustomerModel = require("./sql-models/Customer");
+const StatusModel = require("./sql-models/Status");
+const TypeModel = require("./sql-models/Type");
+const {
+  DATABASE_NAME,
+  USERNAME,
+  PASSWORD,
+  HOST,
+  DIALECT
+} = require("./constants");
+const sequelize = new Sequelize(DATABASE_NAME, USERNAME, PASSWORD, {
   host: HOST,
   dialect: DIALECT,
   pool: {
@@ -12,14 +20,16 @@ const sequelize = new Sequelize(DATABASE_NAME, ROOT, PASSWORD, {
     idle: 10000
   }
 });
-const Book = BookModel(sequelize, Sequelize);
-const Author = AuthorModel(sequelize, Sequelize);
+const Job = JobModel(sequelize, Sequelize);
+const Customer = CustomerModel(sequelize, Sequelize);
+const Status = StatusModel(sequelize, Sequelize);
+const Type = TypeModel(sequelize, Sequelize);
 // Author has Many to book
-Author.hasMany(Book);
-sequelize.sync({ force: false }).then(() => {
-  console.log(`Database & tables created here!`);
-});
+//Author.hasMany(Book);
+
 module.exports = {
-  Author,
-  Book
+  Job,
+  Customer,
+  Status,
+  Type
 };

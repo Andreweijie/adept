@@ -2,13 +2,16 @@ const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const User = require("../models/User");
-const Customer = require("../models/Customer");
+//const Customer = require("../models/Customer");
 const Pickup = require("../models/Pickup");
 const Temp = require("../models/Temp");
-const Job = require("../models/Job");
+//const Job = require("../models/Job");
 const multer = require("multer");
 let config = require("../config");
 let upload = multer({ dest: "uploads/" });
+const { Job, Customer, Status, Type } = require("../sequelize");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 const transporter = nodemailer.createTransport({
   host: "mail.adeptelectronics.com.sg",
   port: 465,
@@ -25,6 +28,19 @@ getNextJobID = jobid => {
   return "J" + newID;
 };
 //route for confirming a temporary order
+
+router.get("/tester", (req, res) => {
+  Job.findAll({
+    where: {
+      custID: 177,
+      [Op.or]: [{ jobStatus: "Complete" }, { jobStatus: "Return Not Repair" }]
+    }
+  }).then(function(users) {
+    console.log(users);
+    res.json(users);
+  });
+});
+
 router.post("/confirm", (req, res) => {
   let enquiryId = req.body.enquiryId;
   Temp.findOne({ enquiryId: enquiryId }, (err, temp) => {
