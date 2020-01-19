@@ -8,11 +8,11 @@ const express = require("express"),
   validateAdminInput = require("../validation/adminAcc"),
   nodemailer = require("nodemailer"),
   User = require("../models/User"),
-  Cust = require("../models/Customer"),
+  //Cust = require("../models/Customer"),
   path = require("path"),
   Admin = require("../models/Admin"),
-  { totp } = require("node-otp");
-
+  { totp } = require("node-otp"),
+  { Customer } = require("../sequelize");
 let config = require("../config");
 
 const transporter = nodemailer.createTransport({
@@ -312,7 +312,9 @@ router.post("/change-password", (req, res) => {
 router.post("/check-id", (req, res) => {
   const email = req.body.email;
 
-  Customer.findOne({ email: email }, (err, customer) => {
+  Customer.findOne({
+    where: { email: email }
+  }).then(customer => {
     if (!customer) {
       res.json({ success: false });
     } else {
@@ -333,5 +335,27 @@ router.post("/check-id", (req, res) => {
       });
     }
   });
+
+  /*Customer.findOne({ email: email }, (err, customer) => {
+    if (!customer) {
+      res.json({ success: false });
+    } else {
+      User.findOne({ email: email }, (err, user) => {
+        user.custID = customer.id;
+        user.save();
+        const payload = {
+          user: {
+            name: user.name,
+            email: user.email,
+            custID: customer.id
+          }
+        };
+
+        jwt.sign(payload, "secret", { expiresIn: 300000 }, (err, token) => {
+          res.json({ success: true, adeptcust_token: token });
+        });
+      });
+    }
+  });*/
 });
 module.exports = router;

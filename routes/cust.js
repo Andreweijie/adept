@@ -2,11 +2,14 @@ const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const User = require("../models/User");
-const Customer = require("../models/Customer");
+//const Customer = require("../models/Customer");
 const Pickup = require("../models/Pickup");
 const Temp = require("../models/Temp");
-const Job = require("../models/Job");
+//const Job = require("../models/Job");
 const multer = require("multer");
+const { Job, Customer, Status, Type } = require("../sequelize");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 let config = require("../config");
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -123,7 +126,30 @@ router.get("/history2", (req, res) => {
 });
 
 router.get("/history", (req, res) => {
-  Job.find(
+  Job.findAll({
+    where: {
+      [Op.and]: [
+        { custID: parseInt(req.query.custID) },
+        { jobStatus: { [Op.or]: ["Complete", "Return Not Repair"] } }
+      ]
+    },
+    attributes: [
+      "custID",
+      "manufacturer",
+      "modelNo",
+      "serialNo",
+      "itemDesc",
+      "jobStatus",
+      "jobid"
+    ]
+  }).then(result => {
+    if (!result) {
+      console.log(result);
+    } else {
+      res.json(result);
+    }
+  });
+  /*Job.find(
     {
       $and: [
         {
@@ -141,7 +167,7 @@ router.get("/history", (req, res) => {
     }
   ).select(
     "custId manufacturer modelNo serialNo itemDesc jobStatus jobid -_id"
-  );
+  );*/
 });
 
 //get pending jobs
@@ -193,7 +219,38 @@ router.get("/pending-jobs", (req, res) => {
 
 //get active jobs
 router.get("/active-jobs", (req, res) => {
-  Job.find(
+  Job.findAll({
+    where: {
+      [Op.and]: [
+        { custID: parseInt(req.query.custID) },
+        {
+          jobStatus: {
+            [Op.and]: [
+              { [Op.ne]: "Complete" },
+              { [Op.ne]: "Return Not Repair" }
+            ]
+          }
+        }
+      ]
+    },
+    attributes: [
+      "custID",
+      "manufacturer",
+      "modelNo",
+      "serialNo",
+      "itemDesc",
+      "jobStatus",
+      "jobid"
+    ]
+  }).then(result => {
+    if (!result) {
+      console.log(result);
+    } else {
+      res.json(result);
+    }
+  });
+
+  /*Job.find(
     {
       $and: [
         {
@@ -214,7 +271,7 @@ router.get("/active-jobs", (req, res) => {
     }
   ).select(
     "manufacturer modelNo serialNo itemDesc faultDesc jobStatus jobid quote -_id"
-  );
+  );*/
 });
 
 //set pickup date

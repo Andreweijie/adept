@@ -2,14 +2,14 @@ const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const User = require("../models/User");
-//const Customer = require("../models/Customer");
+const Customer = require("../models/Customer");
 const Pickup = require("../models/Pickup");
 const Temp = require("../models/Temp");
 //const Job = require("../models/Job");
 const multer = require("multer");
 let config = require("../config");
 let upload = multer({ dest: "uploads/" });
-const { Job, Customer, Status, Type } = require("../sequelize");
+const { Job, Status, Type } = require("../sequelize");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const transporter = nodemailer.createTransport({
@@ -68,6 +68,7 @@ router.post("/confirm", (req, res) => {
           if (err) {
             console.log(err);
           }
+
           Job.findOne({ id: { $ne: "id" } })
             .sort("-id")
             .exec((err, doc2) => {
@@ -192,7 +193,31 @@ router.post("/change-status", (req, res) => {
   jobId = req.body.jobId;
   newStatus = req.body.status;
 
-  Job.findOneAndUpdate(
+  Job.update({ jobStatus: newStatus }, { where: { jobid: jobId } }).then(() => {
+    Pickup.findOneAndUpdate(
+      { jobid: jobId },
+      { picked: true },
+      (err, pickup) => {
+        Job.findOne({ where: { jobid: jobId } }).then(job => {
+          Customer.findOne({ id: job.custID }, (err, customer) => {
+            const mailOptions = {
+              from: "test@adeptelectronics.com.sg",
+              to: customer.email,
+              subject: `[UPDATE] Job ${req.body.jobId}`,
+              html: textToSend
+            };
+            transporter.sendMail(mailOptions, (err, info) => {
+              if (err) console.log(err);
+              else console.log("sent");
+            });
+            res.json({ message: "updated" });
+          });
+        });
+      }
+    );
+  });
+
+  /*Job.findOneAndUpdate(
     { jobid: jobId },
     { jobStatus: newStatus },
     (err, doc) => {
@@ -220,7 +245,7 @@ router.post("/change-status", (req, res) => {
         }
       );
     }
-  );
+  );*/
 });
 
 //link customer ID to user account
@@ -242,7 +267,7 @@ router.post("/link-customer", (req, res) => {
 });
 //get all jobs
 router.get("/all-jobs", (req, res) => {
-  Job.find(
+  /* Job.findAll(
     { $or: [{ jobStatus: "Complete" }, { jobStatus: "Return Not Repair" }] },
     (err, docs) => {
       if (err) {
@@ -253,7 +278,33 @@ router.get("/all-jobs", (req, res) => {
     }
   ).select(
     "-_id -id -jobName -freightTerm -orderNo -adviceNoticeNo -partID -partQty -goaheaddate -repBy -finalOutBy -engReport -previousjobid -isjobwarranty -quoteCost -quoteHour -equipID -quotationComment"
-  );
+  );*/
+
+  Job.findAll({
+    attributes: [
+      "jobid",
+      "custID",
+      "manufacturer",
+      "itemDesc",
+      "modelNo",
+      "serialNo",
+      "faultDesc",
+      "jobClass",
+      "jobType",
+      "jobStatus",
+      "quote",
+      "quoteProfit",
+      "quoteBy",
+      "entryDateTime",
+      "salesperson",
+      "closedDate",
+      "jobFinishedBy",
+      "jobLocation"
+    ]
+  }).then(function(users) {
+    console.log(users);
+    res.json(users);
+  });
 });
 //get pickups
 router.get("/pickups", (req, res) => {
@@ -283,7 +334,7 @@ router.get("/pickups", (req, res) => {
 });
 //get all customers
 router.get("/customers", (req, res) => {
-  Customer.find({}, (err, docs) => {
+  /*Customer.find({}, (err, docs) => {
     if (err) {
       console.log(err);
     } else {
@@ -291,7 +342,22 @@ router.get("/customers", (req, res) => {
     }
   }).select(
     "-_id custName company jobTitle custAddress custPostCode custCountry custTel custFax"
-  );
+  );*/
+  Customer.findAll({
+    attributes: [
+      "custName",
+      "company",
+      "jobTitle",
+      "custAddress",
+      "custPostCode",
+      "custCountry",
+      "custTel",
+      "custFax"
+    ]
+  }).then(function(users) {
+    console.log(users);
+    res.json(users);
+  });
 });
 
 router.get("/confirm-pickup", (req, res) => {
