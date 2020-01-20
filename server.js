@@ -28,7 +28,7 @@ app.get("/test", (req, res) => {
 });
 mongoose
   .connect(
-    "mongodb+srv://andreweijie:1234@users-aeexa.mongodb.net/test?retryWrites=true",
+    "mongodb+srv://adeptweb:Bestfriend1@cluster0-uoq1h.gcp.mongodb.net/adept?retryWrites=true&w=majority",
     { useNewUrlParser: true, useFindAndModify: false }
   )
   .then(() => console.log("MongoDB successfully connected"))

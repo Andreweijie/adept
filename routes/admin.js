@@ -12,13 +12,19 @@ let upload = multer({ dest: "uploads/" });
 const { Job, Status, Type } = require("../sequelize");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
+const {
+  MAIL_HOST,
+  MAIL_PORT,
+  MAIL_USER,
+  MAIL_PASSWORD
+} = require("../constants");
 const transporter = nodemailer.createTransport({
-  host: "mail.adeptelectronics.com.sg",
-  port: 465,
+  host: MAIL_HOST,
+  port: MAIL_PORT,
   secure: true,
   auth: {
-    user: "test@adeptelectronics.com.sg",
-    pass: "#xzlT+%w2fj?"
+    user: MAIL_USER,
+    pass: MAIL_PASSWORD
   }
 });
 getNextJobID = jobid => {

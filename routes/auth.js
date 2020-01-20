@@ -12,16 +12,17 @@ const express = require("express"),
   path = require("path"),
   Admin = require("../models/Admin"),
   { totp } = require("node-otp"),
-  { Customer } = require("../sequelize");
+  { Customer } = require("../sequelize"),
+  { MAIL_HOST, MAIL_PORT, MAIL_USER, MAIL_PASSWORD } = require("../constants");
 let config = require("../config");
 
 const transporter = nodemailer.createTransport({
-  host: "mail.adeptelectronics.com.sg",
-  port: 465,
+  host: MAIL_HOST,
+  port: MAIL_PORT,
   secure: true,
   auth: {
-    user: "test@adeptelectronics.com.sg",
-    pass: "#xzlT+%w2fj?"
+    user: MAIL_USER,
+    pass: MAIL_PASSWORD
   }
 });
 
@@ -62,8 +63,54 @@ router.post("/register", (req, res) => {
         if (err) console.log(err);
         else console.log("sent");
       });
+      Customer.findOne({ where: { email: req.body.email } }).then(customer => {
+        if (customer) {
+          console.log(customer);
+          newUser = new User({
+            custID: customer.id,
+            name: customer.custName,
+            email: customer.email,
+            password: req.body.password,
+            company: customer.company,
+            jobTitle: customer.jobTitle,
+            custAddress: customer.custAddress,
+            custPostCode: customer.custPostCode,
+            custTel: customer.custTel,
+            custFax: customer.custFax,
+            verToken: verificationToken,
+            isVerified: false
+          });
+        } else {
+          console.log("haha");
+          newUser = new User({
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
+            company: req.body.company,
+            jobTitle: req.body.jobTitle,
+            custAddress: req.body.address,
+            custPostCode: req.body.mobileNo,
+            custTel: req.body.officeNo,
+            custFax: req.body.faxNo,
+            verToken: verificationToken,
+            isVerified: false
+          });
+        }
 
-      Cust.findOne({ email: req.body.email }, (err, doc) => {
+        //hash password before saving user in DB
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (err) throw err;
+
+            newUser.password = hash;
+            newUser
+              .save()
+              .then(user => res.json(user))
+              .catch(err => console.log(err));
+          });
+        });
+      });
+      /*Cust.findOne({ email: req.body.email }, (err, doc) => {
         if (doc) {
           console.log(doc);
           newUser = new User({
@@ -109,7 +156,7 @@ router.post("/register", (req, res) => {
               .catch(err => console.log(err));
           });
         });
-      });
+      });*/
     }
   });
 });

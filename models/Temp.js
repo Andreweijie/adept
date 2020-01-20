@@ -3,7 +3,7 @@ const mongoose = require("mongoose"),
   autoIncrement = require("mongoose-auto-increment");
 
 let connection = mongoose.createConnection(
-  "mongodb+srv://andreweijie:1234@users-aeexa.mongodb.net/test?retryWrites=true"
+  "mongodb+srv://adeptweb:Bestfriend1@cluster0-uoq1h.gcp.mongodb.net/adept?retryWrites=true&w=majority"
 );
 
 autoIncrement.initialize(connection);

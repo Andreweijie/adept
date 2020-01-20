@@ -10,6 +10,12 @@ const multer = require("multer");
 const { Job, Customer, Status, Type } = require("../sequelize");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
+const {
+  MAIL_HOST,
+  MAIL_PORT,
+  MAIL_USER,
+  MAIL_PASSWORD
+} = require("../constants");
 let config = require("../config");
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -21,12 +27,12 @@ let storage = multer.diskStorage({
 });
 let upload = multer({ storage: storage });
 const transporter = nodemailer.createTransport({
-  host: "mail.adeptelectronics.com.sg",
-  port: 465,
+  host: MAIL_HOST,
+  port: MAIL_PORT,
   secure: true,
   auth: {
-    user: "test@adeptelectronics.com.sg",
-    pass: "#xzlT+%w2fj?"
+    user: MAIL_USER,
+    pass: MAIL_PASSWORD
   }
 });
 
@@ -276,7 +282,57 @@ router.get("/active-jobs", (req, res) => {
 
 //set pickup date
 router.post("/set-pickup", (req, res) => {
-  Customer.findOne({ id: req.body.custID }, (err, doc) => {
+  Customer.findOne({ where: { id: req.body.id } }).then(customer => {
+    let options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric"
+    };
+    let dateObj = new Date(req.body.date);
+    dateObj.setHours(dateObj.getHours() + 8);
+    let dateToSend = dateObj.toLocaleString("en-US", options);
+    console.log(dateToSend);
+    console.log(req.body);
+    let textToSend = config.html.confirmPickup(req.body.jobid, dateToSend);
+
+    const mailOptions = {
+      from: "test@adeptelectronics.com.sg",
+      to: "adepttest19@gmail.com",
+      subject: "Confirm Pick Up",
+      html: textToSend
+    };
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) console.log(err);
+      else console.log("success!");
+    });
+
+    const newPickup = {
+      date: req.body.date,
+      custID: req.body.custID,
+      jobid: req.body.jobid,
+      custAddress: customer.custAddress,
+      email: customer.email,
+      company: customer.company,
+      custTel: customer.custTel
+    };
+    Pickup.replaceOne(
+      { jobid: req.body.jobid },
+      newPickup,
+      { upsert: true },
+      (err, doc) => {
+        if (err) {
+          console.log(err);
+          res.json({ error: "Failed" });
+        } else {
+          res.json({ message: "Success" });
+        }
+      }
+    );
+  });
+
+  /*Customer.findOne({ id: req.body.custID }, (err, doc) => {
     let options = {
       weekday: "long",
       year: "numeric",
@@ -324,7 +380,7 @@ router.post("/set-pickup", (req, res) => {
         }
       }
     );
-  });
+  });*/
 });
 
 router.post("/check-pickup", (req, res) => {
