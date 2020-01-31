@@ -35,3 +35,8 @@ mongoose
   .catch(err => console.log(err));
 
 app.listen(port, "localhost");
+
+/*.connect(
+    "mongodb+srv://adeptweb:Bestfriend1@cluster0-uoq1h.gcp.mongodb.net/adept?retryWrites=true&w=majority",
+    { useNewUrlParser: true, useFindAndModify: false }
+  )*/

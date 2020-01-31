@@ -36,8 +36,8 @@ getNextJobID = jobid => {
 //route for confirming a temporary order
 
 router.get("/tester", (req, res) => {
-  Job.findOne({ order: [["id", "DESC"]] }).then(job => {
-    res.json(job);
+  User.find({}, (err, docs) => {
+    res.json(docs);
   });
 });
 
@@ -418,7 +418,6 @@ router.get("/pickups", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(docs);
       let options = {
         weekday: "long",
         year: "numeric",
