@@ -2,14 +2,14 @@ const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const User = require("../models/User");
-const Customer = require("../models/Customer");
+//const Customer = require("../models/Customer");
 const Pickup = require("../models/Pickup");
 const Temp = require("../models/Temp");
 //const Job = require("../models/Job");
 const multer = require("multer");
 let config = require("../config");
 let upload = multer({ dest: "uploads/" });
-const { Job, Status, Type } = require("../sequelize");
+const { Job, Customer, Status, Type } = require("../sequelize");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const {
@@ -36,14 +36,8 @@ getNextJobID = jobid => {
 //route for confirming a temporary order
 
 router.get("/tester", (req, res) => {
-  Job.findAll({
-    where: {
-      custID: 177,
-      [Op.or]: [{ jobStatus: "Complete" }, { jobStatus: "Return Not Repair" }]
-    }
-  }).then(function(users) {
-    console.log(users);
-    res.json(users);
+  Job.findOne({ order: [["id", "DESC"]] }).then(job => {
+    res.json(job);
   });
 });
 
@@ -68,6 +62,112 @@ router.post("/confirm", (req, res) => {
           custTel: user.custTel,
           custFax: user.custFax,
           email: user.email
+        };
+        Customer.create(newCustData).then(customer => {
+          Job.findOne({ order: [["id", "DESC"]] }).then(job => {
+            let newTask = temp.toObject();
+            console.log(newTask);
+            newTask.jobid = getNextJobID(job.toObject().jobid);
+            newTask.jobStatus = "Awaiting Pickup";
+            newTask.quote = parseInt(req.body.quote);
+            newTask.custID = customer.id;
+
+            Job.create(newTask).then(job2 => {
+              let textToSend = config.html.confirmJob(
+                newTask.jobid,
+                newTask.itemDesc,
+                newTask.manufacturer,
+                newTask.modelNo,
+                newTask.serialNo,
+                newTask.faultDesc,
+                req.body.quote
+              );
+
+              const mailOptions = {
+                from: "test@adeptelectronics.com.sg",
+                to: user.email,
+                subject: `[UPDATE] Job Confirmed`,
+                html: textToSend
+              };
+              transporter.sendMail(mailOptions, (err, info) => {
+                if (err) console.log(err);
+                else console.log("sent");
+              });
+
+              //remove temporary job from database
+              Temp.deleteOne({ enquiryId: enquiryId }, err => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  res.json({ message: "success" });
+                }
+              });
+            });
+          });
+        });
+      } else {
+        Job.findOne({ order: [["id", "DESC"]] }).then(job => {
+          let newTask = temp.toObject();
+          console.log(newTask);
+          newTask.jobid = getNextJobID(job.toObject().jobid);
+          newTask.jobStatus = "Awaiting Pickup";
+          newTask.quote = parseInt(req.body.quote);
+          newTask.custID = customer.id;
+
+          Job.create(newTask).then(job2 => {
+            let textToSend = config.html.confirmJob(
+              newTask.jobid,
+              newTask.itemDesc,
+              newTask.manufacturer,
+              newTask.modelNo,
+              newTask.serialNo,
+              newTask.faultDesc,
+              req.body.quote
+            );
+
+            const mailOptions = {
+              from: "test@adeptelectronics.com.sg",
+              to: user.email,
+              subject: `[UPDATE] Job Confirmed`,
+              html: textToSend
+            };
+            transporter.sendMail(mailOptions, (err, info) => {
+              if (err) console.log(err);
+              else console.log("sent");
+            });
+
+            //remove temporary job from database
+            Temp.deleteOne({ enquiryId: enquiryId }, err => {
+              if (err) {
+                console.log(err);
+              } else {
+                res.json({ message: "success" });
+              }
+            });
+          });
+        });
+      }
+    });
+  });
+  /*Temp.findOne({ enquiryId: enquiryId }, (err, temp) => {
+    if (err) {
+      console.log(err);
+      res.json({ error: "job not found" });
+    }
+    User.findOne({ email: temp.email }, (err, user) => {
+      if (err) {
+        console.log(err);
+      }
+      if (!user.custID || user.custID == 0) {
+        const newCustData = {
+          custName: user.name,
+          company: user.company,
+          jobTitle: user.jobTitle,
+          custAddress: user.custAddress,
+          custPostCode: user.custPostCode,
+          custTel: user.custTel,
+          custFax: user.custFax,
+          email: user.email[]
         };
         const newCust = new Customer(newCustData);
         newCust.save((err, customer) => {
@@ -189,7 +289,7 @@ router.post("/confirm", (req, res) => {
           });
       }
     });
-  });
+  });*/
 });
 
 //route for updating job status
@@ -318,6 +418,7 @@ router.get("/pickups", (req, res) => {
     if (err) {
       console.log(err);
     } else {
+      console.log(docs);
       let options = {
         weekday: "long",
         year: "numeric",
