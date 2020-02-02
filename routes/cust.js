@@ -240,13 +240,14 @@ router.get("/active-jobs", (req, res) => {
       ]
     },
     attributes: [
-      "custID",
       "manufacturer",
       "modelNo",
       "serialNo",
-      "itemDesc",
+      "faultDesc",
       "jobStatus",
-      "jobid"
+      "jobid",
+      "itemDesc",
+      "quote"
     ]
   }).then(result => {
     if (!result) {

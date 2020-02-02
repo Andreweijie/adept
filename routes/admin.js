@@ -36,8 +36,8 @@ getNextJobID = jobid => {
 //route for confirming a temporary order
 
 router.get("/tester", (req, res) => {
-  User.find({}, (err, docs) => {
-    res.json(docs);
+  Customer.findOne({ order: [["id", "DESC"]] }).then(job => {
+    res.json(job);
   });
 });
 
@@ -56,7 +56,7 @@ router.post("/confirm", (req, res) => {
         const newCustData = {
           custName: user.name,
           company: user.company,
-          jobTitle: user.jobTitle,
+          jobtitle: user.jobTitle,
           custAddress: user.custAddress,
           custPostCode: user.custPostCode,
           custTel: user.custTel,
@@ -67,7 +67,7 @@ router.post("/confirm", (req, res) => {
           Job.findOne({ order: [["id", "DESC"]] }).then(job => {
             let newTask = temp.toObject();
             console.log(newTask);
-            newTask.jobid = getNextJobID(job.toObject().jobid);
+            newTask.jobid = getNextJobID(job.jobid);
             newTask.jobStatus = "Awaiting Pickup";
             newTask.quote = parseInt(req.body.quote);
             newTask.custID = customer.id;
@@ -106,43 +106,45 @@ router.post("/confirm", (req, res) => {
           });
         });
       } else {
-        Job.findOne({ order: [["id", "DESC"]] }).then(job => {
-          let newTask = temp.toObject();
-          console.log(newTask);
-          newTask.jobid = getNextJobID(job.toObject().jobid);
-          newTask.jobStatus = "Awaiting Pickup";
-          newTask.quote = parseInt(req.body.quote);
-          newTask.custID = customer.id;
+        Customer.findOne({ where: { id: user.custID } }).then(customer1 => {
+          Job.findOne({ order: [["id", "DESC"]] }).then(job => {
+            let newTask = temp.toObject();
+            console.log(newTask);
+            newTask.jobid = getNextJobID(job.jobid);
+            newTask.jobStatus = "Awaiting Pickup";
+            newTask.quote = parseInt(req.body.quote);
+            newTask.custID = customer1.id;
 
-          Job.create(newTask).then(job2 => {
-            let textToSend = config.html.confirmJob(
-              newTask.jobid,
-              newTask.itemDesc,
-              newTask.manufacturer,
-              newTask.modelNo,
-              newTask.serialNo,
-              newTask.faultDesc,
-              req.body.quote
-            );
+            Job.create(newTask).then(job2 => {
+              let textToSend = config.html.confirmJob(
+                newTask.jobid,
+                newTask.itemDesc,
+                newTask.manufacturer,
+                newTask.modelNo,
+                newTask.serialNo,
+                newTask.faultDesc,
+                req.body.quote
+              );
 
-            const mailOptions = {
-              from: "test@adeptelectronics.com.sg",
-              to: user.email,
-              subject: `[UPDATE] Job Confirmed`,
-              html: textToSend
-            };
-            transporter.sendMail(mailOptions, (err, info) => {
-              if (err) console.log(err);
-              else console.log("sent");
-            });
+              const mailOptions = {
+                from: "test@adeptelectronics.com.sg",
+                to: user.email,
+                subject: `[UPDATE] Job Confirmed`,
+                html: textToSend
+              };
+              transporter.sendMail(mailOptions, (err, info) => {
+                if (err) console.log(err);
+                else console.log("sent");
+              });
 
-            //remove temporary job from database
-            Temp.deleteOne({ enquiryId: enquiryId }, err => {
-              if (err) {
-                console.log(err);
-              } else {
-                res.json({ message: "success" });
-              }
+              //remove temporary job from database
+              Temp.deleteOne({ enquiryId: enquiryId }, err => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  res.json({ message: "success" });
+                }
+              });
             });
           });
         });
