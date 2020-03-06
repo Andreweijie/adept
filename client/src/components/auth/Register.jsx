@@ -26,6 +26,10 @@ class Register extends Component {
   };
   onSubmit = e => {
     e.preventDefault();
+    if (this.state.password.length < 8) {
+      message("Your password has to be at least 8 characters!", "error", 3);
+      return;
+    }
     const userData = {
       name: this.state.name,
       company: this.state.company,
@@ -49,8 +53,8 @@ class Register extends Component {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        if (data.email) {
-          message(data.email, "error", 4);
+        if (data.error) {
+          message(data.error, "error", 4);
         } else if (data.name) {
           message(
             "Success! Please check your email to confirm your account!",

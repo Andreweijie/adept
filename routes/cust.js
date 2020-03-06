@@ -283,7 +283,7 @@ router.get("/active-jobs", (req, res) => {
 
 //set pickup date
 router.post("/set-pickup", (req, res) => {
-  Customer.findOne({ where: { id: req.body.id } }).then(customer => {
+  Customer.findOne({ where: { id: req.body.custID } }).then(customer => {
     let options = {
       weekday: "long",
       year: "numeric",

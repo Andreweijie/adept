@@ -1,0 +1,81 @@
+<mjml>
+  <mj-head>
+    <mj-title>New Reservation</mj-title>
+  </mj-head>
+  <mj-body>
+
+    <mj-section>
+
+    </mj-section>
+    <mj-section background-color="#e5c88b">
+      <mj-column width="300px">
+       <mj-text align="center" font-size="32px" font-weight="bold" color="#fff">
+          TCS
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#fff">
+      <mj-column width="600px">
+        <mj-text align="left" font-size="20px" font-weight="bold">
+          Dear Team,
+        </mj-text>
+        <mj-text align="left" font-size="20px">
+         There is a new online reservation:
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#fff">
+    <mj-column>
+      <mj-table>
+         <tr style="border:1px solid #ecedee;text-align:right;padding:15px 0;">
+            <th style="padding: 0 15px 0 0;">Year</th>
+            <th style="padding: 0 15px;">Language</th>
+          </tr>
+          <tr style="border:1px solid #ecedee;text-align:right;padding:15px 0;">
+            <th style="padding: 0 15px 0 0;">Year</th>
+            <th style="padding: 0 15px;">Language</th>
+          </tr>
+          <tr style="border:1px solid #ecedee;text-align:right;padding:15px 0;">
+            <th style="padding: 0 15px 0 0;">Year</th>
+            <th style="padding: 0 15px;">Language</th>
+          </tr>
+          <tr style="border:1px solid #ecedee;text-align:right;padding:15px 0;">
+            <th style="padding: 0 15px 0 0;">Year</th>
+            <th style="padding: 0 15px;">Language</th>
+          </tr>
+          <tr style="border:1px solid #ecedee;text-align:right;padding:15px 0;">
+            <th style="padding: 0 15px 0 0;">Year</th>
+            <th style="padding: 0 15px;">Language</th>
+          </tr>
+          <tr style="border:1px solid #ecedee;text-align:right;padding:15px 0;">
+            <th style="padding: 0 15px 0 0;">Year</th>
+            <th style="padding: 0 15px;">Language</th>
+          </tr>
+          <tr style="border:1px solid #ecedee;text-align:right;padding:15px 0;">
+            <th style="padding: 0 15px 0 0;">Year</th>
+            <th style="padding: 0 15px;">Language</th>
+          </tr>
+          <tr style="border:1px solid #ecedee;text-align:right;padding:15px 0;">
+            <th style="padding: 0 15px 0 0;">Year</th>
+            <th style="padding: 0 15px;">Language</th>
+          </tr>
+          <tr style="border:1px solid #ecedee;text-align:right;padding:15px 0;">
+            <th style="padding: 0 15px 0 0;">Year</th>
+            <th style="padding: 0 15px;">Language</th>
+          </tr>
+         
+      </mj-table>
+    </mj-column>
+    </mj-section>
+    <mj-section background-color="#e5c88b">
+      <mj-column width="300px">
+        <mj-text font-size="16px" color="#fff" align="center">
+          The Coastal Settlement
+        </mj-text>
+        <mj-text font-size="16px" color="#fff" align="center">
+         200 Netheravon Rd, Singapore 508529
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

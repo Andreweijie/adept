@@ -52,17 +52,19 @@ export default class Dashboard extends Component {
         }
       });
 
-    fetch(
-      `${config.serverHost}/backend/cust/active-jobs?custID=${this.state.user.custID}`
-    )
-      .then(res => res.json())
-      .then(data => {
-        if (data.length != 0) {
-          this.setState({
-            activeBody: data
-          });
-        }
-      });
+    if (this.state.user.custID) {
+      fetch(
+        `${config.serverHost}/backend/cust/active-jobs?custID=${this.state.user.custID}`
+      )
+        .then(res => res.json())
+        .then(data => {
+          if (data.length != 0) {
+            this.setState({
+              activeBody: data
+            });
+          }
+        });
+    }
   }
   formatPending = data => {
     let options = {

@@ -812,33 +812,8 @@
     animation-name: pulse;
   }
 }
-th {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  border-top: none !important;
-  font-size: 0.8em;
-}
-table {
-  margin-top: 10px;
-  width: 100%;
-  tbody {
-    overflow: scroll;
-  }
-  tr {
-    background-color: white;
-    td {
-      vertical-align: baseline !important;
-      span {
-        display: block;
-        width: 10em;
-        word-wrap: break-word;
-        white-space: normal;
-        font-weight: bold;
-      }
-    }
-  }
-}
+s
+
 .tableData {
   font-size: 15px;
 }

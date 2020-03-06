@@ -307,7 +307,7 @@ router.post("/change-status", (req, res) => {
       { picked: true },
       (err, pickup) => {
         Job.findOne({ where: { jobid: jobId } }).then(job => {
-          Customer.findOne({ id: job.custID }, (err, customer) => {
+          Customer.findOne({ where: { id: job.custID } }).then(customer => {
             const mailOptions = {
               from: "test@adeptelectronics.com.sg",
               to: customer.email,
@@ -390,6 +390,7 @@ router.get("/all-jobs", (req, res) => {
 
   Job.findAll({
     attributes: [
+      "id",
       "jobid",
       "custID",
       "manufacturer",
@@ -397,17 +398,9 @@ router.get("/all-jobs", (req, res) => {
       "modelNo",
       "serialNo",
       "faultDesc",
-      "jobClass",
       "jobType",
       "jobStatus",
-      "quote",
-      "quoteProfit",
-      "quoteBy",
-      "entryDateTime",
-      "salesperson",
-      "closedDate",
-      "jobFinishedBy",
-      "jobLocation"
+      "quote"
     ]
   }).then(function(users) {
     console.log(users);
@@ -453,6 +446,7 @@ router.get("/customers", (req, res) => {
   );*/
   Customer.findAll({
     attributes: [
+      "id",
       "custName",
       "company",
       "jobTitle",
@@ -466,6 +460,32 @@ router.get("/customers", (req, res) => {
     console.log(users);
     res.json(users);
   });
+});
+
+router.get("/enquiries", (req, res) => {
+  Temp.find({}, (err, docs) => {
+    if (err) {
+      console.log(err);
+    } else {
+      let options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric"
+      };
+      let newDocs = docs.map(e => {
+        let newObj = e.toObject();
+        let dateObj = new Date(newObj.dateOfEnquiry);
+        dateObj.setHours(dateObj.getHours() + 8);
+        newObj.dateOfEnquiry = dateObj.toLocaleString("en-US", options);
+        return newObj;
+      });
+      res.json(newDocs);
+    }
+  }).select(
+    "enquiryId manufacturer modelNo serialNo faultDesc itemDesc jobClass dateOfEnquiry -_id"
+  );
 });
 
 router.get("/confirm-pickup", (req, res) => {

@@ -106,7 +106,7 @@ router.post("/register", (req, res) => {
             newUser
               .save()
               .then(user => res.json(user))
-              .catch(err => console.log(err));
+              .catch(err => res.json({ error: err }));
           });
         });
       });
@@ -259,6 +259,7 @@ router.post("/login", (req, res) => {
       bcrypt.compare(userInput.password, user.password).then(isMatch => {
         if (isMatch) {
           //create user information object
+          console.log("hello");
           let customerId = false;
           if (user.custID) {
             customerId = user.custID;
@@ -275,6 +276,7 @@ router.post("/login", (req, res) => {
             res.json({ success: true, adeptcust_token: token });
           });
         } else {
+          console.log("hellooo");
           return res
             .status(400)
             .json({ errors: { password: "password is incorrect" } });
@@ -338,13 +340,16 @@ router.post("/change-password", (req, res) => {
     if (!user) {
       return res.status(400).json({ email: "User does not exists!" }); //check DB for existing email and return error message if exists
     } else {
+      console.log("is user");
       if (user.resetToken == req.body.otp || req.body.custID) {
+        console.log("otp matches");
         //hash password before saving user in DB
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(req.body.password, salt, (err, hash) => {
             if (err) throw err;
 
             user.password = hash;
+            console.log(user.password);
             user
               .save()
               .then(user => res.json(user))

@@ -91,7 +91,7 @@ class ChangePassword extends Component {
             ) : null}
 
             <div className="input-field">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">New Password</label>
               <input
                 onChange={this.onChange}
                 value={this.state.password}
@@ -100,7 +100,7 @@ class ChangePassword extends Component {
               />
             </div>
             <div className="input-field">
-              <label htmlFor="password2">New Password</label>
+              <label htmlFor="password2">Confirm Password</label>
               <input
                 onChange={this.onChange}
                 value={this.state.password2}
