@@ -95,6 +95,7 @@ class Login extends Component {
                   type="password"
                 />
               </div>
+              <Link to="/reset">Forgot Password?</Link>
               <div />
             </form>
             <button type="submit" onClick={this.onSubmit}>

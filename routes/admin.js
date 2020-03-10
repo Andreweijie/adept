@@ -547,4 +547,15 @@ router.delete("/reject-pickup", (req, res) => {
   });
 });
 
+router.delete("/cancel-pending", (req, res) => {
+  Temp.findOneAndDelete({ enquiryId: req.query.enquiryId }, (err, doc) => {
+    if (err) {
+      console.log(err);
+      res.json(err);
+    } else {
+      res.json({ success: true });
+    }
+  });
+});
+
 module.exports = router;
