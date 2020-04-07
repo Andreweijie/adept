@@ -71,7 +71,8 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
     serialNo: req.body.serialNo,
     faultDesc: req.body.faultDesc,
     itemDesc: req.body.itemDesc,
-    jobClass: jobClass
+    jobClass: jobClass,
+    dateOfEnquiry: Date.now()
   });
   newTempJob.save((err, doc) => {
     if (err) {
@@ -296,7 +297,13 @@ router.post("/set-pickup", (req, res) => {
     let dateToSend = dateObj.toLocaleString("en-US", options);
     console.log(dateToSend);
     console.log(req.body);
-    let textToSend = config.html.confirmPickup(req.body.jobid, dateToSend);
+    let textToSend = config.html.confirmPickup(
+      req.body.jobid,
+      dateToSend,
+      customer.name,
+      customer.custAddress,
+      req.body.itemDesc
+    );
 
     const mailOptions = {
       from: "test@adeptelectronics.com.sg",

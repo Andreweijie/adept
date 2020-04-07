@@ -25,6 +25,13 @@ class ChangePassword extends Component {
   };
   onSubmit = e => {
     e.preventDefault();
+    if (this.state.password.length < 8 || this.state.password2.length < 8) {
+      message("Your password has to be at least 8 characters!", "error", 3);
+      return;
+    } else if (this.state.password !== this.state.password2) {
+      message("Yours passwords need to match!", "error", 3);
+      return;
+    }
     let emailToSend = this.state.email;
     if (this.state.custOrNot) {
       emailToSend = decode(localStorage.getItem("adeptcust_token")).user.email;
@@ -54,6 +61,8 @@ class ChangePassword extends Component {
           message("Your password has successfully been changed!", "success", 5);
           localStorage.removeItem("adeptcust_token");
           this.props.history.replace("/customer/login");
+        } else if (data.message) {
+          message(data.message, "error", 5);
         } else {
           this.props.history.replace("/customer/login");
         }

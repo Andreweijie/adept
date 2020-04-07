@@ -32,7 +32,8 @@ export default class DashBodyItem extends Component {
     const pickUpDate = {
       custID: parseInt(this.state.custID),
       jobid: this.props.data[5],
-      date: this.state.selectedDay
+      date: this.state.selectedDay,
+      itemDesc: this.props.data[6]
     };
 
     fetch(`${config.serverHost}/backend/cust/set-pickup`, {
