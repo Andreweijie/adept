@@ -11,7 +11,7 @@ class ChangePassword extends Component {
       otp: "",
       password: "",
       password2: "",
-      custOrNot: false
+      custOrNot: false,
     };
   }
   componentDidMount() {
@@ -20,10 +20,10 @@ class ChangePassword extends Component {
     }
   }
 
-  onChange = e => {
+  onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
     if (this.state.password.length < 8 || this.state.password2.length < 8) {
       message("Your password has to be at least 8 characters!", "error", 3);
@@ -40,7 +40,7 @@ class ChangePassword extends Component {
       email: emailToSend,
       password: this.state.password,
       password2: this.state.password2,
-      custID: undefined
+      custID: undefined,
     };
     if (this.state.custOrNot) {
       newPassword.custID = true;
@@ -50,14 +50,14 @@ class ChangePassword extends Component {
     fetch(`${config.serverHost}/backend/api/change-password`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(newPassword)
+      body: JSON.stringify(newPassword),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         console.log(data);
-        if (this.state.custOrNot) {
+        if (this.state.custOrNot && !data.message) {
           message("Your password has successfully been changed!", "success", 5);
           localStorage.removeItem("adeptcust_token");
           this.props.history.replace("/customer/login");

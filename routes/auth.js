@@ -22,8 +22,8 @@ const transporter = nodemailer.createTransport({
   secure: true,
   auth: {
     user: MAIL_USER,
-    pass: MAIL_PASSWORD
-  }
+    pass: MAIL_PASSWORD,
+  },
 });
 
 //Register Route
@@ -35,7 +35,7 @@ router.post("/register", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  User.findOne({ email: req.body.email }).then(user => {
+  User.findOne({ email: req.body.email }).then((user) => {
     if (user) {
       return res.status(400).json({ email: "Email already exists" }); //check DB for existing email and return error message if exists
     } else {
@@ -43,11 +43,11 @@ router.post("/register", (req, res) => {
       //send verification email
       console.log(req.body.email);
       const payload = {
-        email: req.body.email
+        email: req.body.email,
       };
 
       let verificationToken = jwt.sign(payload, "secret", {
-        expiresIn: 30000
+        expiresIn: 30000,
       });
       const textToSend = config.html.confirmAccount(
         verificationToken,
@@ -57,59 +57,61 @@ router.post("/register", (req, res) => {
         from: "test@adeptelectronics.com.sg",
         to: req.body.email,
         subject: "Verify Your Account",
-        html: textToSend
+        html: textToSend,
       };
       transporter.sendMail(mailOptions, (err, info) => {
         if (err) console.log(err);
         else console.log("sent");
       });
-      Customer.findOne({ where: { email: req.body.email } }).then(customer => {
-        if (customer) {
-          console.log(customer);
-          newUser = new User({
-            custID: customer.id,
-            name: customer.custName,
-            email: customer.email,
-            password: req.body.password,
-            company: customer.company,
-            jobTitle: customer.jobTitle,
-            custAddress: customer.custAddress,
-            custPostCode: customer.custPostCode,
-            custTel: customer.custTel,
-            custFax: customer.custFax,
-            verToken: verificationToken,
-            isVerified: false
-          });
-        } else {
-          console.log("haha");
-          newUser = new User({
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
-            company: req.body.company,
-            jobTitle: req.body.jobTitle,
-            custAddress: req.body.address,
-            custPostCode: req.body.mobileNo,
-            custTel: req.body.officeNo,
-            custFax: req.body.faxNo,
-            verToken: verificationToken,
-            isVerified: false
+      Customer.findOne({ where: { email: req.body.email } }).then(
+        (customer) => {
+          if (customer) {
+            console.log(customer);
+            newUser = new User({
+              custID: customer.id,
+              name: customer.custName,
+              email: customer.email,
+              password: req.body.password,
+              company: customer.company,
+              jobTitle: customer.jobTitle,
+              custAddress: customer.custAddress,
+              custPostCode: customer.custPostCode,
+              custTel: customer.custTel,
+              custFax: customer.custFax,
+              verToken: verificationToken,
+              isVerified: false,
+            });
+          } else {
+            console.log("haha");
+            newUser = new User({
+              name: req.body.name,
+              email: req.body.email,
+              password: req.body.password,
+              company: req.body.company,
+              jobTitle: req.body.jobTitle,
+              custAddress: req.body.address,
+              custPostCode: req.body.mobileNo,
+              custTel: req.body.officeNo,
+              custFax: req.body.faxNo,
+              verToken: verificationToken,
+              isVerified: false,
+            });
+          }
+
+          //hash password before saving user in DB
+          bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+              if (err) throw err;
+
+              newUser.password = hash;
+              newUser
+                .save()
+                .then((user) => res.json(user))
+                .catch((err) => res.json({ error: err }));
+            });
           });
         }
-
-        //hash password before saving user in DB
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-
-            newUser.password = hash;
-            newUser
-              .save()
-              .then(user => res.json(user))
-              .catch(err => res.json({ error: err }));
-          });
-        });
-      });
+      );
       /*Cust.findOne({ email: req.body.email }, (err, doc) => {
         if (doc) {
           console.log(doc);
@@ -169,7 +171,7 @@ router.post("/admin-register", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  Admin.findOne({ email: req.body.email }).then(user => {
+  Admin.findOne({ email: req.body.email }).then((user) => {
     if (user) {
       return res.status(400).json({ email: "Email already exists" }); //check DB for existing email and return error message if exists
     } else {
@@ -182,8 +184,8 @@ router.post("/admin-register", (req, res) => {
           newUser.password = hash;
           newUser
             .save()
-            .then(user => res.json(user))
-            .catch(err => console.log(err));
+            .then((user) => res.json(user))
+            .catch((err) => console.log(err));
         });
       });
     }
@@ -201,29 +203,29 @@ router.post("/login", (req, res) => {
 
   const userInput = {
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
   };
 
   if (req.body.accountType == "admin") {
-    Admin.findOne({ email: userInput.email }).then(user => {
+    Admin.findOne({ email: userInput.email }).then((user) => {
       //check if user exists
       if (!user) {
         return res.status(404).json({
           errors: {
-            message: "E-mail not found."
-          }
+            message: "E-mail not found.",
+          },
         });
       }
 
       //Check password
-      bcrypt.compare(userInput.password, user.password).then(isMatch => {
+      bcrypt.compare(userInput.password, user.password).then((isMatch) => {
         if (isMatch) {
           //create user information object
           const payload = {
             user: {
               name: user.name,
-              role: user.role
-            }
+              role: user.role,
+            },
           };
           //create and sign JSON Web Token
           jwt.sign(payload, "secret", { expiresIn: 300000 }, (err, token) => {
@@ -232,31 +234,31 @@ router.post("/login", (req, res) => {
         } else {
           return res.status(400).json({
             errors: {
-              message: "Password is incorrect."
-            }
+              message: "Password is incorrect.",
+            },
           });
         }
       });
     });
   } else {
-    User.findOne({ email: userInput.email }).then(user => {
+    User.findOne({ email: userInput.email }).then((user) => {
       //check if user exists
       if (!user) {
         return res.status(404).json({
           errors: {
-            message: "E-mail not found."
-          }
+            message: "E-mail not found.",
+          },
         });
       } else if (!user.isVerified) {
         return res.status(404).json({
           errors: {
-            message: "Account not verified."
-          }
+            message: "Account not verified.",
+          },
         });
       }
 
       //Check password
-      bcrypt.compare(userInput.password, user.password).then(isMatch => {
+      bcrypt.compare(userInput.password, user.password).then((isMatch) => {
         if (isMatch) {
           //create user information object
           console.log("hello");
@@ -268,8 +270,8 @@ router.post("/login", (req, res) => {
             user: {
               name: user.name,
               email: user.email,
-              custID: customerId
-            }
+              custID: customerId,
+            },
           };
           //create and sign JSON Web Token
           jwt.sign(payload, "secret", { expiresIn: 300000 }, (err, token) => {
@@ -279,7 +281,7 @@ router.post("/login", (req, res) => {
           console.log("hellooo");
           return res
             .status(400)
-            .json({ errors: { password: "password is incorrect" } });
+            .json({ errors: { message: "Password is incorrect" } });
         }
       });
     });
@@ -288,14 +290,14 @@ router.post("/login", (req, res) => {
 
 router.get("/verification", (req, res) => {
   console.log(req.query.email);
-  User.findOne({ email: req.query.email }).then(user => {
+  User.findOne({ email: req.query.email }).then((user) => {
     console.log(user);
     if (user.verToken == req.query.token) {
       console.log("object");
       user.isVerified = true;
       user
         .save()
-        .then(user =>
+        .then((user) =>
           res.redirect("http://adeptelectronics.com.sg/account-confirmed.html")
         );
     } else {
@@ -314,14 +316,14 @@ router.get("/forget", (req, res) => {
     from: "test@adeptelectronics.com.sg",
     to: email,
     subject: "Change your account password",
-    html: textToSend
+    html: textToSend,
   };
   transporter.sendMail(mailOptions, (err, info) => {
     if (err) console.log(err);
     else console.log("sent");
   });
 
-  User.findOne({ email }).then(user => {
+  User.findOne({ email }).then((user) => {
     user.resetToken = forgetOtp;
     user.save().then(res.json({ success: "success!", otp: forgetOtp }));
   });
@@ -336,7 +338,7 @@ router.post("/change-password", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  User.findOne({ email: req.body.email }).then(user => {
+  User.findOne({ email: req.body.email }).then((user) => {
     if (!user) {
       return res.status(400).json({ email: "User does not exists!" }); //check DB for existing email and return error message if exists
     } else {
@@ -352,8 +354,8 @@ router.post("/change-password", (req, res) => {
             console.log(user.password);
             user
               .save()
-              .then(user => res.json(user))
-              .catch(err => console.log(err));
+              .then((user) => res.json(user))
+              .catch((err) => console.log(err));
           });
         });
       } else {
@@ -367,8 +369,8 @@ router.post("/check-id", (req, res) => {
   const email = req.body.email;
 
   Customer.findOne({
-    where: { email: email }
-  }).then(customer => {
+    where: { email: email },
+  }).then((customer) => {
     if (!customer) {
       res.json({ success: false });
     } else {
@@ -379,8 +381,8 @@ router.post("/check-id", (req, res) => {
           user: {
             name: user.name,
             email: user.email,
-            custID: customer.id
-          }
+            custID: customer.id,
+          },
         };
 
         jwt.sign(payload, "secret", { expiresIn: 300000 }, (err, token) => {

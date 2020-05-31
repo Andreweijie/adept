@@ -14,7 +14,7 @@ const {
   MAIL_HOST,
   MAIL_PORT,
   MAIL_USER,
-  MAIL_PASSWORD
+  MAIL_PASSWORD,
 } = require("../constants");
 let config = require("../config");
 let storage = multer.diskStorage({
@@ -23,7 +23,7 @@ let storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     cb(null, file.filename + ".jpg");
-  }
+  },
 });
 let upload = multer({ storage: storage });
 const transporter = nodemailer.createTransport({
@@ -32,11 +32,11 @@ const transporter = nodemailer.createTransport({
   secure: true,
   auth: {
     user: MAIL_USER,
-    pass: MAIL_PASSWORD
-  }
+    pass: MAIL_PASSWORD,
+  },
 });
 
-checkEmpty = inputValue => {
+checkEmpty = (inputValue) => {
   if (!inputValue) {
     return "NIL";
   } else {
@@ -55,8 +55,8 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
     attach = [
       {
         filename: "image.jpg",
-        path: req.file.path //same cid value as in the html img src
-      }
+        path: req.file.path, //same cid value as in the html img src
+      },
     ];
   }
   if (req.body.urgent) {
@@ -72,7 +72,7 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
     faultDesc: req.body.faultDesc,
     itemDesc: req.body.itemDesc,
     jobClass: jobClass,
-    dateOfEnquiry: Date.now()
+    dateOfEnquiry: Date.now(),
   });
   newTempJob.save((err, doc) => {
     if (err) {
@@ -93,7 +93,7 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
       to: "adepttest19@gmail.com",
       subject: itemDesc,
       html: textToSend,
-      attachments: attach
+      attachments: attach,
     };
     transporter.sendMail(mailOptions, (err, info) => {
       if (err) console.log(err);
@@ -110,17 +110,17 @@ router.get("/history2", (req, res) => {
     {
       $and: [
         {
-          $or: [{ jobStatus: "Complete" }, { jobStatus: "Return Not Repair" }]
+          $or: [{ jobStatus: "Complete" }, { jobStatus: "Return Not Repair" }],
         },
-        { custID: parseInt(req.query.custID) }
-      ]
+        { custID: parseInt(req.query.custID) },
+      ],
     },
     (err, docs) => {
       if (err) {
         console.log(err);
       } else {
         let dataToShoot = [];
-        docs.map(e => {
+        docs.map((e) => {
           dataToShoot.push(Object.values(e.toObject()));
         });
 
@@ -137,8 +137,8 @@ router.get("/history", (req, res) => {
     where: {
       [Op.and]: [
         { custID: parseInt(req.query.custID) },
-        { jobStatus: { [Op.or]: ["Complete", "Return Not Repair"] } }
-      ]
+        { jobStatus: { [Op.or]: ["Complete", "Return Not Repair"] } },
+      ],
     },
     attributes: [
       "custID",
@@ -147,9 +147,9 @@ router.get("/history", (req, res) => {
       "serialNo",
       "itemDesc",
       "jobStatus",
-      "jobid"
-    ]
-  }).then(result => {
+      "id",
+    ],
+  }).then((result) => {
     if (!result) {
       console.log(result);
     } else {
@@ -189,9 +189,9 @@ router.get("/pending-jobs2", (req, res) => {
         year: "numeric",
         month: "long",
         day: "numeric",
-        hour: "numeric"
+        hour: "numeric",
       };
-      docs.map(e => {
+      docs.map((e) => {
         let newObj = e.toObject();
         newObj.dateOfEnquiry = newObj.dateOfEnquiry.toLocaleString(
           "en-US",
@@ -199,7 +199,7 @@ router.get("/pending-jobs2", (req, res) => {
         );
         dataToSend.push(Object.values(newObj));
       });
-      let dataToSend2 = dataToSend.map(e => {
+      let dataToSend2 = dataToSend.map((e) => {
         let ele = e.pop();
         e.unshift(ele);
         return e;
@@ -234,11 +234,11 @@ router.get("/active-jobs", (req, res) => {
           jobStatus: {
             [Op.and]: [
               { [Op.ne]: "Complete" },
-              { [Op.ne]: "Return Not Repair" }
-            ]
-          }
-        }
-      ]
+              { [Op.ne]: "Return Not Repair" },
+            ],
+          },
+        },
+      ],
     },
     attributes: [
       "manufacturer",
@@ -246,11 +246,11 @@ router.get("/active-jobs", (req, res) => {
       "serialNo",
       "faultDesc",
       "jobStatus",
-      "jobid",
+      "id",
       "itemDesc",
-      "quote"
-    ]
-  }).then(result => {
+      "quote",
+    ],
+  }).then((result) => {
     if (!result) {
       console.log(result);
     } else {
@@ -284,13 +284,13 @@ router.get("/active-jobs", (req, res) => {
 
 //set pickup date
 router.post("/set-pickup", (req, res) => {
-  Customer.findOne({ where: { id: req.body.custID } }).then(customer => {
+  Customer.findOne({ where: { id: req.body.custID } }).then((customer) => {
     let options = {
       weekday: "long",
       year: "numeric",
       month: "long",
       day: "numeric",
-      hour: "numeric"
+      hour: "numeric",
     };
     let dateObj = new Date(req.body.date);
     dateObj.setHours(dateObj.getHours() + 8);
@@ -309,7 +309,7 @@ router.post("/set-pickup", (req, res) => {
       from: "test@adeptelectronics.com.sg",
       to: "adepttest19@gmail.com",
       subject: "Confirm Pick Up",
-      html: textToSend
+      html: textToSend,
     };
     transporter.sendMail(mailOptions, (err, info) => {
       if (err) console.log(err);
@@ -323,7 +323,7 @@ router.post("/set-pickup", (req, res) => {
       custAddress: customer.custAddress,
       email: customer.email,
       company: customer.company,
-      custTel: customer.custTel
+      custTel: customer.custTel,
     };
     Pickup.replaceOne(
       { jobid: req.body.jobid },
