@@ -18,11 +18,9 @@ const {
 } = require("../constants");
 let config = require("../config");
 let storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/");
-  },
+  destination: "uploads/",
   filename: (req, file, cb) => {
-    cb(null, file.filename + ".jpg");
+    cb(null, "enquiry.jpg");
   },
 });
 let upload = multer({ storage: storage });
@@ -51,6 +49,7 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
   let itemDesc = req.body.itemDesc;
   let attach = [];
   let jobClass;
+  let subject = `${itemDesc}-${req.body.brand}-${req.body.model}`;
   if (req.file) {
     attach = [
       {
@@ -60,7 +59,7 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
     ];
   }
   if (req.body.urgent) {
-    itemDesc = "[URGENT]" + itemDesc;
+    itemDesc = `[URGENT] ${itemDesc}-${req.body.brand}-${req.body.model}`;
     jobClass = "Emergency";
   }
 
@@ -91,7 +90,7 @@ router.post("/enquiry", upload.single("productImage"), (req, res) => {
     const mailOptions = {
       from: "test@adeptelectronics.com.sg",
       to: "adepttest19@gmail.com",
-      subject: itemDesc,
+      subject: subject,
       html: textToSend,
       attachments: attach,
     };
