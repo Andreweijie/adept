@@ -17,22 +17,22 @@ export default class Dashboard extends Component {
         "Fault Symptoms",
         "Job Class",
         "Item Desc",
-        "Date Of Enquiry"
+        "Date Of Enquiry",
       ],
       pendingBody: [],
       activeHeaders: [
+        "Job ID",
         "Manufacturer",
         "Model No",
         "Serial No",
-        "Fault Desc",
+        "Fault Symptoms",
         "Job Status",
-        "Job ID",
         "Item Desc",
         "Quote Amt",
-        "Pickup Date"
+        "Pickup Date",
       ],
       activeBody: [],
-      user: decode(localStorage.getItem("adeptcust_token")).user
+      user: decode(localStorage.getItem("adeptcust_token")).user,
     };
   }
 
@@ -40,12 +40,12 @@ export default class Dashboard extends Component {
     fetch(
       `${config.serverHost}/backend/cust/pending-jobs?email=${this.state.user.email}`
     )
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.length != 0) {
           console.log(data);
           this.setState({
-            pendingBody: this.formatPending(data)
+            pendingBody: this.formatPending(data),
           });
         } else {
           console.log(data);
@@ -56,27 +56,27 @@ export default class Dashboard extends Component {
       fetch(
         `${config.serverHost}/backend/cust/active-jobs?custID=${this.state.user.custID}`
       )
-        .then(res => res.json())
-        .then(data => {
+        .then((res) => res.json())
+        .then((data) => {
           if (data.length != 0) {
             this.setState({
-              activeBody: data
+              activeBody: data,
             });
           }
         });
     }
   }
-  formatPending = data => {
+  formatPending = (data) => {
     let options = {
       year: "numeric",
       month: "numeric",
       day: "numeric",
-      hour: "numeric"
+      hour: "numeric",
     };
-    let pendingData = data.map(e => {
+    let pendingData = data.map((e) => {
       return Object.values(e);
     });
-    let pendingFinal = pendingData.map(e => {
+    let pendingFinal = pendingData.map((e) => {
       let ele = e.pop();
       e.unshift(ele);
       e[e.length - 1] = new Date(e[e.length - 1]);

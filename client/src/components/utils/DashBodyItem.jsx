@@ -11,16 +11,31 @@ export default class DashBodyItem extends Component {
     show: false,
     selectedDay: new Date(),
     time: "",
-    custID: decode(localStorage.getItem("adeptcust_token")).user.custID
+    pickDate: "",
+    custID: decode(localStorage.getItem("adeptcust_token")).user.custID,
   };
 
   componentDidMount() {
     if (this.props.active && this.props.data[4] === "Awaiting Pickup") {
       this.checkPickup();
     }
+    if (this.props.active) {
+      fetch(
+        `${config.serverHost}/backend/cust/get-pickup?jobid=${this.props.data[0]}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.length !== 0) {
+            console.log("hey");
+            this.setState({ pickDate: data[0].date });
+          } else {
+            return;
+          }
+        });
+    }
   }
 
-  setMessage = data => {
+  setMessage = (data) => {
     if (data.message) {
       message("Success! Pickup Date Set!", "success", 4);
     } else {
@@ -31,25 +46,25 @@ export default class DashBodyItem extends Component {
   setPickupDate = () => {
     const pickUpDate = {
       custID: parseInt(this.state.custID),
-      jobid: this.props.data[5],
+      jobid: this.props.data[0],
       date: this.state.selectedDay,
-      itemDesc: this.props.data[6]
+      itemDesc: this.props.data[6],
     };
 
     fetch(`${config.serverHost}/backend/cust/set-pickup`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(pickUpDate)
+      body: JSON.stringify(pickUpDate),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data) {
           this.setMessage(data);
           this.setState(
             {
-              show: false
+              show: false,
             },
             this.toggleModal()
           );
@@ -62,28 +77,28 @@ export default class DashBodyItem extends Component {
     fetch(`${config.serverHost}/backend/cust/check-pickup`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ jobid: jobId })
+      body: JSON.stringify({ jobid: jobId }),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (!data.pickUpSet) {
           message(`Please click on MORE and set pickup date for JOB ${jobId}`);
         }
       });
   };
-  handleDayChange = day => {
+  handleDayChange = (day) => {
     this.setState({ selectedDay: day });
   };
-  handleTimeChange = time => {
+  handleTimeChange = (time) => {
     this.setState({ time }, () => {
       console.log(this.state.time);
     });
   };
   toggleModal = () => {
     this.setState({
-      modalIsVisible: !this.state.modalIsVisible
+      modalIsVisible: !this.state.modalIsVisible,
     });
   };
   render() {
@@ -107,7 +122,7 @@ export default class DashBodyItem extends Component {
                 </div>
               );
             })}
-            {this.props.active && this.props.data[4] == "Awaiting Pickup" ? (
+            {this.props.active ? (
               <div className="date-time-div">
                 <span style={{ padding: 8 }}>Pickup Date</span>
                 <DatePicker
@@ -136,9 +151,7 @@ export default class DashBodyItem extends Component {
           }
         })}
         <span className="dash-header child">
-          <button className="open" onClick={this.toggleModal}>
-            MORE
-          </button>
+          {this.props.active ? this.state.pickDate : null}
         </span>
       </div>
     );

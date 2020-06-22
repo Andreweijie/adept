@@ -141,12 +141,13 @@ router.get("/history", (req, res) => {
     },
     attributes: [
       "custID",
+      "id",
       "manufacturer",
       "modelNo",
       "serialNo",
       "itemDesc",
       "jobStatus",
-      "id",
+      "quote",
     ],
   }).then((result) => {
     if (!result) {
@@ -223,6 +224,17 @@ router.get("/pending-jobs", (req, res) => {
   );
 });
 
+router.get("/get-pickup", (req, res) => {
+  Pickup.find({ jobid: req.query.jobid }, (err, docs) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(docs);
+      res.json(docs);
+    }
+  });
+});
+
 //get active jobs
 router.get("/active-jobs", (req, res) => {
   Job.findAll({
@@ -240,12 +252,12 @@ router.get("/active-jobs", (req, res) => {
       ],
     },
     attributes: [
+      "id",
       "manufacturer",
       "modelNo",
       "serialNo",
       "faultDesc",
       "jobStatus",
-      "id",
       "itemDesc",
       "quote",
     ],
