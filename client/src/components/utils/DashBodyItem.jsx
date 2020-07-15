@@ -27,7 +27,14 @@ export default class DashBodyItem extends Component {
         .then((data) => {
           if (data.length !== 0) {
             console.log("hey");
-            this.setState({ pickDate: data[0].date });
+            this.setState({
+              pickDate: new Date(data[0].date).toLocaleString("en-SG", {
+                year: "numeric",
+                month: "numeric",
+                day: "numeric",
+                hour: "numeric",
+              }),
+            });
           } else {
             return;
           }
@@ -147,11 +154,19 @@ export default class DashBodyItem extends Component {
               </span>
             );
           } else {
-            return <span className="dash-header child">{header}</span>;
+            return (
+              <span onClick={this.toggleModal} className="dash-header child">
+                {header}
+              </span>
+            );
           }
         })}
         <span className="dash-header child">
-          {this.props.active ? this.state.pickDate : null}
+          {this.props.active ? (
+            this.state.pickDate
+          ) : this.state.pickDate !== "" ? (
+            <button className="open">SET</button>
+          ) : null}
         </span>
       </div>
     );

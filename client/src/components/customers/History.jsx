@@ -14,6 +14,7 @@ export default class History extends Component {
       "Item Description",
       "Job Status",
       "Quote Amount",
+      "Closed Date",
     ],
     body: [],
     custID: decode(localStorage.getItem("adeptcust_token")).user.custID,
@@ -26,6 +27,17 @@ export default class History extends Component {
       .then((data) => {
         if (data.length != 0) {
           console.log(data);
+          data = data.map((completedOrder) => {
+            completedOrder.closedDate = new Date(
+              completedOrder.closedDate
+            ).toLocaleString("en-SG", {
+              year: "numeric",
+              month: "numeric",
+              day: "numeric",
+              hour: "numeric",
+            });
+            return completedOrder;
+          });
           this.setState({
             body: data,
           });

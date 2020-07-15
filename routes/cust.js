@@ -148,6 +148,7 @@ router.get("/history", (req, res) => {
       "itemDesc",
       "jobStatus",
       "quote",
+      "closedDate",
     ],
   }).then((result) => {
     if (!result) {

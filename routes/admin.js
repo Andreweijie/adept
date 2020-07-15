@@ -111,7 +111,7 @@ router.post("/confirm", (req, res) => {
             console.log(newTask);
             newTask.jobStatus = "Awaiting Pickup";
             newTask.quote = parseInt(req.body.quote);
-            newTask.custID = customer1.id;
+            newTask.custID = user.custID;
 
             Job.create(newTask).then((job2) => {
               let textToSend = config.html.confirmJob(
@@ -304,7 +304,7 @@ router.post("/change-status", (req, res) => {
       { jobid: jobId },
       { picked: true },
       (err, pickup) => {
-        Job.findOne({ where: {  id: jobId } }).then((job) => {
+        Job.findOne({ where: { id: jobId } }).then((job) => {
           Customer.findOne({ where: { id: job.custID } }).then((customer) => {
             const mailOptions = {
               from: "test@adeptelectronics.com.sg",
