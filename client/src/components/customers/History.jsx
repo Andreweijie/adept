@@ -14,7 +14,6 @@ export default class History extends Component {
       "Item Description",
       "Job Status",
       "Quote Amount",
-      "Closed Date",
     ],
     body: [],
     custID: decode(localStorage.getItem("adeptcust_token")).user.custID,
