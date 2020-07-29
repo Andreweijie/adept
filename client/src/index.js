@@ -5,8 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import App from "./App";
-import registerServiceWorker from "./registerServiceWorker";
-
+import {unregister} from "./registerServiceWorker";
+unregister();
 ReactDOM.render(
   <Router>
     <App />

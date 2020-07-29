@@ -6,12 +6,14 @@ import config from "../../config";
 export default class History extends Component {
   state = {
     headers: [
+      "Cust ID",
+      "Job ID",
       "Manufacturer",
       "Model No",
       "Serial No",
+      "Item Desc",
       "Job Status",
-      "Job ID",
-      "Item Description"
+      "Quote Amt",
     ],
     body: [],
     custID: decode(localStorage.getItem("adeptcust_token")).user.custID

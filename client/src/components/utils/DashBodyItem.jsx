@@ -11,7 +11,7 @@ export default class DashBodyItem extends Component {
     show: false,
     selectedDay: new Date(),
     time: "",
-    custID: decode(localStorage.getItem("adeptcust_token")).user.custID
+    custID: decode(localStorage.getItem("adeptcust_token")).user.custID,
   };
 
   componentDidMount() {
@@ -20,7 +20,7 @@ export default class DashBodyItem extends Component {
     }
   }
 
-  setMessage = data => {
+  setMessage = (data) => {
     if (data.message) {
       message("Success! Pickup Date Set!", "success", 4);
     } else {
@@ -32,23 +32,23 @@ export default class DashBodyItem extends Component {
     const pickUpDate = {
       custID: parseInt(this.state.custID),
       jobid: this.props.data[5],
-      date: this.state.selectedDay
+      date: this.state.selectedDay,
     };
 
     fetch(`${config.serverHost}/backend/cust/set-pickup`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(pickUpDate)
+      body: JSON.stringify(pickUpDate),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data) {
           this.setMessage(data);
           this.setState(
             {
-              show: false
+              show: false,
             },
             this.toggleModal()
           );
@@ -61,28 +61,28 @@ export default class DashBodyItem extends Component {
     fetch(`${config.serverHost}/backend/cust/check-pickup`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ jobid: jobId })
+      body: JSON.stringify({ jobid: jobId }),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (!data.pickUpSet) {
           message(`Please click on MORE and set pickup date for JOB ${jobId}`);
         }
       });
   };
-  handleDayChange = day => {
+  handleDayChange = (day) => {
     this.setState({ selectedDay: day });
   };
-  handleTimeChange = time => {
+  handleTimeChange = (time) => {
     this.setState({ time }, () => {
       console.log(this.state.time);
     });
   };
   toggleModal = () => {
     this.setState({
-      modalIsVisible: !this.state.modalIsVisible
+      modalIsVisible: !this.state.modalIsVisible,
     });
   };
   render() {
