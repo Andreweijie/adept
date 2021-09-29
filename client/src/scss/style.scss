@@ -579,14 +579,27 @@
     font-size: 16px;
   }
   .register-page {
+    min-height: 100vh;
+    #cust-type {
+      
+    }
     #back-box {
       width: 100% !important;
       height: 100% !important;
+      margin-top: 0px !important;
+      border-radius: 0px !important;
       #register-box {
         width: 100% !important;
         height: 100vh !important;
         box-shadow: none !important;
         .form-box {
+          margin-block-start: 1em;
+          .cols {
+            width: 100% !important;
+          }
+          .input-field {
+            width: 100%;
+          }
           button {
             margin: 0;
             margin-bottom: 0.5em;

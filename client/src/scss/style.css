@@ -909,9 +909,14 @@
   .reg-link {
     font-size: 16px;
   }
+  .register-page {
+    min-height: 100vh;
+  }
   .register-page #back-box {
     width: 100% !important;
     height: 100% !important;
+    margin-top: 0px !important;
+    border-radius: 0px !important;
   }
   .register-page #back-box #register-box {
     width: 100% !important;
@@ -920,10 +925,18 @@
             box-shadow: none !important;
   }
   .register-page #back-box #register-box .form-box {
+    -webkit-margin-before: 1em;
+            margin-block-start: 1em;
     -webkit-box-orient: vertical !important;
     -webkit-box-direction: normal !important;
         -ms-flex-direction: column !important;
             flex-direction: column !important;
+  }
+  .register-page #back-box #register-box .form-box .cols {
+    width: 100% !important;
+  }
+  .register-page #back-box #register-box .form-box .input-field {
+    width: 100%;
   }
   .register-page #back-box #register-box .form-box button {
     margin: 0;
